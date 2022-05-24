@@ -35,7 +35,10 @@
     "extends": "eda",
     "ignorePatterns": [
       "bundle.js"
-    ]
+    ],
+    "rules": {
+      "no-unused-vars": "off"
+    }
   },
   "dependencies": {
     "@vscode/sqlite3": "^5.0.7",
