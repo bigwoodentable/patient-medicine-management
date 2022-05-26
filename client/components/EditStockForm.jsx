@@ -2,13 +2,7 @@ import React from 'react'
 
 import { Formik, Form, Field, FieldArray } from 'formik'
 
-// Here is an example of a form with an editable list.
-
-// Next to each input are buttons for insert and remove.
-
-// If the list is empty, there is a button to add an item.
-
-export const EditStock = () => {
+function EditStockForm() {
   const stocksData = [
     { id: 1, medName: 'medOne', totalQuantity: 300 },
     { id: 2, medName: 'medTwo', totalQuantity: 200 },
@@ -36,7 +30,7 @@ export const EditStock = () => {
 
                         <button
                           type="button"
-                          onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                          onClick={() => arrayHelpers.remove(index)} // remove a medicine from the list
                         >
                           -
                         </button>
@@ -49,7 +43,7 @@ export const EditStock = () => {
                               medName: '',
                               totalQuantity: 0,
                             })
-                          } // insert an empty string at a position
+                          } // insert an empty object with the same shape
                         >
                           +
                         </button>
@@ -66,7 +60,7 @@ export const EditStock = () => {
                         })
                       }
                     >
-                      {/* show this when user has removed all friends from the list */}
+                      {/* show this when user has removed all medicines from the list */}
                       Add a medicine
                     </button>
                   )}
@@ -84,8 +78,11 @@ export const EditStock = () => {
     </div>
   )
 }
+
+export default EditStockForm
 //----------------------------
 // regular React code
+//
 // function EditStock() {
 //   //API get data
 // const stocksData = [
@@ -147,5 +144,3 @@ export const EditStock = () => {
 //     </form>
 //   )
 // }
-
-export default EditStock
