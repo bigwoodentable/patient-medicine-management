@@ -2,6 +2,7 @@ import React from 'react'
 import StockItem from './StockItem.jsx'
 
 function Stock() {
+  //API get data
   const stocksData = [
     { id: 1, medName: 'medOne', totalQuantity: 300 },
     { id: 2, medName: 'medTwo', totalQuantity: 200 },

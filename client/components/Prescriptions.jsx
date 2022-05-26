@@ -22,8 +22,8 @@ function Prescriptions(props) {
     },
   ]
 
-  return prescriptions.map((prescription) => (
-    <PrescriptionItem prescription={prescription} />
+  return prescriptions.map((prescription, i) => (
+    <PrescriptionItem key={i} prescription={prescription} />
   ))
 }
 

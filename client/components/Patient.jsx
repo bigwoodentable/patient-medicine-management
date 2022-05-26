@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import PatientDetails from './PatientDetails.jsx'
 import Prescriptions from './Prescriptions.jsx'
 
@@ -8,7 +8,12 @@ function Patient() {
   const { id: patientId } = useParams()
   return (
     <>
-      <PatientDetails patientId={patientId} />
+      <div>
+        <PatientDetails patientId={patientId} />
+        <Link to={`/newPrescription/${patientId}`}>
+          LINK: Create New Prescription
+        </Link>
+      </div>
       <Prescriptions patientId={patientId} />
     </>
   )

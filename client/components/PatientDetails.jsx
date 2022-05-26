@@ -16,7 +16,6 @@ function PatientDetails(props) {
       <h3>Patient Name: {patientDetail.patientName}</h3>
       <h3>Description: {patientDetail.description}</h3>
       <h3>Age: {patientDetail.age}</h3>
-      <h1>LINK: Create New Prescription</h1>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function NewPatient() {
+function NewPatientForm() {
   const [newClient, setNewClient] = useState({
     patientName: '',
     age: 0,
@@ -51,4 +51,4 @@ function NewPatient() {
   )
 }
 
-export default NewPatient
+export default NewPatientForm
