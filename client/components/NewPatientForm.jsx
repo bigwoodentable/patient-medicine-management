@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { addPatient } from '../apis/patient'
 
+//REFACTOR WITH FORMIK
 function NewPatientForm() {
   const [newClient, setNewClient] = useState({
     patientName: '',
@@ -8,7 +10,6 @@ function NewPatientForm() {
   })
 
   const onChange = (e) => {
-    console.log('e.target.name', e.target.name)
     setNewClient({
       ...newClient,
       //Remove the computed property
@@ -16,10 +17,14 @@ function NewPatientForm() {
     })
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     //send back through API function
-    console.log('newClient: ', newClient)
+    try {
+      await addPatient(newClient)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (

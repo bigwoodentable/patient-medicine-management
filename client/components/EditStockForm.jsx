@@ -1,21 +1,28 @@
 import React from 'react'
 
 import { Formik, Form, Field, FieldArray } from 'formik'
+import { updateAllStock } from '../apis/stocks'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function EditStockForm() {
-  const stocksData = [
-    { id: 1, medName: 'medOne', totalQuantity: 300 },
-    { id: 2, medName: 'medTwo', totalQuantity: 200 },
-    { id: 3, medName: 'medThree', totalQuantity: 400 },
-  ]
+  const stocksData = useSelector((state) => state.stocks)
+  const navigate = useNavigate()
+
+  async function handleSubmit(values) {
+    try {
+      await updateAllStock(values.stocks)
+      navigate('/')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       <h1>Stock List</h1>
 
-      <Formik
-        initialValues={{ stocks: stocksData }}
-        onSubmit={(values) => console.log(values.stocks)}
-      >
+      <Formik initialValues={{ stocks: stocksData }} onSubmit={handleSubmit}>
         {({ values }) => (
           <Form>
             <FieldArray

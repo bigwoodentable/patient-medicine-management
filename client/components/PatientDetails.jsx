@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getPatientDetailsFromId } from '../apis/patient.js'
 
 function PatientDetails(props) {
   //This works at getting patientId
   const { patientId } = props
 
-  const patientDetail = {
-    patientName: 'mike',
-    description: 'male, architect',
-    age: 50,
-  }
+  const [patientDetail, setPatientDetail] = useState([])
+
+  useEffect(async () => {
+    try {
+      const details = await getPatientDetailsFromId(patientId)
+      setPatientDetail(details)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
 
   return (
     <>

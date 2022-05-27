@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchStocks } from '../actions/stocks.js'
 import StockItem from './StockItem.jsx'
 
 function Stock() {
-  //API get data
-  const stocksData = [
-    { id: 1, medName: 'medOne', totalQuantity: 300 },
-    { id: 2, medName: 'medTwo', totalQuantity: 200 },
-    { id: 3, medName: 'medThree', totalQuantity: 400 },
-  ]
+  const stocksData = useSelector((state) => state.stocks)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchStocks())
+  }, [])
 
   return (
     <table>

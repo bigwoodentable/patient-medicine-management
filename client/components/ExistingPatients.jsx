@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getPatientNames } from '../apis/patient'
 
 function ExistingPatients() {
-  const patients = [
-    { id: 1, patientName: 'john' },
-    { id: 2, patientName: 'mary' },
-    { id: 3, patientName: 'james' },
-  ]
+  const [patients, setpatients] = useState([])
+
+  useEffect(async () => {
+    try {
+      const patientNames = await getPatientNames()
+      setpatients(patientNames)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [])
+
   return (
     <ul>
       {patients.map((patient) => (

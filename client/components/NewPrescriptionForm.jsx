@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { addPrescriptionById } from '../apis/prescriptions'
 
+//REFACTOR WITH FORMIK
 function NewPrescriptionForm() {
   //May need to send this back to backend
   const { id: patientId } = useParams()
@@ -19,10 +21,14 @@ function NewPrescriptionForm() {
     })
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
     //send back through API function
-    console.log('newPrescription: ', newPrescription)
+    try {
+      await addPrescriptionById(newPrescription, patientId)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (

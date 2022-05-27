@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import EditStock from './EditStock.jsx'
+import EditStockForm from './EditStockForm.jsx'
 import ExistingPatients from './ExistingPatients.jsx'
 import Home from './Home.jsx'
 import Navbar from './Navbar.jsx'
@@ -21,7 +21,7 @@ function App() {
         <Route path="/existingPatients" element={<ExistingPatients />} />
         <Route path="/patient/:id" element={<Patient />} />
         <Route path="/newPrescription/:id" element={<NewPrescriptionForm />} />
-        <Route path="/editStock" element={<EditStock />} />
+        <Route path="/editStock" element={<EditStockForm />} />
       </Routes>
     </div>
   )
