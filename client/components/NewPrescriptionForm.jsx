@@ -1,28 +1,13 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
 import { addPrescriptionById } from '../apis/prescriptions'
+import { useParams } from 'react-router-dom'
 
-//REFACTOR WITH FORMIK
 function NewPrescriptionForm() {
-  //May need to send this back to backend
   const { id: patientId } = useParams()
 
-  const [newPrescription, setnewPrescription] = useState({
-    medName: '',
-    prescribedQuantity: 0,
-  })
-
-  const onChange = (e) => {
-    console.log('e.target.name', e.target.name)
-    setnewPrescription({
-      ...newPrescription,
-      //Remove the computed property
-      [e.target.name]: e.target.value,
-    })
-  }
-
-  const onSubmit = async (e) => {
-    e.preventDefault()
+  const handleSubmit = async (newPrescription) => {
     //send back through API function
     try {
       await addPrescriptionById(newPrescription, patientId)
@@ -31,25 +16,83 @@ function NewPrescriptionForm() {
     }
   }
 
+  const initialValues = {
+    prescriptions: [
+      {
+        medName: '',
+        prescribedQuantity: 0,
+      },
+      {
+        medName: '',
+        prescribedQuantity: 0,
+      },
+      {
+        medName: '',
+        prescribedQuantity: 0,
+      },
+    ],
+  }
+
   return (
-    <form onSubmit={onSubmit}>
-      <input
-        type="text"
-        name="medName"
-        placeholder="Medicine Name"
-        value={newPrescription.medName}
-        onChange={onChange}
-      />
-      <input
-        //needs to be an number
-        type="text"
-        name="prescribedQuantity"
-        placeholder="Prescribed Quantity"
-        value={newPrescription.prescribedQuantity}
-        onChange={onChange}
-      />
-      <input type="submit" />
-    </form>
+    <div>
+      <h1>New Prescription</h1>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values) => handleSubmit(values.prescriptions)}
+      >
+        {({ values }) => (
+          <Form>
+            <FieldArray name="prescriptions">
+              {({ insert, remove, push }) => (
+                <div>
+                  {values.prescriptions.length > 0 &&
+                    values.prescriptions.map((friend, index) => (
+                      <div key={index}>
+                        <Field
+                          name={`prescriptions.${index}.medName`}
+                          placeholder="Medicine Name"
+                          type="text"
+                        />
+                        <ErrorMessage
+                          name={`prescriptions.${index}.medName`}
+                          component="div"
+                          className="field-error"
+                        />
+                        <Field
+                          name={`prescriptions.${index}.prescribedQuantity`}
+                          placeholder="Quantity"
+                          type="number"
+                        />
+                        <ErrorMessage
+                          name={`prescriptions.${index}.prescribedQuantity`}
+                          component="div"
+                          className="field-error"
+                        />
+                        <button type="button" onClick={() => remove(index)}>
+                          X
+                        </button>
+                      </div>
+                    ))}
+                  <button
+                    type="button"
+                    className="secondary"
+                    onClick={() =>
+                      push({
+                        medName: '',
+                        prescribedQuantity: 0,
+                      })
+                    }
+                  >
+                    Add stock
+                  </button>
+                  <button type="submit">Submit</button>
+                </div>
+              )}
+            </FieldArray>
+          </Form>
+        )}
+      </Formik>
+    </div>
   )
 }
 

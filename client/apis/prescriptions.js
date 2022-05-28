@@ -25,11 +25,12 @@ export function getPrescriptionsById(id) {
 }
 
 export function addPrescriptionById(newPrescription, id) {
-  const { medName, prescribedQuantity } = newPrescription
-  const newPrescriptionAdjusted = {
-    medName,
-    prescribedQuantity: Number(prescribedQuantity),
-  }
+  const newPrescriptionAdjusted = newPrescription.map((prescription) => {
+    return {
+      medName: prescription.medName,
+      prescribedQuantity: Number(prescription.prescribedQuantity),
+    }
+  })
   // return request.post(rootUrl + `/add/${id}`).send(newPrescriptionAdjusted)
   console.log(newPrescriptionAdjusted)
   return Promise.resolve(null)
