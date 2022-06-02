@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Formik, Form, Field, FieldArray } from 'formik'
-import { updateAllStock } from '../apis/stocks'
+import { updateAllStocks } from '../apis/stocks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ function EditStockForm() {
 
   async function handleSubmit(values) {
     try {
-      await updateAllStock(values.stocks)
+      await updateAllStocks(values.stocks)
       navigate('/')
     } catch (error) {
       console.log(error)

@@ -1,10 +1,11 @@
 import React from 'react'
 
 function StockItem(props) {
-  const { id, medName, totalQuantity } = props.stockData
+  const { code, medName, totalQuantity } = props.stockData
 
   return (
     <>
+      <td>{code}</td>
       <td>{medName}</td>
       <td>{totalQuantity}</td>
     </>

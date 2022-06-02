@@ -1,4 +1,4 @@
-import { getAllStock } from '../apis/stocks'
+import { getAllStocks } from '../apis/stocks'
 
 export const SET_STOCKS = 'SET_STOCKS'
 
@@ -11,7 +11,7 @@ export function setStocks(stocks) {
 
 export function fetchStocks() {
   return (dispatch) => {
-    return getAllStock().then((stocks) => {
+    return getAllStocks().then((stocks) => {
       dispatch(setStocks(stocks))
       return null
     })

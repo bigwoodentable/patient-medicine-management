@@ -14,6 +14,7 @@ function Stock() {
     <table>
       <thead>
         <tr>
+          <th>Code</th>
           <th>Name</th>
           <th>Quantity</th>
         </tr>
