@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.increments().primary()
     table.integer('prescribed_quantity')
     table.string('med_name').references('medicines.name')
-    table.integer('report_id').references('reports.id')
+    table.integer('report_id').references('reports.report_id')
   })
 }
 

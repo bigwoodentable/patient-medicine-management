@@ -10,15 +10,21 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('reports').insert([
         {
-          id: 1,
-          date: '2018-11-29T00:00:00.000Z',
+          report_id: 1,
+          date_added: '2018-11-29T00:00:00.000Z',
           diagnosis: 'stomach ache',
           patient_id: 1,
         },
         {
-          id: 2,
-          date: '2018-11-29T00:00:00.000Z',
+          report_id: 2,
+          date_added: '2018-11-29T00:00:00.000Z',
           diagnosis: 'head ache',
+          patient_id: 2,
+        },
+        {
+          report_id: 3,
+          date_added: '2018-11-29T00:00:00.000Z',
+          diagnosis: 'heart ache',
           patient_id: 2,
         },
       ])

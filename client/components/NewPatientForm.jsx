@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { addPatient } from '../apis/patient'
+import { addPatient } from '../apis/patients'
 
 //REFACTOR WITH FORMIK
 function NewPatientForm() {

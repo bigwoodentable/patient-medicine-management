@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getPatientDetailsFromId } from '../apis/patient.js'
+import { getPatientById } from '../apis/patients.js'
 
 function PatientDetails(props) {
   //This works at getting patientId
@@ -9,7 +9,7 @@ function PatientDetails(props) {
 
   useEffect(async () => {
     try {
-      const details = await getPatientDetailsFromId(patientId)
+      const details = await getPatientById(patientId)
       setPatientDetail(details)
     } catch (error) {
       console.error(error)

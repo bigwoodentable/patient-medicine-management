@@ -1,7 +1,7 @@
 import React from 'react'
 
-function PrescriptionItem(props) {
-  const { date, diagnosis, medicines } = props.prescription
+function ReportsItem(props) {
+  const { date, diagnosis, prescriptions } = props.report
 
   return (
     <>
@@ -15,7 +15,7 @@ function PrescriptionItem(props) {
           </tr>
         </thead>
         <tbody>
-          {medicines.map((medicine, i) => (
+          {prescriptions.map((medicine, i) => (
             <tr key={i}>
               <td>{medicine.medName}</td>
               <td> {medicine.prescribedQuantity}</td>
@@ -27,4 +27,4 @@ function PrescriptionItem(props) {
   )
 }
 
-export default PrescriptionItem
+export default ReportsItem

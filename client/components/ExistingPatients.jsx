@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { getPatientNames } from '../apis/patient'
+import { getPatients } from '../apis/patients'
 
 function ExistingPatients() {
   const [patients, setpatients] = useState([])
 
   useEffect(async () => {
     try {
-      const patientNames = await getPatientNames()
+      const patientNames = await getPatients()
       setpatients(patientNames)
     } catch (error) {
       console.error(error)

@@ -1,22 +1,22 @@
 import request from 'superagent'
 
-const rootUrl = '/api/v1/prescriptions'
+const rootUrl = '/api/v1/reports'
 
-export function getPrescriptionsById(id) {
-  // return request.get(rootUrl + `/${id}`)
+export function getReportsById(patientId) {
+  // return request.get(rootUrl + `/${patientId}`)
   return Promise.resolve([
     {
-      date: 10222,
+      dateAdded: 10222,
       diagnosis: 'cough with sore throat',
-      medicines: [
+      prescriptions: [
         { id: 1, medName: 'medTwo', prescribedQuantity: 25 },
         { id: 2, medName: 'medThree', prescribedQuantity: 15 },
       ],
     },
     {
-      date: 10122,
+      dateAdded: 10122,
       diagnosis: 'stomach ache',
-      medicines: [
+      prescriptions: [
         { id: 1, medName: 'medOne', prescribedQuantity: 16 },
         { id: 2, medName: 'medThree', prescribedQuantity: 36 },
       ],
@@ -24,14 +24,14 @@ export function getPrescriptionsById(id) {
   ])
 }
 
-export function addPrescriptionById(newPrescription, id) {
-  const newPrescriptionAdjusted = newPrescription.map((prescription) => {
+export function addPrescriptionsById(newPrescriptions, patientId) {
+  const newPrescriptionAdjusted = newPrescriptions.map((prescription) => {
     return {
       medName: prescription.medName,
       prescribedQuantity: Number(prescription.prescribedQuantity),
     }
   })
-  // return request.post(rootUrl + `/add/${id}`).send(newPrescriptionAdjusted)
+  // return request.post(rootUrl + `/add/${patientId}`).send(newPrescriptionAdjusted)
   console.log(newPrescriptionAdjusted)
   return Promise.resolve(null)
 }

@@ -4,8 +4,8 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('reports', (table) => {
-    table.increments().primary()
-    table.date('date')
+    table.increments('report_id').primary()
+    table.date('date_added')
     table.string('diagnosis')
     table.integer('patient_id').references('patients.id')
   })

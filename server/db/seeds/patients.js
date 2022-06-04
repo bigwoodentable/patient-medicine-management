@@ -9,9 +9,33 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex('patients').insert([
-        { id: 1, patient_name: 'mike', age: 51, notes: 'male, architect' },
-        { id: 2, patient_name: 'john', age: 31, notes: 'male, doctor' },
-        { id: 3, patient_name: 'james', age: 55, notes: 'male, lawyer' },
+        {
+          patient_id: 1,
+          fname: 'mike',
+          lname: 'lee',
+          age: 51,
+          notes: 'male, architect',
+          status: 'active',
+          date_added: '111111',
+        },
+        {
+          patient_id: 2,
+          fname: 'john',
+          lname: 'chan',
+          age: 31,
+          notes: 'male, doctor',
+          status: 'deleted',
+          date_added: '222222',
+        },
+        {
+          patient_id: 3,
+          fname: 'james',
+          lname: 'wong',
+          age: 55,
+          notes: 'male, lawyer',
+          status: 'active',
+          date_added: '333333',
+        },
       ])
     })
 }

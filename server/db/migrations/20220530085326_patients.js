@@ -4,10 +4,13 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('patients', (table) => {
-    table.increments().primary()
-    table.string('patient_name')
+    table.string('patient_id').primary()
+    table.string('fname')
+    table.string('lname')
     table.integer('age')
     table.string('notes')
+    table.string('status')
+    table.date('date_added')
   })
 }
 

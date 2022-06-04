@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
-import { addPrescriptionById } from '../apis/prescriptions'
+import { addPrescriptionsById } from '../apis/reports'
 import { useParams } from 'react-router-dom'
 
 function NewPrescriptionForm() {
@@ -10,12 +10,13 @@ function NewPrescriptionForm() {
   const handleSubmit = async (newPrescription) => {
     //send back through API function
     try {
-      await addPrescriptionById(newPrescription, patientId)
+      await addPrescriptionsById(newPrescription, patientId)
     } catch (error) {
       console.error(error)
     }
   }
 
+  //ADD Diagnosis
   const initialValues = {
     prescriptions: [
       {
