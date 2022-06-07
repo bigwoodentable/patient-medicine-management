@@ -24,7 +24,7 @@ export function getReportsById(patientId) {
   ])
 }
 
-export function addPrescriptionsById(newPrescriptions, patientId) {
+export function addReportById(newPrescriptions, patientId) {
   const newPrescriptionAdjusted = newPrescriptions.map((prescription) => {
     return {
       medName: prescription.medName,

@@ -7,6 +7,7 @@ function getReportsById(patientId, db = connection) {
 }
 
 function getPrescriptionsByReportId(reportId, db = connection) {
+  console.log('getPrescriptionsByReportId db function running')
   return db('prescriptions')
     .where('report_id', reportId)
     .select('med_name as medName', 'prescribed_quantity as prescribedQuantity')
