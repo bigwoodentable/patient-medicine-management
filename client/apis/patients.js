@@ -37,15 +37,14 @@ export function getPatients() {
 }
 
 export function getPatientById(id) {
+  console.log('api')
   // return request.get(rootUrl + `/details/${id}`)
-  return Promise.resolve([
-    {
-      patientId: '2',
-      fname: 'john',
-      lname: 'chan',
-      age: 31,
-      notes: 'male, doctor',
-      dateAdded: 222222,
-    },
-  ])
+  return Promise.resolve({
+    patientId: '2',
+    fname: 'john',
+    lname: 'chan',
+    age: 31,
+    notes: 'male, doctor',
+    dateAdded: 222222,
+  })
 }

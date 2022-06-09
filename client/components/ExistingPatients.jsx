@@ -17,8 +17,10 @@ function ExistingPatients() {
   return (
     <ul>
       {patients.map((patient) => (
-        <li key={patient.id}>
-          <Link to={`/patient/${patient.id}`}>{patient.patientName}</Link>
+        <li key={patient.patientId}>
+          <Link
+            to={`/patient/${patient.patientId}`}
+          >{`${patient.fname} ${patient.lname}`}</Link>
         </li>
       ))}
     </ul>

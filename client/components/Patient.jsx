@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import PatientDetails from './PatientDetails.jsx'
-import Prescriptions from './Prescriptions.jsx'
+import Reports from './Reports.jsx'
 
 function Patient() {
   //useParams works
@@ -10,11 +10,9 @@ function Patient() {
     <>
       <div>
         <PatientDetails patientId={patientId} />
-        <Link to={`/newPrescription/${patientId}`}>
-          LINK: Create New Prescription
-        </Link>
+        <Link to={`/newReportForm/${patientId}`}>LINK: Create New Report</Link>
       </div>
-      <Prescriptions patientId={patientId} />
+      <Reports patientId={patientId} />
     </>
   )
 }

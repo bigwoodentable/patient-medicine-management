@@ -5,12 +5,12 @@ function PatientDetails(props) {
   //This works at getting patientId
   const { patientId } = props
 
-  const [patientDetail, setPatientDetail] = useState([])
+  const [patientDetails, setPatientDetails] = useState({})
 
   useEffect(async () => {
     try {
       const details = await getPatientById(patientId)
-      setPatientDetail(details)
+      setPatientDetails(details)
     } catch (error) {
       console.error(error)
     }
@@ -19,9 +19,9 @@ function PatientDetails(props) {
   return (
     <>
       <h2>Patient Details</h2>
-      <h3>Patient Name: {patientDetail.patientName}</h3>
-      <h3>Description: {patientDetail.description}</h3>
-      <h3>Age: {patientDetail.age}</h3>
+      <h3>Patient Name: {`${patientDetails.fname} ${patientDetails.lname}`}</h3>
+      <h3>Notes: {patientDetails.notes}</h3>
+      <h3>Age: {patientDetails.age}</h3>
     </>
   )
 }

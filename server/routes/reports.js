@@ -7,7 +7,6 @@ const router = express.Router()
 //  /api/v1/reports/:patientId
 
 //Using for loop
-
 router.get('/:patientId', async (req, res) => {
   // console.log(1)
   const patientId = req.params.patientId

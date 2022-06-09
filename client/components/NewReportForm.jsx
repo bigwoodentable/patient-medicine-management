@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
-import { addPrescriptionsById } from '../apis/reports'
+import { addReportById } from '../apis/reports'
 import { useParams } from 'react-router-dom'
 
-function NewPrescriptionForm() {
+function NewReportForm() {
   const { id: patientId } = useParams()
 
-  const handleSubmit = async (newPrescription) => {
+  const handleSubmit = async (newReport) => {
     //send back through API function
     try {
-      await addPrescriptionsById(newPrescription, patientId)
+      addReportById(newReport, patientId)
     } catch (error) {
       console.error(error)
     }
@@ -18,54 +18,62 @@ function NewPrescriptionForm() {
 
   //ADD Diagnosis
   const initialValues = {
-    prescriptions: [
-      {
-        medName: '',
-        prescribedQuantity: 0,
-      },
-      {
-        medName: '',
-        prescribedQuantity: 0,
-      },
-      {
-        medName: '',
-        prescribedQuantity: 0,
-      },
-    ],
+    reports: {
+      diagnosis: '',
+      prescriptions: [
+        {
+          medName: '',
+          prescribedQuantity: 0,
+        },
+        {
+          medName: '',
+          prescribedQuantity: 0,
+        },
+        {
+          medName: '',
+          prescribedQuantity: 0,
+        },
+      ],
+    },
   }
 
   return (
     <div>
-      <h1>New Prescription</h1>
+      <h1>New Report</h1>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => handleSubmit(values.prescriptions)}
+        onSubmit={(values) => handleSubmit(values.reports)}
       >
         {({ values }) => (
           <Form>
-            <FieldArray name="prescriptions">
+            <Field
+              name="reports.diagnosis"
+              as="textarea"
+              placeholder="Diagnosis"
+            />
+            <FieldArray name="reports.prescriptions">
               {({ insert, remove, push }) => (
                 <div>
-                  {values.prescriptions.length > 0 &&
-                    values.prescriptions.map((friend, index) => (
+                  {values.reports.prescriptions.length > 0 &&
+                    values.reports.prescriptions.map((friend, index) => (
                       <div key={index}>
                         <Field
-                          name={`prescriptions.${index}.medName`}
+                          name={`reports.prescriptions.${index}.medName`}
                           placeholder="Medicine Name"
                           type="text"
                         />
                         <ErrorMessage
-                          name={`prescriptions.${index}.medName`}
+                          name={`reports.prescriptions.${index}.medName`}
                           component="div"
                           className="field-error"
                         />
                         <Field
-                          name={`prescriptions.${index}.prescribedQuantity`}
+                          name={`reports.prescriptions.${index}.prescribedQuantity`}
                           placeholder="Quantity"
                           type="number"
                         />
                         <ErrorMessage
-                          name={`prescriptions.${index}.prescribedQuantity`}
+                          name={`reports.prescriptions.${index}.prescribedQuantity`}
                           component="div"
                           className="field-error"
                         />
@@ -97,4 +105,4 @@ function NewPrescriptionForm() {
   )
 }
 
-export default NewPrescriptionForm
+export default NewReportForm

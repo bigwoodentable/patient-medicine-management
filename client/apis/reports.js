@@ -24,14 +24,18 @@ export function getReportsById(patientId) {
   ])
 }
 
-export function addReportById(newPrescriptions, patientId) {
-  const newPrescriptionAdjusted = newPrescriptions.map((prescription) => {
+export function addReportById(newReports, patientId) {
+  const prescriptionsAdjusted = newReports.prescriptions.map((report) => {
     return {
-      medName: prescription.medName,
-      prescribedQuantity: Number(prescription.prescribedQuantity),
+      medName: report.medName,
+      prescribedQuantity: Number(report.prescribedQuantity),
     }
   })
-  // return request.post(rootUrl + `/add/${patientId}`).send(newPrescriptionAdjusted)
-  console.log(newPrescriptionAdjusted)
+  const reportAdjusted = {
+    diagnosis: newReports.diagnosis,
+    prescriptions: prescriptionsAdjusted,
+  }
+  // return request.post(rootUrl + `/add/${patientId}`).send(newreportAdjusted)
+  console.log(reportAdjusted)
   return Promise.resolve(null)
 }
