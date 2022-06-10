@@ -41,8 +41,33 @@ router.get('/:patientId', async (req, res) => {
   return null
 })
 
+//  /api/v1/reports/add/:patientId
+
+router.post('/add/:patientId', async (req, res) => {
+  console.log('add')
+  const patientId = req.params.patientId
+  const { diagnosis, prescriptions } = req.body
+  try {
+    const reportId = await db.addReportById(diagnosis, patientId)
+    db.addPrescriptionsById(prescriptions, reportId)
+    return res.json('success')
+  } catch (error) {
+    console.error(error)
+  }
+})
+
+// {
+//   dateAdded: 10122,
+//   diagnosis: 'stomach ache',
+//   prescriptions: [
+//     { id: 1, medName: 'medOne', prescribedQuantity: 16 },
+//     { id: 2, medName: 'medThree', prescribedQuantity: 36 },
+//   ],
+// }
+
 module.exports = router
 
+//  /api/v1/reports/:patientId
 // Using array.map()
 
 // router.get('/:patientId', async (req, res) => {
