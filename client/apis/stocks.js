@@ -1,20 +1,12 @@
 import request from 'superagent'
 
-const rootUrl = '/api/v1/stock'
+const rootUrl = '/api/v1/stocks'
 
 export function getAllStocks() {
-  // return request.get(rootUrl + '/all').then((res) => {
-  //   return res.body.stock
-  // })
-  return Promise.resolve([
-    { code: 222, medName: 'medTwo', totalQuantity: 7300 },
-    { code: 333, medName: 'medThree', totalQuantity: 200 },
-    { code: 444, medName: 'medFour', totalQuantity: 400 },
-  ])
+  return request.get(rootUrl + '/all').then((res) => res.body)
 }
 
-export function updateAllStocks(stocks) {
-  // return request.put(rootUrl + '/update').send(newStocks)
+export function updateAllStocks(stocks, navigate) {
   const newStocks = stocks.map((stock) => {
     return {
       medName: stock.medName,
@@ -22,6 +14,8 @@ export function updateAllStocks(stocks) {
     }
   })
 
-  console.log(newStocks)
-  return null
+  return request
+    .put(rootUrl + '/update')
+    .send(newStocks)
+    .then(navigate('/'))
 }

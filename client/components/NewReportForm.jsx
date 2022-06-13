@@ -2,15 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
 import { addReportById } from '../apis/reports'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 function NewReportForm() {
+  const navigate = useNavigate()
   const { id: patientId } = useParams()
 
   const handleSubmit = async (newReport) => {
     //send back through API function
     try {
-      addReportById(newReport, patientId)
+      await addReportById(newReport, patientId)
+      navigate(`/patient/${patientId}`)
     } catch (error) {
       console.error(error)
     }

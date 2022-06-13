@@ -4,9 +4,10 @@ import { addPatient } from '../apis/patients'
 //REFACTOR WITH FORMIK
 function NewPatientForm() {
   const [newClient, setNewClient] = useState({
-    patientName: '',
+    fname: '',
+    lname: '',
     age: 0,
-    description: '',
+    notes: '',
   })
 
   const onChange = (e) => {
@@ -31,9 +32,16 @@ function NewPatientForm() {
     <form onSubmit={onSubmit}>
       <input
         type="text"
-        name="patientName"
-        placeholder="patient name"
-        value={newClient.patientName}
+        name="fname"
+        placeholder="First Name"
+        value={newClient.fname}
+        onChange={onChange}
+      />
+      <input
+        type="text"
+        name="lname"
+        placeholder="Last Name"
+        value={newClient.lname}
         onChange={onChange}
       />
       <input
@@ -46,9 +54,9 @@ function NewPatientForm() {
       />
       <input
         type="text"
-        name="description"
-        placeholder="description"
-        value={newClient.description}
+        name="notes"
+        placeholder="Notes"
+        value={newClient.notes}
         onChange={onChange}
       />
       <input type="submit" />

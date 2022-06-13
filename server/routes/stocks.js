@@ -9,6 +9,7 @@ router.get('/all', (req, res) => {
   console.log('all')
   db.getAllStocks()
     .then((stocks) => {
+      console.log('stocks returned in Route', stocks)
       res.json(stocks)
       return null
     })
@@ -22,12 +23,12 @@ router.get('/all', (req, res) => {
 // it auto increments the id, so only need [{"med_name": "name}...]
 // /api/v1/stocks/update
 router.put('/update', (req, res) => {
+  console.log('/update', req.body)
   const newStocks = req.body
 
   db.updateAllStocks(newStocks)
     .then((result) => {
-      res.send(result)
-      return null
+      return res.json(result)
     })
     .catch((err) => {
       console.log(err)

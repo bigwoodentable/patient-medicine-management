@@ -11,8 +11,7 @@ function EditStockForm() {
 
   async function handleSubmit(values) {
     try {
-      await updateAllStocks(values.stocks)
-      navigate('/')
+      await updateAllStocks(values.stocks, navigate)
     } catch (error) {
       console.log(error)
     }

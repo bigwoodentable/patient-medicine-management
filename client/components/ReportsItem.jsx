@@ -1,11 +1,11 @@
 import React from 'react'
 
 function ReportsItem(props) {
-  const { date, diagnosis, prescriptions } = props.report
+  const { dateAdded, diagnosis, prescription } = props.report
 
   return (
     <>
-      <h3>Date: {date}</h3>
+      <h3>Date Added: {dateAdded}</h3>
       <h3>diagnosis: {diagnosis}</h3>
       <table>
         <thead>
@@ -15,7 +15,7 @@ function ReportsItem(props) {
           </tr>
         </thead>
         <tbody>
-          {prescriptions.map((medicine, i) => (
+          {prescription.map((medicine, i) => (
             <tr key={i}>
               <td>{medicine.medName}</td>
               <td> {medicine.prescribedQuantity}</td>

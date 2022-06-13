@@ -56,15 +56,6 @@ router.post('/add/:patientId', async (req, res) => {
   }
 })
 
-// {
-//   dateAdded: 10122,
-//   diagnosis: 'stomach ache',
-//   prescriptions: [
-//     { id: 1, medName: 'medOne', prescribedQuantity: 16 },
-//     { id: 2, medName: 'medThree', prescribedQuantity: 36 },
-//   ],
-// }
-
 module.exports = router
 
 //  /api/v1/reports/:patientId

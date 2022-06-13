@@ -1,6 +1,7 @@
 const connection = require('./connection')
 
 function getAllStocks(db = connection) {
+  console.log('getAll')
   return db('stocks')
     .join('medicines', 'stocks.med_name', 'medicines.name')
     .select('code', 'med_name as medName', 'total_quantity as totalQuantity')
@@ -12,8 +13,15 @@ function updateAllStocks(newStocks, db = connection) {
     .then(() => null)
     .catch((error) => console.error(error))
 
-  console.log('newstock', newStocks)
-  return db('stocks').insert(newStocks)
+  const stocks = newStocks.map(async (stock) => {
+    const stockFormatted = {
+      med_name: stock.medName,
+      total_quantity: stock.totalQuantity,
+    }
+    return await db('stocks').insert(stockFormatted)
+  })
+
+  return Promise.all(stocks)
 }
 
 function deleteAllStocks(db = connection) {

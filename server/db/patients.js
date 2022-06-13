@@ -27,6 +27,7 @@ function getPatientById(id, db = connection) {
       'notes',
       'date_added as dateAdded'
     )
+    .first()
 }
 
 module.exports = {
