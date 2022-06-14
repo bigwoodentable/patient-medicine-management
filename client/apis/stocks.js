@@ -17,5 +17,5 @@ export function updateAllStocks(stocks, navigate) {
   return request
     .put(rootUrl + '/update')
     .send(newStocks)
-    .then(navigate('/'))
+    .then(navigate('/stocks'))
 }

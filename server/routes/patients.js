@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 //  /api/v1/patients/details/:id
 router.get('/details/:id', (req, res) => {
-  const id = Number(req.params.id)
+  const id = req.params.id
 
   db.getPatientById(id)
     .then((patient) => {

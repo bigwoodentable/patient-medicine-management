@@ -8,43 +8,31 @@ const router = express.Router()
 
 //Using for loop
 router.get('/:patientId', async (req, res) => {
-  // console.log(1)
   const patientId = req.params.patientId
-  // console.log(2)
-
   try {
     const reportsNoPrescrip = await db.getReportsById(patientId)
-    // console.log(3, reportsNoPrescrip)
     const reportsFunc = async (arr = []) => {
-      // console.log(4, arr)
       for (const report of reportsNoPrescrip) {
-        // console.log('4b arr: ', arr)
         const prescription = await db.getPrescriptionsByReportId(
           report.reportId
         )
         arr.push({ ...report, prescription })
-        // console.log('4c arr: ', arr)
       }
       return arr
     }
     const reports = await reportsFunc()
-    // console.log(5, reports)
     const reportPromise = Promise.all(reports)
-    // console.log(6, reportPromise)
     const resolvedPromise = await reportPromise
-    // console.log(7, resolvedPromise)
     res.json(resolvedPromise)
   } catch (error) {
     console.error(`this is ${error}`)
   }
-  // console.log(8)
   return null
 })
 
 //  /api/v1/reports/add/:patientId
 
 router.post('/add/:patientId', async (req, res) => {
-  console.log('add')
   const patientId = req.params.patientId
   const { diagnosis, prescriptions } = req.body
   try {

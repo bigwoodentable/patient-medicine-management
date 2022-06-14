@@ -1,7 +1,6 @@
 const connection = require('./connection')
 
 function getAllStocks(db = connection) {
-  console.log('getAll')
   return db('stocks')
     .join('medicines', 'stocks.med_name', 'medicines.name')
     .select('code', 'med_name as medName', 'total_quantity as totalQuantity')
@@ -25,7 +24,6 @@ function updateAllStocks(newStocks, db = connection) {
 }
 
 function deleteAllStocks(db = connection) {
-  console.log('delete')
   return db('stocks').delete().where('med_name', '!=', 'null')
 }
 

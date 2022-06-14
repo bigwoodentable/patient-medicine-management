@@ -1,14 +1,8 @@
 import React from 'react'
-import Navbar from './Navbar.jsx'
-import Stock from './Stock.jsx'
+import { Link } from 'react-router-dom'
 
 function Home() {
-  return (
-    <>
-      <Navbar />
-      <Stock />
-    </>
-  )
+  return <>Place Holder for data</>
 }
 
 export default Home

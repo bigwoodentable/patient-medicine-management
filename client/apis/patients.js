@@ -2,8 +2,11 @@ import request from 'superagent'
 
 const rootUrl = '/api/v1/patients'
 
-export function addPatient(newClient) {
-  return request.post(rootUrl + '/add').send(newClient)
+export function addPatient(newClient, navigate) {
+  return request
+    .post(rootUrl + '/add')
+    .send(newClient)
+    .then(navigate('/patients'))
 }
 
 export function getPatients() {

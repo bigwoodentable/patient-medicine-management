@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <Router>
         <App />
       </Router>
-      ,
     </Provider>,
     document.getElementById('app')
   )

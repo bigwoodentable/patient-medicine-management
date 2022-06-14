@@ -4,7 +4,6 @@ import { getPatientById } from '../apis/patients.js'
 function PatientDetails(props) {
   //This works at getting patientId
   const { patientId } = props
-
   const [patientDetails, setPatientDetails] = useState({})
 
   useEffect(async () => {
