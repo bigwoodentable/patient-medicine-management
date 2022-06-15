@@ -165,7 +165,7 @@ function Stock() {
                   const labelId = `enhanced-table-checkbox-${index}`
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.name}>
+                    <TableRow hover tabIndex={-1} key={index}>
                       {<StockItem stockData={row} labelId={labelId} />}
                     </TableRow>
                   )

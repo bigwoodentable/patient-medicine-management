@@ -16,7 +16,10 @@ function Reports(props) {
     }
   }, [])
 
-  return reports.map((report, i) => <ReportsItem key={i} report={report} />)
+  return reports
+    .slice(0)
+    .reverse()
+    .map((report, i) => <ReportsItem key={i} report={report} />)
 }
 
 export default Reports

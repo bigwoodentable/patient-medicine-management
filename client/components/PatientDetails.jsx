@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { getPatientById } from '../apis/patients.js'
 
@@ -17,10 +18,15 @@ function PatientDetails(props) {
 
   return (
     <>
-      <h2>Patient Details</h2>
-      <h3>Patient Name: {`${patientDetails.fname} ${patientDetails.lname}`}</h3>
-      <h3>Notes: {patientDetails.notes}</h3>
-      <h3>Age: {patientDetails.age}</h3>
+      <Typography variant="h4" component="div">
+        {`${patientDetails.fname} ${patientDetails.lname}`}
+      </Typography>
+      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        Age: {patientDetails.age}
+      </Typography>
+      <Typography variant="body2">
+        {patientDetails.notes} <br />
+      </Typography>
     </>
   )
 }
