@@ -19,7 +19,7 @@ import {
 } from '@mui/material'
 import StockItem from './StockItem.jsx'
 import { Link } from 'react-router-dom'
-import AddIcon from '@mui/icons-material/Add'
+import EditIcon from '@mui/icons-material/Edit'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -140,7 +140,7 @@ function Stock() {
         >
           <Link to="/editStock">
             <IconButton color="primary" aria-label="add patient" size="large">
-              <AddIcon />
+              <EditIcon />
             </IconButton>
           </Link>
         </Box>
