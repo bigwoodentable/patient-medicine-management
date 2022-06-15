@@ -11,19 +11,19 @@ exports.seed = function (knex) {
       return knex('reports').insert([
         {
           report_id: 1,
-          date_added: '2018-11-29T00:00:00.000Z',
+          date_added: '3/12/2019',
           diagnosis: 'stomach ache',
           patient_id: 1,
         },
         {
           report_id: 2,
-          date_added: '2018-11-29T00:00:00.000Z',
+          date_added: '2/04/2022',
           diagnosis: 'head ache',
           patient_id: 2,
         },
         {
           report_id: 3,
-          date_added: '2018-11-29T00:00:00.000Z',
+          date_added: '7/02/2008',
           diagnosis: 'heart ache',
           patient_id: 2,
         },

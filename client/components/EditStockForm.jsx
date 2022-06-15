@@ -5,7 +5,7 @@ import { updateAllStocks } from '../apis/stocks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import { Box, IconButton, Typography } from '@mui/material'
+import { Box, IconButton, Paper, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
 
@@ -39,64 +39,85 @@ function EditStockForm() {
 
       <Formik initialValues={{ stocks: stocksData }} onSubmit={handleSubmit}>
         {({ values }) => (
-          <Form>
-            <FieldArray
-              name="stocks"
-              render={(arrayHelpers) => (
-                <>
-                  {values.stocks && values.stocks.length > 0 ? (
-                    values.stocks.map((stock, index) => (
-                      <Box key={index}>
-                        <Field
-                          style={{
-                            height: 40,
-                            width: 160,
-                            marginRight: 16,
-                            marginTop: 16,
-                            border: '0.5px solid grey',
-                            borderRadius: '5px',
-                          }}
-                          name={`stocks.${index}.medName`}
-                        />
-                        <Field
-                          style={{
-                            height: 40,
-                            width: 160,
-                            marginRight: 16,
-                            marginTop: 16,
-                            border: '0.5px solid grey',
-                            borderRadius: '5px',
-                          }}
-                          name={`stocks.${index}.totalQuantity`}
-                        />
+          <Paper elevation={3} sx={{ p: 3 }}>
+            <Form>
+              <FieldArray
+                name="stocks"
+                render={(arrayHelpers) => (
+                  <>
+                    {values.stocks && values.stocks.length > 0 ? (
+                      values.stocks.map((stock, index) => (
+                        <Box key={index}>
+                          <Field
+                            style={{
+                              height: 40,
+                              width: 160,
+                              marginRight: 16,
+                              marginTop: 16,
+                              border: '0.5px solid grey',
+                              borderRadius: '5px',
+                            }}
+                            name={`stocks.${index}.medName`}
+                          />
+                          <Field
+                            style={{
+                              height: 40,
+                              width: 160,
+                              marginRight: 16,
+                              marginTop: 16,
+                              border: '0.5px solid grey',
+                              borderRadius: '5px',
+                            }}
+                            name={`stocks.${index}.totalQuantity`}
+                          />
+                          <Button
+                            color="primary"
+                            variant="text"
+                            size="large"
+                            onClick={() =>
+                              arrayHelpers.insert(index + 1, {
+                                id: '',
+                                medName: '',
+                                totalQuantity: 0,
+                              })
+                            }
+                          >
+                            <AddIcon />
+                          </Button>
+                          <Button
+                            color="primary"
+                            size="large"
+                            onClick={() => arrayHelpers.remove(index)} // remove a medicine from the list
+                          >
+                            <DeleteIcon />
+                          </Button>
+                        </Box>
+                      ))
+                    ) : (
+                      <Box
+                        sx={{
+                          display: 'grid',
+                          Button: { mt: 3, mr: 2 },
+                          justifyContent: 'center',
+                        }}
+                      >
                         <Button
-                          color="primary"
-                          variant="text"
-                          size="large"
+                          color="secondary"
+                          variant="outlined"
                           onClick={() =>
-                            arrayHelpers.insert(index + 1, {
+                            arrayHelpers.push({
                               id: '',
                               medName: '',
                               totalQuantity: 0,
                             })
                           }
                         >
-                          <IconButton aria-label="add" size="large">
-                            <AddIcon />
-                          </IconButton>
-                        </Button>
-                        <Button
-                          color="primary"
-                          size="large"
-                          onClick={() => arrayHelpers.remove(index)} // remove a medicine from the list
-                        >
-                          <IconButton aria-label="delete" size="large">
-                            <DeleteIcon />
-                          </IconButton>
+                          {/* show this when user has removed all medicines from the list */}
+                          Add a medicine
                         </Button>
                       </Box>
-                    ))
-                  ) : (
+                    )}
+
                     <Box
                       sx={{
                         display: 'grid',
@@ -105,45 +126,22 @@ function EditStockForm() {
                       }}
                     >
                       <Button
-                        color="secondary"
-                        variant="outlined"
-                        onClick={() =>
-                          arrayHelpers.push({
-                            id: '',
-                            medName: '',
-                            totalQuantity: 0,
-                          })
-                        }
+                        color="primary"
+                        variant="contained"
+                        // fullWidth
+                        type="submit"
                       >
-                        {/* show this when user has removed all medicines from the list */}
-                        Add a medicine
+                        Submit
+                      </Button>
+                      <Button color="primary" variant="outlined" type="reset">
+                        Reset
                       </Button>
                     </Box>
-                  )}
-
-                  <Box
-                    sx={{
-                      display: 'grid',
-                      Button: { mt: 3, mr: 2 },
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <Button
-                      color="primary"
-                      variant="contained"
-                      // fullWidth
-                      type="submit"
-                    >
-                      Submit
-                    </Button>
-                    <Button color="primary" variant="outlined" type="reset">
-                      Reset
-                    </Button>
-                  </Box>
-                </>
-              )}
-            />
-          </Form>
+                  </>
+                )}
+              />
+            </Form>
+          </Paper>
         )}
       </Formik>
     </Box>

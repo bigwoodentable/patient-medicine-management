@@ -27,6 +27,10 @@ function deleteAllStocks(db = connection) {
   return db('stocks').delete().where('med_name', '!=', 'null')
 }
 
+function reduceQuantityById(db = connection) {
+  return db('stocks').delete().where('med_name', '!=', 'null')
+}
+
 // function countAllStocks(x, db = connection) {
 //   console.log('Count')
 //   return db('stocks').count('id')

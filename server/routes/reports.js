@@ -38,6 +38,7 @@ router.post('/add/:patientId', async (req, res) => {
   try {
     const reportId = await db.addReportById(diagnosis, patientId)
     db.addPrescriptionsById(prescriptions, reportId)
+    //deduct from stock
     return res.json('success')
   } catch (error) {
     console.error(error)

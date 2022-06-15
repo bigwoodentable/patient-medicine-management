@@ -15,7 +15,7 @@ function getPrescriptionsByReportId(reportId, db = connection) {
 //input diagnosis + patient_id, add inputs + date
 function addReportById(diagnosis, patientId, db = connection) {
   const newReport = {
-    date_added: new Date(Date.now()),
+    date_added: new Date(Date.now()).toLocaleDateString(),
     diagnosis,
     patient_id: patientId,
   }

@@ -63,6 +63,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
+            sx={{ fontWeight: 'bold' }}
             align="center"
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
@@ -142,11 +143,7 @@ function Stock() {
           </Link>
         </Box>
         <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
+          <Table size={dense ? 'small' : 'medium'}>
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}

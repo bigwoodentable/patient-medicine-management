@@ -6,6 +6,7 @@ export function addPatient(newClient, navigate) {
   return request
     .post(rootUrl + '/add')
     .send(newClient)
+    .then((res) => res.json)
     .then(navigate('/patients'))
 }
 

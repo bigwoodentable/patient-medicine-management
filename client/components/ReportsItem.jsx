@@ -71,7 +71,7 @@ function ReportsItem(props) {
                     </TableCell>
 
                     <TableCell align="right">
-                      we{medicine.prescribedQuantity}
+                      {medicine.prescribedQuantity}
                     </TableCell>
                   </TableRow>
                 ))}
