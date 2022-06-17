@@ -23,7 +23,7 @@ function Patient() {
           </Paper>
           <Link
             style={{ textDecoration: 'none' }}
-            to={`/newReport/${patientId}`}
+            to={`/newReportForm/${patientId}`}
           >
             <Button sx={{ mt: 3 }} variant="contained" color="primary">
               Create Report

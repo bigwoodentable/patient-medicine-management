@@ -10,7 +10,7 @@ import Sidebar from './Sidebar.jsx'
 import Stock from './Stock.jsx'
 import { styled } from '@mui/system'
 import Medicines from './Medicines.jsx'
-import NewReport from './NewReport.jsx'
+import NewReportForm from './forms/NewReportForm.jsx'
 
 const MainStyle = styled('div')(({ theme }) => ({
   flexGrow: 1,
@@ -31,7 +31,7 @@ function App() {
           <Route path="/newPatient" element={<NewPatientForm />} />
           <Route path="/patients" element={<ExistingPatients />} />
           <Route path="/patient/:id" element={<Patient />} />
-          <Route path="/newReport/:id" element={<NewReport />} />
+          <Route path="/newReportForm/:id" element={<NewReportForm />} />
           <Route path="/editStock" element={<EditStockForm />} />
           <Route path="/Stocks" element={<Stock />} />
           <Route path="/medicines" element={<Medicines />} />
