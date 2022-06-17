@@ -1,16 +1,15 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
-import { addReportById } from '../apis/reports'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Formik, Field, Form, FieldArray } from 'formik'
+import { addReportById } from '../../apis/reports'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import { Box, IconButton, Paper, Typography } from '@mui/material'
+import { Box, Paper, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
-function NewReportForm() {
+function NewReportForm(props) {
+  const { patientId } = props
   const navigate = useNavigate()
-  const { id: patientId } = useParams()
 
   const handleSubmit = async (newReport) => {
     //send back through API function
@@ -25,6 +24,8 @@ function NewReportForm() {
   const initialValues = {
     reports: {
       diagnosis: '',
+      prescriptionNumber: '',
+      prescriptionPrice: '',
       prescriptions: [
         {
           medName: '',
@@ -52,7 +53,12 @@ function NewReportForm() {
       noValidate
       autoComplete="off"
     >
-      <Typography variant="h4" sx={{ mb: 4 }}>
+      <Link style={{ textDecoration: 'none' }} to={`/patient/${patientId}`}>
+        <Button variant="outlined" size="small">
+          <ArrowBackIcon sx={{ mr: 1 }} /> Patient
+        </Button>
+      </Link>
+      <Typography variant="h4" sx={{ mb: 4, mt: 3 }}>
         New Report
       </Typography>
       <Formik
@@ -91,10 +97,10 @@ function NewReportForm() {
                 <Typography variant="h6">Prescription</Typography>
                 <FieldArray name="reports.prescriptions">
                   {({ insert, remove, push }) => (
-                    <div>
+                    <Box>
                       {values.reports.prescriptions.length > 0 &&
                         values.reports.prescriptions.map((friend, index) => (
-                          <div key={index}>
+                          <Box key={index}>
                             <Field
                               style={{
                                 height: 40,
@@ -129,8 +135,42 @@ function NewReportForm() {
                             >
                               <DeleteIcon />
                             </Button>
-                          </div>
+                          </Box>
                         ))}
+                      <Typography sx={{ mt: 2 }} variant="body2">
+                        Prescription Number:
+                      </Typography>
+                      <Field
+                        style={{
+                          height: 40,
+                          width: 180,
+                          marginRight: 16,
+                          marginTop: 16,
+                          marginBottom: 8,
+                          border: '0.5px solid grey',
+                          borderRadius: '5px',
+                        }}
+                        label="Prescription Number"
+                        name="reports.prescriptionNumber"
+                      />
+
+                      <Typography variant="body2">
+                        Prescription Price:
+                      </Typography>
+                      <Field
+                        style={{
+                          height: 40,
+                          width: 180,
+                          marginRight: 16,
+                          marginTop: 16,
+                          marginBottom: 8,
+                          border: '0.5px solid grey',
+                          borderRadius: '5px',
+                        }}
+                        label="Prescription Price"
+                        name="reports.prescriptionPrice"
+                      />
+
                       <Box
                         sx={{
                           display: 'grid',
@@ -150,15 +190,19 @@ function NewReportForm() {
                         >
                           Add stock
                         </Button>
+                        <Button color="secondary" variant="outlined">
+                          Calculate
+                        </Button>
                         <Button
                           color="primary"
                           variant="contained"
                           type="submit"
+                          // onclick={}
                         >
                           Submit
                         </Button>
                       </Box>
-                    </div>
+                    </Box>
                   )}
                 </FieldArray>
               </Form>

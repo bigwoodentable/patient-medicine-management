@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Formik, Form, Field, FieldArray } from 'formik'
-import { updateAllStocks } from '../apis/stocks'
+import { updateAllStocks } from '../../apis/stocks'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Button from '@material-ui/core/Button'

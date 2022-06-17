@@ -4,8 +4,9 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('medicines', (table) => {
-    table.string('name').primary()
+    table.string('med_name').primary()
     table.string('code')
+    table.decimal('cost', 8, 2)
   })
 }
 

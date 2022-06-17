@@ -51,6 +51,12 @@ const headCells = [
     label: 'Name',
   },
   {
+    id: 'cost',
+    numeric: true,
+    disablePadding: false,
+    label: 'Cost/100g',
+  },
+  {
     id: 'totalQuantity',
     numeric: true,
     disablePadding: false,
@@ -140,7 +146,7 @@ function Stock() {
           justifyContent="flex-end"
         >
           <Link to="/editStock">
-            <IconButton color="primary" aria-label="add patient" size="large">
+            <IconButton color="primary" size="large">
               <EditIcon />
             </IconButton>
           </Link>

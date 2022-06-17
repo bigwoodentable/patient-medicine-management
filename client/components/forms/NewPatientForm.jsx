@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { addPatient } from '../apis/patients'
+import { Link, useNavigate } from 'react-router-dom'
+import { addPatient } from './../../apis/patients'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { Box, Paper } from '@mui/material'
 import { Typography } from '@material-ui/core'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
 function NewPatientForm() {
   const navigate = useNavigate()
@@ -37,7 +38,12 @@ function NewPatientForm() {
       noValidate
       autoComplete="off"
     >
-      <Box sx={{ mb: 4 }}>
+      <Link style={{ textDecoration: 'none' }} to={`/patients`}>
+        <Button variant="outlined" size="small">
+          <ArrowBackIcon sx={{ mr: 1 }} /> Patients
+        </Button>
+      </Link>
+      <Box sx={{ mb: 4, mt: 3 }}>
         <Typography variant="h4">New Patient</Typography>
       </Box>
       <Formik

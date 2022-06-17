@@ -14,7 +14,13 @@ import Paper from '@mui/material/Paper'
 import { Box, Divider } from '@mui/material'
 
 function ReportsItem(props) {
-  const { dateAdded, diagnosis, prescription } = props.report
+  const {
+    dateAdded,
+    diagnosis,
+    prescription,
+    prescriptionPrice,
+    prescriptionNumber,
+  } = props.report
 
   return (
     <>
@@ -27,19 +33,25 @@ function ReportsItem(props) {
           <Typography>{dateAdded}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Paper sx={{ bgcolor: 'lightgrey', p: 3, mb: 3 }} elevation={2}>
-            <Typography
-              sx={{ bgcolor: 'lightgrey' }}
-              variant="h8"
-              fontWeight={'bold'}
-            >
-              Diagnosis <br />
-              <br />
-            </Typography>
-            <Box sx={{ bgcolor: '#EEEEEE', p: 3, borderRadius: '5px' }}>
-              <Typography variant="body2">{diagnosis}</Typography>
-            </Box>
-          </Paper>
+          {/* <Paper sx={{ p: 3, mb: 3 }} elevation={2}> */}
+          <Typography variant="h8" fontWeight={'bold'}>
+            Diagnosis <br />
+            <br />
+          </Typography>
+          <Box
+            sx={{
+              border: 1,
+              borderColor: '#GGGGGG',
+              p: 3,
+              borderRadius: '2px',
+            }}
+          >
+            <Typography variant="body2">{diagnosis}</Typography>
+          </Box>
+          {/* </Paper> */}
+          <Typography variant="body1" sx={{ mb: 1, mt: 3 }}>
+            <b>Number of Prescriptions:</b> {prescriptionNumber}
+          </Typography>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
@@ -78,6 +90,20 @@ function ReportsItem(props) {
               </TableBody>
             </Table>
           </TableContainer>
+          <Accordion sx={{ mt: 3 }}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography variant="b2" fontWeight="bold">
+                Financial Details
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails sx={{ bgcolor: 'white' }}>
+              <Typography>Prescription Price: {prescriptionPrice}</Typography>
+            </AccordionDetails>
+          </Accordion>
         </AccordionDetails>
       </Accordion>
     </>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { visuallyHidden } from '@mui/utils'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Table,
   TableBody,
@@ -13,12 +14,12 @@ import {
   TableSortLabel,
   FormControlLabel,
   Switch,
-  Button,
   IconButton,
 } from '@mui/material'
+import MedicineItem from './MedicineItem.jsx'
 import { Link } from 'react-router-dom'
-import { getPatients } from '../apis/patients.js'
-import AddIcon from '@mui/icons-material/Add'
+import EditIcon from '@mui/icons-material/Edit'
+import { fetchMeds } from '../actions/medicines.js'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -38,16 +39,22 @@ function getComparator(order, orderBy) {
 
 const headCells = [
   {
-    id: 'fname',
+    id: 'code',
     numeric: true,
     disablePadding: true,
+    label: 'Code',
+  },
+  {
+    id: 'medName',
+    numeric: false,
+    disablePadding: false,
     label: 'Name',
   },
   {
-    id: 'button',
-    numeric: false,
-    disablePadding: true,
-    label: '',
+    id: 'cost',
+    numeric: true,
+    disablePadding: false,
+    label: 'Cost/100g',
   },
 ]
 
@@ -87,21 +94,17 @@ function EnhancedTableHead(props) {
   )
 }
 
-function Stock() {
+function Medicines() {
   const [order, setOrder] = useState('asc')
   const [orderBy, setOrderBy] = useState('Code')
   const [page, setPage] = useState(0)
   const [dense, setDense] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-  const [rows, setRows] = useState([])
 
-  useEffect(async () => {
-    try {
-      const patientNames = await getPatients()
-      setRows(patientNames)
-    } catch (error) {
-      console.error(error)
-    }
+  const rows = useSelector((state) => state.medicines)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchMeds())
   }, [])
 
   const handleRequestSort = (event, property) => {
@@ -136,14 +139,18 @@ function Stock() {
           display="flex"
           justifyContent="flex-end"
         >
-          <Link to="/newPatient">
+          <Link to="/editMeds">
             <IconButton color="primary" size="large">
-              <AddIcon />
+              <EditIcon />
             </IconButton>
           </Link>
         </Box>
         <TableContainer>
-          <Table size={dense ? 'small' : 'medium'}>
+          <Table
+            sx={{ minWidth: 750 }}
+            aria-labelledby="tableTitle"
+            size={dense ? 'small' : 'medium'}
+          >
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
@@ -160,22 +167,7 @@ function Stock() {
 
                   return (
                     <TableRow hover tabIndex={-1} key={index}>
-                      <TableCell
-                        component="th"
-                        id={labelId}
-                        scope="row"
-                        align="center"
-                      >
-                        {`${row.fname} ${row.lname}`}
-                      </TableCell>
-                      <TableCell align="right">
-                        <Link
-                          to={`/patient/${row.patientId}`}
-                          style={{ textDecoration: 'none' }}
-                        >
-                          <Button variant="contained">Details</Button>
-                        </Link>
-                      </TableCell>
+                      {<MedicineItem medData={row} labelId={labelId} />}
                     </TableRow>
                   )
                 })}
@@ -209,4 +201,4 @@ function Stock() {
   )
 }
 
-export default Stock
+export default Medicines

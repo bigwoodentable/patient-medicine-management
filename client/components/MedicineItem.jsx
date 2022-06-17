@@ -1,10 +1,9 @@
 import React from 'react'
 import TableCell from '@mui/material/TableCell'
 
-function StockItem(props) {
-  const { code, medName, totalQuantity, cost } = props.stockData
+function MedicineItem(props) {
+  const { code, medName, cost } = props.medData
   const { labelId } = props
-
   return (
     <>
       <TableCell component="th" id={labelId} scope="row" align="center">
@@ -12,9 +11,8 @@ function StockItem(props) {
       </TableCell>
       <TableCell align="center">{medName}</TableCell>
       <TableCell align="center">{cost}</TableCell>
-      <TableCell align="center">{totalQuantity}</TableCell>
     </>
   )
 }
 
-export default StockItem
+export default MedicineItem

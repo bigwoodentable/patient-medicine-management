@@ -1,14 +1,16 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import EditStockForm from './EditStockForm.jsx'
+import EditStockForm from './forms/EditStockForm.jsx'
+import EditMedsForm from './forms/EditMedsForm.jsx'
 import ExistingPatients from './ExistingPatients.jsx'
 import Home from './Home.jsx'
-import NewPatientForm from './NewPatientForm.jsx'
-import NewReportForm from './NewReportForm.jsx'
+import NewPatientForm from './forms/NewPatientForm.jsx'
 import Patient from './Patient.jsx'
-import Navbar from './Navbar.jsx'
+import Sidebar from './Sidebar.jsx'
 import Stock from './Stock.jsx'
 import { styled } from '@mui/system'
+import Medicines from './Medicines.jsx'
+import NewReport from './NewReport.jsx'
 
 const MainStyle = styled('div')(({ theme }) => ({
   flexGrow: 1,
@@ -22,16 +24,18 @@ const MainStyle = styled('div')(({ theme }) => ({
 function App() {
   return (
     <div>
-      <Navbar />
+      <Sidebar />
       <MainStyle>
         <Routes>
           <Route path="/Home" element={<Home />} />
           <Route path="/newPatient" element={<NewPatientForm />} />
-          <Route path="/Patients" element={<ExistingPatients />} />
+          <Route path="/patients" element={<ExistingPatients />} />
           <Route path="/patient/:id" element={<Patient />} />
-          <Route path="/newReportForm/:id" element={<NewReportForm />} />
+          <Route path="/newReport/:id" element={<NewReport />} />
           <Route path="/editStock" element={<EditStockForm />} />
           <Route path="/Stocks" element={<Stock />} />
+          <Route path="/medicines" element={<Medicines />} />
+          <Route path="/editMeds" element={<EditMedsForm />} />
         </Routes>
       </MainStyle>
     </div>

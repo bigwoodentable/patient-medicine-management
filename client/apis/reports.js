@@ -7,6 +7,11 @@ export function getReportsById(patientId) {
 }
 
 export function addReportById(newReports, patientId) {
+  const reportBasics = {
+    prescription_price: Number(newReports.prescriptionPrice),
+    prescription_number: Number(newReports.prescriptionNumber),
+    diagnosis: newReports.diagnosis,
+  }
   const prescriptionsAdjusted = newReports.prescriptions.map((report) => {
     return {
       medName: report.medName,
@@ -14,7 +19,7 @@ export function addReportById(newReports, patientId) {
     }
   })
   const reportAdjusted = {
-    diagnosis: newReports.diagnosis,
+    reportBasics,
     prescriptions: prescriptionsAdjusted,
   }
   return request.post(rootUrl + `/add/${patientId}`).send(reportAdjusted)

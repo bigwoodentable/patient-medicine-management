@@ -1,6 +1,7 @@
 const express = require('express')
 
 const db = require('../db/reports')
+const { updateQuantByName } = require('../db/stocks')
 
 const router = express.Router()
 
@@ -34,11 +35,13 @@ router.get('/:patientId', async (req, res) => {
 
 router.post('/add/:patientId', async (req, res) => {
   const patientId = req.params.patientId
-  const { diagnosis, prescriptions } = req.body
+  const { reportBasics, prescriptions } = req.body
+
   try {
-    const reportId = await db.addReportById(diagnosis, patientId)
+    const reportId = await db.addReportById(reportBasics, patientId)
     db.addPrescriptionsById(prescriptions, reportId)
-    //deduct from stock
+    updateQuantByName(prescriptions)
+
     return res.json('success')
   } catch (error) {
     console.error(error)

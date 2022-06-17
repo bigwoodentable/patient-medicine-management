@@ -20,7 +20,7 @@ const drawerWidth = 240
 
 export default function PermanentDrawerLeft() {
   return (
-    <Box sx={{ display: 'flex'}}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -47,16 +47,27 @@ export default function PermanentDrawerLeft() {
         <Toolbar />
         <Divider />
         <List>
-          {['Home', 'Patients', 'Stocks'].map((text, index) => (
+          {['Home', 'Patients', 'Stocks', 'Medicines'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton href={`/${text}`}>
-                <ListItemIcon>
-                  {/* Change ICON to suitable one */}
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+              <Link
+                to={`/${text}`}
+                style={{ textDecoration: 'none', color: 'black' }}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    {/* Change ICON to suitable one */}
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
 
-                <ListItemText primary={text} />
-              </ListItemButton>
+                  <ListItemText>
+                    {text === 'Stocks'
+                      ? `Current ${text}`
+                      : text === 'Medicines'
+                      ? `Medicine Info`
+                      : text}
+                  </ListItemText>
+                </ListItemButton>
+              </Link>
             </ListItem>
           ))}
         </List>

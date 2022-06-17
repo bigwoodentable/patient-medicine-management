@@ -2,8 +2,13 @@ const connection = require('./connection')
 
 function getAllStocks(db = connection) {
   return db('stocks')
-    .join('medicines', 'stocks.med_name', 'medicines.name')
-    .select('code', 'med_name as medName', 'total_quantity as totalQuantity')
+    .join('medicines', 'stocks.med_name', 'medicines.med_name')
+    .select(
+      'code',
+      'stocks.med_name as medName',
+      'total_quantity as totalQuantity',
+      'cost'
+    )
 }
 
 //delete existing stock; based on medName, get medId, add totalQuantity
@@ -27,16 +32,17 @@ function deleteAllStocks(db = connection) {
   return db('stocks').delete().where('med_name', '!=', 'null')
 }
 
-function reduceQuantityById(db = connection) {
-  return db('stocks').delete().where('med_name', '!=', 'null')
+function updateQuantByName(prescriptions, db = connection) {
+  prescriptions.forEach(async (prescription) => {
+    return await db('stocks')
+      .where('med_name', '=', prescription.medName)
+      .decrement('total_quantity', Number(prescription.prescribedQuantity))
+  })
+  return null
 }
-
-// function countAllStocks(x, db = connection) {
-//   console.log('Count')
-//   return db('stocks').count('id')
-// }
 
 module.exports = {
   getAllStocks,
   updateAllStocks,
+  updateQuantByName,
 }
