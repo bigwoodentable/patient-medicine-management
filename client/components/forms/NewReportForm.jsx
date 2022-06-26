@@ -27,7 +27,7 @@ function NewReportForm() {
     dispatch(fetchMeds())
   }, [])
 
-  const handleSubmit = async (newReport) => {
+  async function handleSubmit(newReport) {
     //send back through API function
     try {
       await addReportById(newReport, patientId)
@@ -37,33 +37,19 @@ function NewReportForm() {
     }
   }
 
-  // 百合
-  async function handleCalc(newReport) {
-    console.log(1, totalCosts)
-    calcCosts(newReport)
-    console.log(2, totalCosts)
-    calcProfit(newReport)
-    console.log(3, totalCosts)
-  }
-
-  function calcCosts(newReport) {
-    console.log(4, totalCosts)
-    const { prescriptions } = newReport
-    prescriptions.forEach((prescription) => {
-      return medInfo.forEach((info) =>
+  // 百合 白扁豆
+  function handleCalc(newReport) {
+    const { prescriptions, prescriptionNumber, prescriptionPrice } = newReport
+    const cost = prescriptions.reduce((total, prescription) => {
+      medInfo.forEach((info) =>
         info.medName === prescription.medName
-          ? setTotalCosts(
-              totalCosts + (info.cost / 100) * prescription.prescribedQuantity
-            )
+          ? (total += (info.cost / 100) * prescription.prescribedQuantity)
           : null
       )
-    })
-  }
-
-  function calcProfit(newReport) {
-    console.log(5, totalCosts)
-    const { prescriptionNumber, prescriptionPrice } = newReport
-    settotalProfit(prescriptionNumber * prescriptionPrice - totalCosts)
+      return total
+    }, 0)
+    setTotalCosts(cost)
+    settotalProfit(prescriptionNumber * prescriptionPrice - cost)
   }
 
   const initialValues = {
@@ -110,6 +96,7 @@ function NewReportForm() {
         <Formik
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values.reports)}
+          enableReinitialize
         >
           {({ values }) => (
             <Box
@@ -262,7 +249,7 @@ function NewReportForm() {
         </Formik>
       </Box>
       <Box>
-        <ReportCalc />
+        <ReportCalc profits={totalProfit} costs={totalCosts} />
       </Box>
     </Box>
   )
