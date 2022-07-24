@@ -20,6 +20,8 @@ function ReportsItem(props) {
     prescription,
     prescriptionPrice,
     prescriptionNumber,
+    totalCosts,
+    totalProfits,
   } = props.report
 
   return (
@@ -102,6 +104,8 @@ function ReportsItem(props) {
             </AccordionSummary>
             <AccordionDetails sx={{ bgcolor: 'white' }}>
               <Typography>Prescription Price: {prescriptionPrice}</Typography>
+              <Typography>Total Costs: {totalCosts}</Typography>
+              <Typography>Total Profit: {totalProfits}</Typography>
             </AccordionDetails>
           </Accordion>
         </AccordionDetails>

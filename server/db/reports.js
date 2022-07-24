@@ -8,7 +8,9 @@ function getReportsById(patientId, db = connection) {
       'date_added as dateAdded',
       'diagnosis',
       'prescription_price as prescriptionPrice',
-      'prescription_number as prescriptionNumber'
+      'prescription_number as prescriptionNumber',
+      'total_costs as totalCosts',
+      'total_profit as totalProfits'
     )
 }
 

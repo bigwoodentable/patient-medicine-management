@@ -11,9 +11,9 @@ const router = express.Router()
 router.get('/:patientId', async (req, res) => {
   const patientId = req.params.patientId
   try {
-    const reportsNoPrescrip = await db.getReportsById(patientId)
+    const reportBasics = await db.getReportsById(patientId)
     const reportsFunc = async (arr = []) => {
-      for (const report of reportsNoPrescrip) {
+      for (const report of reportBasics) {
         const prescription = await db.getPrescriptionsByReportId(
           report.reportId
         )

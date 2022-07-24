@@ -18,7 +18,7 @@ import { fetchMeds } from '../../actions/medicines'
 
 function NewReportForm() {
   const [totalCosts, setTotalCosts] = useState(0)
-  const [totalProfit, settotalProfit] = useState(0)
+  const [totalProfits, setTotalProfit] = useState(0)
   const { id: patientId } = useParams()
   const navigate = useNavigate()
   const medInfo = useSelector((state) => state.medicines)
@@ -29,8 +29,10 @@ function NewReportForm() {
 
   async function handleSubmit(newReport) {
     //send back through API function
+    const combinedReport = { ...newReport, totalCosts, totalProfits }
+
     try {
-      await addReportById(newReport, patientId)
+      await addReportById(combinedReport, patientId)
       navigate(`/patient/${patientId}`)
     } catch (error) {
       console.error(error)
@@ -52,7 +54,7 @@ function NewReportForm() {
       return total
     }, 0)
     setTotalCosts(cost)
-    settotalProfit(prescriptionNumber * prescriptionPrice - cost)
+    setTotalProfit(prescriptionNumber * prescriptionPrice - cost)
   }
 
   const initialValues = {
@@ -61,6 +63,10 @@ function NewReportForm() {
       prescriptionNumber: '',
       prescriptionPrice: '',
       prescriptions: [
+        {
+          medName: '',
+          prescribedQuantity: 0,
+        },
         {
           medName: '',
           prescribedQuantity: 0,
@@ -252,7 +258,7 @@ function NewReportForm() {
         </Formik>
       </Box>
       <Box>
-        <ReportCalc profits={totalProfit} costs={totalCosts} />
+        <ReportCalc profits={totalProfits} costs={totalCosts} />
       </Box>
     </Box>
   )

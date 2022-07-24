@@ -15,6 +15,8 @@ exports.seed = function (knex) {
           diagnosis: 'stomach ache',
           prescription_price: 10,
           prescription_number: 7,
+          total_costs: 10,
+          total_profit: 7,
           patient_id: 1,
         },
         {
@@ -23,6 +25,8 @@ exports.seed = function (knex) {
           diagnosis: 'head ache',
           prescription_price: 15.5,
           prescription_number: 3,
+          total_costs: 10,
+          total_profit: 7,
           patient_id: 2,
         },
         {
@@ -31,6 +35,8 @@ exports.seed = function (knex) {
           diagnosis: 'heart ache',
           prescription_price: 12,
           prescription_number: 5,
+          total_costs: 10,
+          total_profit: 7,
           patient_id: 2,
         },
       ])
