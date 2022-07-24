@@ -13,6 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         <App />
       </Router>
     </Provider>,
-    document.getElementById('app')
+    document.getElementById('app2')
   )
 })

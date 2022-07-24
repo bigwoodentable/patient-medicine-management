@@ -43,7 +43,10 @@ function NewReportForm() {
     const cost = prescriptions.reduce((total, prescription) => {
       medInfo.forEach((info) =>
         info.medName === prescription.medName
-          ? (total += (info.cost / 100) * prescription.prescribedQuantity)
+          ? (total +=
+              (info.cost / 100) *
+              prescription.prescribedQuantity *
+              prescriptionNumber)
           : null
       )
       return total
