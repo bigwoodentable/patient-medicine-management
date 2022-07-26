@@ -70,10 +70,29 @@ function NewReportForm() {
         return null
       }
 
-      //remove white spaces from the medicine names
-      rmSpacePrescriptions = newReport.prescriptions.map((med) => {
+      //Remove white spaces from the medicine names
+      rmSpacePrescriptions = rmEmptyPrescrips.prescriptions.map((med, i) => {
+        //Check for duplicates - attempting to use a solution that's O(n) instead of O(n2)
         return { ...med, medName: removeSpacesAll(med.medName) }
       })
+
+      rmSpacePrescriptions.forEach((med, i) => {
+        const temp = { 百合: 1 }
+        console.log('med', med.medName)
+        console.log('temp', temp)
+        console.log('temp[med.medName]', temp[med.medName])
+        console.log('med.medName]', med.medName)
+        if (temp[med.medName] === med.medName) {
+          console.log('if')
+          console.log('temp[med]', temp[med.medName])
+          alert(`${med} is repeated in this prescription`)
+          return null
+        } else {
+          console.log('else')
+          temp[med.medName] = i
+        }
+      })
+
       adjustedReport = { ...newReport, prescriptions: rmSpacePrescriptions }
     }
 
