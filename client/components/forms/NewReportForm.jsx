@@ -9,6 +9,14 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ReportCalc from '../ReportCalc.jsx'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchMeds } from '../../actions/medicines'
+import {
+  removeSpacesEnds,
+  removeSpacesAll,
+  loopObj,
+  removeEmptyPrescriptions,
+} from '../../helper'
+import Stock from '../Stock'
+import { fetchStocks } from '../../actions/stocks'
 
 //onClick calculate - pass prescriptions
 //fetch medicine info on redux
@@ -21,15 +29,55 @@ function NewReportForm() {
   const [totalProfits, setTotalProfit] = useState(0)
   const { id: patientId } = useParams()
   const navigate = useNavigate()
-  const medInfo = useSelector((state) => state.medicines)
+
+  const medInfo = useSelector((state) => state.stocks)
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchMeds())
+    dispatch(fetchStocks())
   }, [])
 
   async function handleSubmit(newReport) {
-    //send back through API function
-    const combinedReport = { ...newReport, totalCosts, totalProfits }
+    let adjustedReport,
+      rmSpacePrescriptions = {}
+
+    //check if medicines prescribed
+    if (newReport.prescriptions[0].medName === '') {
+      if (confirm('Would you like to continue with no prescriptions?')) {
+        //if intended to have no prescriptions, clear prescriptions array
+        adjustedReport = { ...newReport, prescriptions: [] }
+      } else {
+        return null
+      }
+    } else {
+      //Remove empty prescriptions
+      const rmEmptyPrescrips = {
+        ...newReport,
+        prescriptions: removeEmptyPrescriptions(newReport.prescriptions),
+      }
+
+      //Check if entered medicines' names match the names in current stocks
+      const correctPrescription = rmEmptyPrescrips.prescriptions.every(
+        (prescription) => {
+          console.log(prescription.medName)
+          return medInfo.find((info) => info.medName === prescription.medName)
+        }
+      )
+
+      if (!correctPrescription) {
+        alert(
+          "Please make sure medicines' names are spelt correctly and are in current stocks"
+        )
+        return null
+      }
+
+      //remove white spaces from the medicine names
+      rmSpacePrescriptions = newReport.prescriptions.map((med) => {
+        return { ...med, medName: removeSpacesAll(med.medName) }
+      })
+      adjustedReport = { ...newReport, prescriptions: rmSpacePrescriptions }
+    }
+
+    const combinedReport = { ...adjustedReport, totalCosts, totalProfits }
 
     try {
       await addReportById(combinedReport, patientId)
@@ -44,7 +92,7 @@ function NewReportForm() {
     const { prescriptions, prescriptionNumber, prescriptionPrice } = newReport
     const cost = prescriptions.reduce((total, prescription) => {
       medInfo.forEach((info) =>
-        info.medName === prescription.medName
+        info.medName === removeSpacesAll(prescription.medName)
           ? (total +=
               (info.cost / 100) *
               prescription.prescribedQuantity *
@@ -60,8 +108,8 @@ function NewReportForm() {
   const initialValues = {
     reports: {
       diagnosis: '',
-      prescriptionNumber: '',
-      prescriptionPrice: '',
+      prescriptionNumber: '0',
+      prescriptionPrice: '0',
       prescriptions: [
         {
           medName: '',
@@ -141,7 +189,7 @@ function NewReportForm() {
                     {({ insert, remove, push }) => (
                       <Box>
                         {values.reports.prescriptions.length > 0 &&
-                          values.reports.prescriptions.map((friend, index) => (
+                          values.reports.prescriptions.map((v, index) => (
                             <Box key={index}>
                               <Field
                                 style={{
@@ -259,6 +307,9 @@ function NewReportForm() {
       </Box>
       <Box>
         <ReportCalc profits={totalProfits} costs={totalCosts} />
+      </Box>
+      <Box>
+        <Stock />
       </Box>
     </Box>
   )

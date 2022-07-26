@@ -40,8 +40,8 @@
       "react-hooks"
     ],
     "rules": {
-      "react-hooks/rules-of-hooks": "error", 
-      "react-hooks/exhaustive-deps": "warn", 
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
       "no-unused-vars": "off"
     }
   },
@@ -55,6 +55,7 @@
     "@vscode/sqlite3": "^5.0.7",
     "express": "^4.17.1",
     "formik": "^2.2.9",
+    "formik-yup": "^0.0.5",
     "knex": "^1.0.2",
     "pg": "^8.5.1",
     "superagent": "^6.1.0",
