@@ -47,5 +47,5 @@ export function calcFinances(
   }, 0)
 
   const profit = prescriptionNumber * prescriptionPrice - cost
-  return { totalCosts: cost, totalProfits: profit }
+  return { totalCosts: cost.toFixed(2), totalProfits: profit.toFixed(2) }
 }

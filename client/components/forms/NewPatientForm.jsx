@@ -7,6 +7,14 @@ import { Box, Paper } from '@mui/material'
 import { Typography } from '@material-ui/core'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import * as Yup from 'yup'
+
+const SignupSchema = Yup.object().shape({
+  fname: Yup.string().required('First Name Required'),
+  lname: Yup.string().required('Last Name Required'),
+  age: Yup.number().required('Age Required').positive().integer(),
+  // email: Yup.string().email('Invalid email').required('Required'),
+})
 
 function NewPatientForm() {
   const navigate = useNavigate()
@@ -20,12 +28,10 @@ function NewPatientForm() {
   }
 
   const initialValues = {
-    patient: {
-      fname: '',
-      lname: '',
-      age: '',
-      notes: '',
-    },
+    fname: '',
+    lname: '',
+    age: '',
+    notes: '',
   }
 
   return (
@@ -48,9 +54,10 @@ function NewPatientForm() {
       </Box>
       <Formik
         initialValues={initialValues}
-        onSubmit={(values) => handleSubmit(values.patient)}
+        validationSchema={SignupSchema}
+        onSubmit={(values) => handleSubmit(values)}
       >
-        {({ values }) => (
+        {({ values, errors, touched }) => (
           <Box
             sx={{
               display: 'grid',
@@ -65,7 +72,7 @@ function NewPatientForm() {
               }}
             >
               <Form>
-                <Field
+                <TextField
                   style={{
                     height: 40,
                     width: 160,
@@ -74,10 +81,12 @@ function NewPatientForm() {
                     border: '0.5px solid grey',
                     borderRadius: '5px',
                   }}
-                  name="patient.fname"
+                  name="fname"
                   placeholder="First Name"
+                  error={touched.fname && Boolean(errors.fname)}
+                  helperText={touched.fname && errors.fname}
                 />
-                <Field
+                <TextField
                   style={{
                     height: 40,
                     width: 160,
@@ -86,11 +95,13 @@ function NewPatientForm() {
                     border: '0.5px solid grey',
                     borderRadius: '5px',
                   }}
-                  name="patient.lname"
+                  name="lname"
                   placeholder="Last Name"
+                  error={touched.lname && Boolean(errors.lname)}
+                  helperText={touched.lname && errors.lname}
                 />
 
-                <Field
+                <TextField
                   style={{
                     height: 40,
                     width: 160,
@@ -99,13 +110,15 @@ function NewPatientForm() {
                     border: '0.5px solid grey',
                     borderRadius: '5px',
                   }}
-                  name="patient.age"
+                  name="age"
                   placeholder="Age"
+                  error={touched.age && Boolean(errors.age)}
+                  helperText={touched.age && errors.age}
                 />
                 <Box sx={{ mt: 3 }}>
                   <Typography variant={'body2'}>Notes:</Typography>
                 </Box>
-                <Field
+                <TextField
                   style={{
                     height: 80,
                     width: 360,
@@ -115,7 +128,7 @@ function NewPatientForm() {
                     border: '0.5px solid grey',
                     borderRadius: '5px',
                   }}
-                  name="patient.notes"
+                  name="notes"
                   as="textarea"
                 />
                 <Button color="primary" variant="contained" type="submit">
