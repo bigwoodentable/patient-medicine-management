@@ -27,3 +27,25 @@ export function removeEmptyPrescriptions(prescriptions) {
     return prescription.medName !== ''
   })
 }
+
+export function calcFinances(
+  medInfo,
+  prescriptions,
+  prescriptionNumber,
+  prescriptionPrice
+) {
+  const cost = prescriptions.reduce((total, prescription) => {
+    medInfo.forEach((info) =>
+      info.medName === removeSpacesAll(prescription.medName)
+        ? (total +=
+            (info.cost / 100) *
+            prescription.prescribedQuantity *
+            prescriptionNumber)
+        : null
+    )
+    return total
+  }, 0)
+
+  const profit = prescriptionNumber * prescriptionPrice - cost
+  return { totalCosts: cost, totalProfits: profit }
+}

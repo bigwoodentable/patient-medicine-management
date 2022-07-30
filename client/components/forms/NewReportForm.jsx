@@ -14,6 +14,7 @@ import {
   removeSpacesAll,
   loopObj,
   removeEmptyPrescriptions,
+  calcFinances,
 } from '../../helper'
 import Stock from '../Stock'
 import { fetchStocks } from '../../actions/stocks'
@@ -36,12 +37,24 @@ function NewReportForm() {
     dispatch(fetchStocks())
   }, [])
 
+  function handleCalc(newReport) {
+    const { prescriptions, prescriptionNumber, prescriptionPrice } = newReport
+    const finances = calcFinances(
+      medInfo,
+      prescriptions,
+      prescriptionNumber,
+      prescriptionPrice
+    )
+    setTotalCosts(finances.totalCosts)
+    setTotalProfit(prescriptionNumber * prescriptionPrice - finances.totalCosts)
+  }
+
   async function handleSubmit(newReport) {
-    let adjustedReport,
-      rmSpacePrescriptions = {}
+    const { prescriptions, prescriptionNumber, prescriptionPrice } = newReport
+    let adjustedReport = {}
 
     //check if medicines prescribed
-    if (newReport.prescriptions[0].medName === '') {
+    if (prescriptions[0].medName === '') {
       if (confirm('Would you like to continue with no prescriptions?')) {
         //if intended to have no prescriptions, clear prescriptions array
         adjustedReport = { ...newReport, prescriptions: [] }
@@ -55,13 +68,15 @@ function NewReportForm() {
         prescriptions: removeEmptyPrescriptions(newReport.prescriptions),
       }
 
+      //Remove white spaces from the medicine names
+      const rmSpacePrescriptions = rmEmptyPrescrips.prescriptions.map((med) => {
+        return { ...med, medName: removeSpacesAll(med.medName) }
+      })
+
       //Check if entered medicines' names match the names in current stocks
-      const correctPrescription = rmEmptyPrescrips.prescriptions.every(
-        (prescription) => {
-          console.log(prescription.medName)
-          return medInfo.find((info) => info.medName === prescription.medName)
-        }
-      )
+      const correctPrescription = rmSpacePrescriptions.every((prescription) => {
+        return medInfo.find((info) => info.medName === prescription.medName)
+      })
 
       if (!correctPrescription) {
         alert(
@@ -70,33 +85,44 @@ function NewReportForm() {
         return null
       }
 
-      //Remove white spaces from the medicine names
-      rmSpacePrescriptions = rmEmptyPrescrips.prescriptions.map((med, i) => {
-        //Check for duplicates - attempting to use a solution that's O(n) instead of O(n2)
-        return { ...med, medName: removeSpacesAll(med.medName) }
-      })
-
-      rmSpacePrescriptions.forEach((med, i) => {
-        const temp = { 百合: 1 }
-        console.log('med', med.medName)
-        console.log('temp', temp)
-        console.log('temp[med.medName]', temp[med.medName])
-        console.log('med.medName]', med.medName)
+      //Check for duplicates - attempting to use a solution that's O(n) instead of O(n2)
+      const temp = {}
+      const isDup = rmSpacePrescriptions.every((med) => {
         if (temp[med.medName] === med.medName) {
-          console.log('if')
-          console.log('temp[med]', temp[med.medName])
-          alert(`${med} is repeated in this prescription`)
-          return null
+          return false
         } else {
-          console.log('else')
-          temp[med.medName] = i
+          temp[med.medName] = med.medName
         }
+        return true
       })
 
-      adjustedReport = { ...newReport, prescriptions: rmSpacePrescriptions }
+      if (!isDup) {
+        alert(`Please check if a medicine is repeated`)
+        return null
+      }
+
+      //update report with medicine names that do not have white spaces
+      adjustedReport = {
+        ...newReport,
+        prescriptions: rmSpacePrescriptions,
+      }
     }
 
-    const combinedReport = { ...adjustedReport, totalCosts, totalProfits }
+    //calculate total profits and total costs if users did not press
+    let finances = {}
+
+    if (totalCosts === 0) {
+      finances = calcFinances(
+        medInfo,
+        prescriptions,
+        prescriptionNumber,
+        prescriptionPrice
+      )
+    } else {
+      finances = { totalCosts, totalProfits }
+    }
+
+    const combinedReport = { ...adjustedReport, ...finances }
 
     try {
       await addReportById(combinedReport, patientId)
@@ -104,24 +130,6 @@ function NewReportForm() {
     } catch (error) {
       console.error(error)
     }
-  }
-
-  // 百合 白扁豆
-  function handleCalc(newReport) {
-    const { prescriptions, prescriptionNumber, prescriptionPrice } = newReport
-    const cost = prescriptions.reduce((total, prescription) => {
-      medInfo.forEach((info) =>
-        info.medName === removeSpacesAll(prescription.medName)
-          ? (total +=
-              (info.cost / 100) *
-              prescription.prescribedQuantity *
-              prescriptionNumber)
-          : null
-      )
-      return total
-    }, 0)
-    setTotalCosts(cost)
-    setTotalProfit(prescriptionNumber * prescriptionPrice - cost)
   }
 
   const initialValues = {
@@ -171,7 +179,9 @@ function NewReportForm() {
         </Typography>
         <Formik
           initialValues={initialValues}
-          onSubmit={(values) => handleSubmit(values.reports)}
+          onSubmit={(values) => {
+            handleSubmit(values.reports)
+          }}
           enableReinitialize
         >
           {({ values }) => (
