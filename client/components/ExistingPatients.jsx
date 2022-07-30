@@ -19,6 +19,11 @@ import {
 import { Link } from 'react-router-dom'
 import { getPatients } from '../apis/patients.js'
 import AddIcon from '@mui/icons-material/Add'
+import FirstPageIcon from '@mui/icons-material/FirstPage'
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
+import LastPageIcon from '@mui/icons-material/LastPage'
+import { useTheme } from '@emotion/react'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -94,7 +99,7 @@ function Stock() {
   const [dense, setDense] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [rows, setRows] = useState([])
-
+  console.log('page', page)
   useEffect(async () => {
     try {
       const patientNames = await getPatients()
@@ -111,6 +116,7 @@ function Stock() {
   }
 
   const handleChangePage = (event, newPage) => {
+    console.log('handleChangePage')
     setPage(newPage)
   }
 
@@ -192,9 +198,9 @@ function Stock() {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 30, 50, 100]}
+          rowsPerPageOptions={[3, 10, 30, 50, 100]}
           component="div"
-          count={Math.ceil(rows.length / rowsPerPage)}
+          count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

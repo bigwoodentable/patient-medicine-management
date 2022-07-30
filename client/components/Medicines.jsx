@@ -186,7 +186,7 @@ function Medicines() {
         <TablePagination
           rowsPerPageOptions={[10, 30, 50, 100]}
           component="div"
-          count={Math.ceil(rows.length / rowsPerPage)}
+          count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

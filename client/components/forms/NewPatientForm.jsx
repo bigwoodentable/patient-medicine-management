@@ -12,7 +12,11 @@ import * as Yup from 'yup'
 const SignupSchema = Yup.object().shape({
   fname: Yup.string().required('First Name Required'),
   lname: Yup.string().required('Last Name Required'),
-  age: Yup.number().required('Age Required').positive().integer(),
+  age: Yup.number()
+    .required('Age Required')
+    .positive()
+    .integer()
+    .typeError('Positive Number Required'),
   // email: Yup.string().email('Invalid email').required('Required'),
 })
 
@@ -20,6 +24,8 @@ function NewPatientForm() {
   const navigate = useNavigate()
 
   const handleSubmit = async (patient) => {
+    console.log('patient', patient)
+
     try {
       await addPatient(patient, navigate)
     } catch (error) {
@@ -72,7 +78,10 @@ function NewPatientForm() {
               }}
             >
               <Form>
-                <TextField
+                {console.log('error', errors)}
+                {console.log('values', values)}
+                {console.log('touched', touched)}
+                <Field
                   style={{
                     height: 40,
                     width: 160,
@@ -83,10 +92,13 @@ function NewPatientForm() {
                   }}
                   name="fname"
                   placeholder="First Name"
-                  error={touched.fname && Boolean(errors.fname)}
-                  helperText={touched.fname && errors.fname}
+                  className={
+                    errors.fname && touched.fname ? 'input-error' : null
+                  }
+                  // helperText={errors.fname}
                 />
-                <TextField
+                <ErrorMessage name="fname" component="span" className="error" />
+                <Field
                   style={{
                     height: 40,
                     width: 160,
@@ -97,11 +109,13 @@ function NewPatientForm() {
                   }}
                   name="lname"
                   placeholder="Last Name"
-                  error={touched.lname && Boolean(errors.lname)}
-                  helperText={touched.lname && errors.lname}
+                  className={
+                    errors.lname && touched.lname ? 'input-error' : null
+                  }
                 />
+                <ErrorMessage name="lname" component="span" className="error" />
 
-                <TextField
+                <Field
                   style={{
                     height: 40,
                     width: 160,
@@ -112,13 +126,13 @@ function NewPatientForm() {
                   }}
                   name="age"
                   placeholder="Age"
-                  error={touched.age && Boolean(errors.age)}
-                  helperText={touched.age && errors.age}
+                  className={errors.age && touched.age ? 'input-error' : null}
                 />
+                <ErrorMessage name="age" component="span" className="error" />
                 <Box sx={{ mt: 3 }}>
                   <Typography variant={'body2'}>Notes:</Typography>
                 </Box>
-                <TextField
+                <Field
                   style={{
                     height: 80,
                     width: 360,
