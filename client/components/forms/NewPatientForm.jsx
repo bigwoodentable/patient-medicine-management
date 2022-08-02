@@ -8,6 +8,7 @@ import { Typography } from '@material-ui/core'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from 'formik'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import * as Yup from 'yup'
+import { removeSpacesAll } from '../../helper'
 
 const SignupSchema = Yup.object().shape({
   fname: Yup.string().required('First Name Required'),
@@ -24,8 +25,6 @@ function NewPatientForm() {
   const navigate = useNavigate()
 
   const handleSubmit = async (patient) => {
-    console.log('patient', patient)
-
     try {
       await addPatient(patient, navigate)
     } catch (error) {
@@ -78,9 +77,6 @@ function NewPatientForm() {
               }}
             >
               <Form>
-                {console.log('error', errors)}
-                {console.log('values', values)}
-                {console.log('touched', touched)}
                 <Field
                   style={{
                     height: 40,

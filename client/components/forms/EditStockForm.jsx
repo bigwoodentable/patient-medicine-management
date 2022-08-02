@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Formik, Form, Field, FieldArray } from 'formik'
 import { updateAllStocks } from '../../apis/stocks'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import { Box, IconButton, Paper, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
+import { fetchMeds } from '../../actions/medicines'
 
 function EditStockForm() {
   const stocksData = useSelector((state) => state.stocks)
+  const medInfo = useSelector((state) => state.medicines)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchMeds())
+  }, [])
+
   const navigate = useNavigate()
 
   async function handleSubmit(values) {
     try {
-      await updateAllStocks(values.stocks, navigate)
+      await updateAllStocks(values, medInfo, navigate)
     } catch (error) {
       console.log(error)
     }

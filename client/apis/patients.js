@@ -1,11 +1,18 @@
 import request from 'superagent'
+import { removeSpacesAll } from '../helper'
 
 const rootUrl = '/api/v1/patients'
 
-export function addPatient(newClient, navigate) {
+export function addPatient(patient, navigate) {
+  const formattedPatient = {
+    ...patient,
+    fname: removeSpacesAll(patient.fname).toUpperCase(),
+    lname: removeSpacesAll(patient.lname).toUpperCase(),
+  }
+
   return request
     .post(rootUrl + '/add')
-    .send(newClient)
+    .send(formattedPatient)
     .then((res) => res.json)
     .then(navigate('/patients'))
 }

@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button'
 import { Box, IconButton, Paper, Typography } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import AddIcon from '@mui/icons-material/Add'
+import { removeSpacesAll, removeEmpty } from '../../helper'
 
 function EditMedsForm() {
   const medsData = useSelector((state) => state.medicines)
@@ -15,7 +16,7 @@ function EditMedsForm() {
 
   async function handleSubmit(values) {
     try {
-      await updateAllMeds(values.meds, navigate)
+      await updateAllMeds(values, navigate)
     } catch (error) {
       console.log(error)
     }

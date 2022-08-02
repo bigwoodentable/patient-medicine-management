@@ -22,9 +22,9 @@ export function loopObj(obj, fn) {
   return newObj
 }
 
-export function removeEmptyPrescriptions(prescriptions) {
-  return prescriptions.filter((prescription) => {
-    return prescription.medName !== ''
+export function removeEmpty(arr) {
+  return arr.filter((obj) => {
+    return obj.medName !== ''
   })
 }
 
