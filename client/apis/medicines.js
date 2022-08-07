@@ -19,7 +19,7 @@ export function updateAllMeds(values, navigate) {
     return {
       code: removeSpacesAll(med.code).toUpperCase(),
       medName: removeSpacesAll(med.medName).toUpperCase(0),
-      cost: Number(med.cost.toFixed(2)),
+      cost: Number(med.cost).toFixed(2),
     }
   })
   console.log('API-formattedmeds', formattedMeds)
