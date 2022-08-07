@@ -1,21 +1,22 @@
 {
   "name": "boilerplate-fullstack",
   "version": "2.0.0",
-  "main": "index.js",
+  "main": "server/index.js",
   "license": "MIT",
   "keywords": [
     "fullstack"
   ],
   "scripts": {
-    "start": "node index",
+    "start": "node server",
     "test": "jest",
     "test:watch": "jest --noStackTrace --watchAll",
     "dev": "run-p dev:client dev:server",
     "dev:client": "npm run webpack -- --watch",
-    "dev:server": "nodemon --watch index.js",
-    "build": "run-p build:client build:server",
+    "dev:server": "nodemon --watch server server/index.js",
+    "build": "run-p build:client build:serve build:deploy",
     "build:client": "npm run webpack -- --mode production",
     "build:server": "npm run knex -- migrate:latest",
+    "build:deploy": "node server",
     "lint": "eslint --ext .js,.jsx .",
     "webpack": "webpack --config ./client/webpack.config.js",
     "knex": "knex --knexfile ./server/db/knexfile.js"
@@ -97,4 +98,3 @@
     "singleQuote": true
   }
 }
-
