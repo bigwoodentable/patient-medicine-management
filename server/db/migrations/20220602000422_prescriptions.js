@@ -8,8 +8,8 @@ exports.up = function (knex) {
     table.integer('prescribed_quantity')
     table.string('med_name')
     table.integer('report_id')
-    // table.string('med_name').references('medicines.med_name')
-    // table.integer('report_id').references('reports.report_id')
+    table.string('med_name').references('med_name').inTable('medicines')
+    table.integer('report_id').references('report_id').inTable('reports')
   })
 }
 
