@@ -16,7 +16,6 @@
     "build": "run-p build:client build:server build:deploy",
     "build:client": "npm run webpack -- --mode production",
     "build:server": "npm run knex -- migrate:latest",
-    "build:deploy": "node server",
     "lint": "eslint --ext .js,.jsx .",
     "webpack": "webpack --config ./client/webpack.config.js",
     "knex": "knex --knexfile ./server/db/knexfile.js"
@@ -96,5 +95,8 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
-  }
+  },
+  "engines": {
+    "node": "16.x"
+}
 }
