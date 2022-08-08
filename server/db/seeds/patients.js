@@ -16,7 +16,7 @@ exports.seed = function (knex) {
           age: 51,
           notes: 'male, architect',
           status: 'active',
-          date_added: '123',
+          date_added: '2018-11-30',
         },
         {
           patient_id: 2,
@@ -25,7 +25,7 @@ exports.seed = function (knex) {
           age: 31,
           notes: 'male, doctor',
           status: 'deleted',
-          date_added: '456',
+          date_added: '2018-11-30',
         },
         {
           patient_id: 3,
@@ -34,7 +34,7 @@ exports.seed = function (knex) {
           age: 55,
           notes: 'male, lawyer',
           status: 'active',
-          date_added: '789',
+          date_added: '2018-11-30',
         },
       ])
     })
