@@ -62,7 +62,8 @@
     "pg": "^8.7.3",
     "psql": "^0.0.1",
     "superagent": "^6.1.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
