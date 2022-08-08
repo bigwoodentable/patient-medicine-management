@@ -6,8 +6,10 @@ exports.up = function (knex) {
   return knex.schema.createTable('prescriptions', (table) => {
     table.increments().primary()
     table.integer('prescribed_quantity')
-    table.string('med_name').references('medicines.med_name')
-    table.integer('report_id').references('reports.report_id')
+    table.string('med_name')
+    table.integer('report_id')
+    // table.string('med_name').references('medicines.med_name')
+    // table.integer('report_id').references('reports.report_id')
   })
 }
 
