@@ -18,6 +18,7 @@ import {
 } from '../../helper'
 import Stock from '../Stock'
 import { fetchStocks } from '../../actions/stocks'
+import { Grid } from '@material-ui/core'
 
 //onClick calculate - pass prescriptions
 //fetch medicine info on redux
@@ -91,188 +92,210 @@ function NewReportForm() {
   }
 
   return (
-    <Box>
-      <Box
-        sx={{
-          '& .MuiTextField-root': { m: 1 },
-          width: '80%',
-          maxWidth: '650px',
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <Link style={{ textDecoration: 'none' }} to={`/patient/${patientId}`}>
-          <Button variant="outlined" size="small">
-            <ArrowBackIcon sx={{ mr: 1 }} /> Patient
-          </Button>
-        </Link>
-        <Typography variant="h4" sx={{ mb: 4, mt: 3 }}>
-          New Report
-        </Typography>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={(values) => {
-            handleSubmit(values.reports)
+    <>
+      <Link style={{ textDecoration: 'none' }} to={`/patient/${patientId}`}>
+        <Button variant="outlined" size="small">
+          <ArrowBackIcon sx={{ mr: 1 }} /> Patient
+        </Button>
+      </Link>
+      <Typography variant="h4" sx={{ ml: 2, mb: 4, mt: 3 }}>
+        New Report
+      </Typography>
+      <Box sx={{ maxWidth: '1000px' }}>
+        <Box
+          sx={{
+            display: 'grid',
+            gap: 1,
+            gridTemplateColumns: 'repeat(2, 1fr)',
           }}
-          enableReinitialize
         >
-          {({ values }) => (
-            <Box
-              sx={{
-                display: 'grid',
-                width: '500px',
-                justifyContent: 'center',
+          <Box>
+            <Formik
+              initialValues={initialValues}
+              onSubmit={(values) => {
+                handleSubmit(values.reports)
               }}
+              enableReinitialize
             >
-              <Paper
-                elevation={3}
-                sx={{
-                  p: 3,
-                }}
-              >
-                <Form>
-                  <Typography variant="h6">Diagnosis</Typography>
-                  <Field
-                    style={{
-                      height: 80,
-                      width: 360,
-                      marginRight: 16,
-                      marginTop: 16,
-                      marginBottom: 8,
-                      border: '0.5px solid grey',
-                      borderRadius: '5px',
+              {({ values }) => (
+                <Box
+                  sx={{
+                    display: 'grid',
+                    width: '500px',
+                    justifyContent: 'center',
+                    // bgcolor: 'yellow',
+                  }}
+                >
+                  <Paper
+                    elevation={3}
+                    sx={{
+                      p: 3,
                     }}
-                    name="reports.diagnosis"
-                    as="textarea"
-                  />
-                  <Typography variant="h6">Prescription</Typography>
-                  <FieldArray name="reports.prescriptions">
-                    {({ insert, remove, push }) => (
-                      <Box>
-                        {values.reports.prescriptions.length > 0 &&
-                          values.reports.prescriptions.map((v, index) => (
-                            <Box key={index}>
-                              <Field
-                                style={{
-                                  height: 40,
-                                  width: 160,
-                                  marginRight: 16,
-                                  marginTop: 16,
-                                  border: '0.5px solid grey',
-                                  borderRadius: '5px',
-                                }}
-                                name={`reports.prescriptions.${index}.medName`}
-                                placeholder="Medicine Name"
-                                type="text"
-                              />
+                  >
+                    <Form>
+                      <Typography variant="h6">Diagnosis</Typography>
+                      <Field
+                        style={{
+                          height: 80,
+                          width: 360,
+                          marginRight: 16,
+                          marginTop: 16,
+                          marginBottom: 8,
+                          border: '0.5px solid grey',
+                          borderRadius: '5px',
+                        }}
+                        name="reports.diagnosis"
+                        as="textarea"
+                      />
+                      <Typography variant="h6">Prescription</Typography>
+                      <FieldArray name="reports.prescriptions">
+                        {({ insert, remove, push }) => (
+                          <Box>
+                            {values.reports.prescriptions.length > 0 &&
+                              values.reports.prescriptions.map((v, index) => (
+                                <Box key={index}>
+                                  <Field
+                                    style={{
+                                      height: 40,
+                                      width: 160,
+                                      marginRight: 16,
+                                      marginTop: 16,
+                                      border: '0.5px solid grey',
+                                      borderRadius: '5px',
+                                    }}
+                                    name={`reports.prescriptions.${index}.medName`}
+                                    placeholder="Medicine Name"
+                                    type="text"
+                                  />
+                                  <Field
+                                    style={{
+                                      height: 40,
+                                      width: 160,
+                                      marginRight: 16,
+                                      marginTop: 16,
+                                      border: '0.5px solid grey',
+                                      borderRadius: '5px',
+                                    }}
+                                    name={`reports.prescriptions.${index}.prescribedQuantity`}
+                                    placeholder="Quantity"
+                                    type="number"
+                                  />
 
-                              <Field
-                                style={{
-                                  height: 40,
-                                  width: 160,
-                                  marginRight: 16,
-                                  marginTop: 16,
-                                  border: '0.5px solid grey',
-                                  borderRadius: '5px',
-                                }}
-                                name={`reports.prescriptions.${index}.prescribedQuantity`}
-                                placeholder="Quantity"
-                                type="number"
-                              />
+                                  <Button
+                                    color="primary"
+                                    onClick={() => remove(index)}
+                                  >
+                                    <DeleteIcon />
+                                  </Button>
+                                </Box>
+                              ))}
+                            <Typography sx={{ mt: 2 }} variant="body2">
+                              Prescription Number:
+                            </Typography>
+                            <Field
+                              style={{
+                                height: 40,
+                                width: 180,
+                                marginRight: 16,
+                                marginTop: 16,
+                                marginBottom: 8,
+                                border: '0.5px solid grey',
+                                borderRadius: '5px',
+                              }}
+                              label="Prescription Number"
+                              name="reports.prescriptionNumber"
+                            />
 
+                            <Typography variant="body2">
+                              Prescription Price:
+                            </Typography>
+                            <Field
+                              style={{
+                                height: 40,
+                                width: 180,
+                                marginRight: 16,
+                                marginTop: 16,
+                                marginBottom: 8,
+                                border: '0.5px solid grey',
+                                borderRadius: '5px',
+                              }}
+                              label="Prescription Price"
+                              name="reports.prescriptionPrice"
+                            />
+                            <Box
+                              sx={{
+                                display: 'grid',
+                                Button: { mt: 3, mr: 2 },
+                                justifyContent: 'center',
+                              }}
+                            >
                               <Button
                                 color="primary"
-                                onClick={() => remove(index)}
+                                variant="outlined"
+                                onClick={() =>
+                                  push({
+                                    medName: '',
+                                    prescribedQuantity: 0,
+                                  })
+                                }
                               >
-                                <DeleteIcon />
+                                Add stock
+                              </Button>
+                              <Button
+                                color="secondary"
+                                variant="outlined"
+                                onClick={() => handleCalc(values.reports)}
+                              >
+                                Calculate
+                              </Button>
+                              <Button
+                                color="primary"
+                                variant="contained"
+                                type="submit"
+                                // onclick={}
+                              >
+                                Submit
                               </Button>
                             </Box>
-                          ))}
-                        <Typography sx={{ mt: 2 }} variant="body2">
-                          Prescription Number:
-                        </Typography>
-                        <Field
-                          style={{
-                            height: 40,
-                            width: 180,
-                            marginRight: 16,
-                            marginTop: 16,
-                            marginBottom: 8,
-                            border: '0.5px solid grey',
-                            borderRadius: '5px',
-                          }}
-                          label="Prescription Number"
-                          name="reports.prescriptionNumber"
-                        />
+                          </Box>
+                        )}
+                      </FieldArray>
+                    </Form>
+                  </Paper>
+                </Box>
+              )}
+            </Formik>
+          </Box>
 
-                        <Typography variant="body2">
-                          Prescription Price:
-                        </Typography>
-                        <Field
-                          style={{
-                            height: 40,
-                            width: 180,
-                            marginRight: 16,
-                            marginTop: 16,
-                            marginBottom: 8,
-                            border: '0.5px solid grey',
-                            borderRadius: '5px',
-                          }}
-                          label="Prescription Price"
-                          name="reports.prescriptionPrice"
-                        />
-
-                        <Box
-                          sx={{
-                            display: 'grid',
-                            Button: { mt: 3, mr: 2 },
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <Button
-                            color="primary"
-                            variant="outlined"
-                            onClick={() =>
-                              push({
-                                medName: '',
-                                prescribedQuantity: 0,
-                              })
-                            }
-                          >
-                            Add stock
-                          </Button>
-                          <Button
-                            color="secondary"
-                            variant="outlined"
-                            onClick={() => handleCalc(values.reports)}
-                          >
-                            Calculate
-                          </Button>
-                          <Button
-                            color="primary"
-                            variant="contained"
-                            type="submit"
-                            // onclick={}
-                          >
-                            Submit
-                          </Button>
-                        </Box>
-                      </Box>
-                    )}
-                  </FieldArray>
-                </Form>
+          <Box sx={{ mb: 4 }}>
+            <Box
+              sx={{
+                width: '95%',
+                borderRadius: '5px',
+                // bgcolor: 'purple',
+              }}
+            >
+              <Paper elevation={3} sx={{ height: '125px', p: 3 }}>
+                <Typography>
+                  <b>Calculation Results:</b>
+                  <br />
+                  <br />
+                </Typography>
+                <ReportCalc profits={totalProfits} costs={totalCosts} />
               </Paper>
             </Box>
-          )}
-        </Formik>
+            <Box
+              sx={{
+                // bgcolor: 'blue',
+                mt: 4,
+              }}
+            >
+              <Stock />
+            </Box>
+          </Box>
+        </Box>
       </Box>
-      <Box>
-        <ReportCalc profits={totalProfits} costs={totalCosts} />
-      </Box>
-      <Box>
-        <Stock />
-      </Box>
-    </Box>
+    </>
   )
 }
 

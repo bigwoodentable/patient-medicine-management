@@ -9,20 +9,25 @@ export function getAllMedicines() {
 
 export function updateAllMeds(values, navigate) {
   //remove empty entries
-  console.log('API-values', values)
   const rmEmptyEntries = {
     meds: removeEmpty(values.meds),
   }
-  console.log('API-rmEmptyEntries', rmEmptyEntries)
+
   //remove white spaces and set to 2 dp from med info names
   const formattedMeds = rmEmptyEntries.meds.map((med) => {
-    return {
-      code: removeSpacesAll(med.code).toUpperCase(),
-      medName: removeSpacesAll(med.medName).toUpperCase(0),
-      cost: Number(med.cost).toFixed(2),
+    if (!Number(med.cost)) {
+      alert(
+        `Please re-enter a number for the cost of "${med.cost}" for Code: ${med.code} Name: ${med.medName}`
+      )
+      return null
+    } else {
+      return {
+        code: removeSpacesAll(med.code).toUpperCase(),
+        medName: removeSpacesAll(med.medName).toUpperCase(0),
+        cost: Number(med.cost).toFixed(2),
+      }
     }
   })
-  console.log('API-formattedmeds', formattedMeds)
   //check for duplicated entries
   const temp = {}
   const isDup = formattedMeds.every((med) => {
