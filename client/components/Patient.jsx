@@ -4,6 +4,7 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import PatientDetails from './PatientDetails.jsx'
 import Reports from './Reports.jsx'
+import WaitIndicator from './WaitIndicator.jsx'
 
 function Patient() {
   //useParams works
@@ -33,6 +34,7 @@ function Patient() {
         <Box>
           <Reports patientId={patientId} />
         </Box>
+        <WaitIndicator />
       </Box>
     </>
   )

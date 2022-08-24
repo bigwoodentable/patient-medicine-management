@@ -24,6 +24,9 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight'
 import LastPageIcon from '@mui/icons-material/LastPage'
 import { useTheme } from '@emotion/react'
+import { useDispatch } from 'react-redux'
+import { clearWaiting, setWaiting } from '../actions/waiting.js'
+import WaitIndicator from './WaitIndicator'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -99,10 +102,12 @@ function Stock() {
   const [dense, setDense] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [rows, setRows] = useState([])
-  console.log('page', page)
+  const dispatch = useDispatch()
   useEffect(async () => {
     try {
+      dispatch(setWaiting())
       const patientNames = await getPatients()
+      dispatch(clearWaiting())
       setRows(patientNames)
     } catch (error) {
       console.error(error)
@@ -116,7 +121,6 @@ function Stock() {
   }
 
   const handleChangePage = (event, newPage) => {
-    console.log('handleChangePage')
     setPage(newPage)
   }
 
@@ -198,7 +202,7 @@ function Stock() {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[3, 10, 30, 50, 100]}
+          rowsPerPageOptions={[10, 30, 50, 100]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -211,6 +215,7 @@ function Stock() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <WaitIndicator />
     </Box>
   )
 }
