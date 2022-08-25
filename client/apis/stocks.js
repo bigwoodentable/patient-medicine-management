@@ -1,14 +1,14 @@
-import request from 'superagent'
-import { removeSpacesAll, removeEmpty } from '../helper'
+import request from "superagent"
+import { removeSpacesAll, removeEmpty } from "../helper"
 
-const rootUrl = '/api/v1/stocks'
+const rootUrl = "/api/v1/stocks"
 
 export function getAllStocks() {
-  return request.get(rootUrl + '/all').then((res) => res.body)
+  return request.get(rootUrl + "/all").then((res) => res.body)
 }
 
 export function updateAllStocks(values, medInfo, navigate) {
-  console.log('API')
+  console.log("API")
   //remove empty entries
   const rmEmptyEntries = removeEmpty(values.stocks)
 
@@ -45,7 +45,7 @@ export function updateAllStocks(values, medInfo, navigate) {
   }, [])
 
   if (unmatchedMeds[0]) {
-    const combinedUnmatched = unmatchedMeds.join(', ')
+    const combinedUnmatched = unmatchedMeds.join(", ")
     alert(
       `The following medicines are not in the Medicine Info list: ${combinedUnmatched}. Please enter a medicine into the Medicine Info list before adding it to the Current Stocks`
     )
@@ -60,8 +60,8 @@ export function updateAllStocks(values, medInfo, navigate) {
   })
 
   return request
-    .put(rootUrl + '/update')
+    .put(rootUrl + "/update")
     .send(formattedStocks)
     .then((res) => res.json)
-    .then(navigate('/stocks'))
+    .then(navigate("/stocks"))
 }

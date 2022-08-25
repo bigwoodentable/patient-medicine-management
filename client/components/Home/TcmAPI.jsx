@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchMeds } from "../actions/medicines"
-import { getMedFromAPI } from "../apis/external"
+import { fetchMeds } from "../../actions/medicines"
+import { getMedFromAPI } from "../../apis/external"
 import _ from "lodash"
 
 function Test() {
