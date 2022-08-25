@@ -1,28 +1,39 @@
+// App.js
+
 import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { fetchStocks } from "../actions/stocks"
-import { getMedFromAPI } from "../apis/external"
-import _ from "lodash"
+
+import { drawChart } from "./Test-d3"
+
+const dataset = [
+  [10, 30, 40, 20],
+
+  [10, 40, 30, 20, 50, 10],
+
+  [60, 30, 40, 20, 30],
+]
+
+var i = 0
 
 function Test() {
-  const [notFound, setNotFound] = useState(0)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(fetchStocks())
-  }, [])
-  const stocks = useSelector((state) => state.stocks)
-  console.log("stocks", stocks)
+  const [data, setData] = useState([])
 
-  const underStock = stocks.filter((stock) => stock.totalQuantity <= 30)
+  useEffect(() => {
+    changeChart()
+  }, [])
+
+  const changeChart = () => {
+    drawChart(400, 600, dataset[i++])
+
+    if (i === dataset.length) i = 0
+  }
 
   return (
-    <div>
-      <h3>Stock under 30g: </h3>
-      {underStock.map((stock, i) => (
-        <p key={i}>
-          {stock.medName} {stock.totalQuantity}g remaining
-        </p>
-      ))}
+    <div className="App">
+      <h2>Graphs with React</h2>
+
+      <button onClick={changeChart}>Change Data</button>
+
+      <div id="chart"></div>
     </div>
   )
 }
