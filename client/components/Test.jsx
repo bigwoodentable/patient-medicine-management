@@ -1,61 +1,48 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { useFormik } from 'formik'
-import * as yup from 'yup'
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchMeds } from "../actions/medicines"
+import { getMedFromAPI } from "../apis/external"
+import _ from "lodash"
 
-const validationSchema = yup.object({
-  email: yup
-    .string('Enter your email')
-    .email('Enter a valid email')
-    .required('Email is required'),
-  password: yup
-    .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
-})
+function Test() {
+  const [medApiInfo, setMedApiInfo] = useState("")
+  const [medApiTitle, setMedApiTitle] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
+  const [notFound, setNotFound] = useState(0)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchMeds())
+  }, [])
+  const meds = useSelector((state) => state.medicines)
+  const randomNumb = _.random(0, meds.length - 1)
 
-const Test = () => {
-  const formik = useFormik({
-    initialValues: {
-      email: 'foobar@example.com',
-      password: 'foobar',
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-    },
-  })
+  useEffect(() => {
+    meds[randomNumb] ? setSearchTerm(meds[randomNumb].medName) : null
+  }, [meds])
+  // console.log("searchTerm", searchTerm)
+  // console.log("rand", randomNumb)
+  useEffect(() => {
+    if (searchTerm) {
+      getMedFromAPI(searchTerm)
+        .then((info) => {
+          setMedApiInfo(info.content)
+          setMedApiTitle(info.title)
+          return null
+        })
+        .catch((err) => {
+          console.error(err)
+          setMedApiInfo(
+            `Information about ${searchTerm} is not in the database, please refresh`
+          )
+          setMedApiTitle(searchTerm)
+        })
+    }
+  }, [searchTerm])
 
   return (
     <div>
-      <form onSubmit={formik.handleSubmit}>
-        <TextField
-          fullWidth
-          id="email"
-          name="email"
-          label="Email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-        />
-        <TextField
-          fullWidth
-          id="password"
-          name="password"
-          label="Password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-        />
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
-        </Button>
-      </form>
+      <h1>{medApiTitle}</h1>
+      <p dangerouslySetInnerHTML={{ __html: medApiInfo }}></p>
     </div>
   )
 }

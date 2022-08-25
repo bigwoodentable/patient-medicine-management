@@ -59,6 +59,7 @@
     "formik-yup": "^0.0.5",
     "husky": "^8.0.1",
     "knex": "^1.0.7",
+    "lodash": "^4.17.21",
     "pg": "^8.7.3",
     "psql": "^0.0.1",
     "superagent": "^6.1.0",
@@ -97,8 +98,7 @@
     "webpack-cli": "4.2.0"
   },
   "prettier": {
-    "semi": false,
-    "singleQuote": true
+    "semi": false
   },
   "engines": {
     "node": "14.x"
