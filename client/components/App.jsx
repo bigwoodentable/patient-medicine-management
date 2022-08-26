@@ -12,6 +12,7 @@ import { styled } from "@mui/system"
 import Medicines from "./Medicines.jsx"
 import NewReportForm from "./forms/NewReportForm.jsx"
 import Test from "./Test.jsx"
+import ResponsiveAppBar from "./ResponsiveAppBar.jsx"
 
 const MainStyle = styled("div")(({ theme }) => ({
   flexGrow: 1,
@@ -25,7 +26,8 @@ const MainStyle = styled("div")(({ theme }) => ({
 function App() {
   return (
     <div>
-      <Sidebar />
+      {/* <Sidebar /> */}
+      <ResponsiveAppBar />
       <MainStyle>
         <Routes>
           <Route path="/Home" element={<Home />} />
