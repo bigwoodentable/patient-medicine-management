@@ -55,36 +55,33 @@ function Test() {
             text: "Dollar (NZD)",
             position: "outer-middle",
           },
-          tick: {
-            format: d3.format("$,"),
-          },
+          // tick: {
+          //   format: d3.format("$,"),
+          // },
         },
       },
     })
 
     setChart(chartObj)
   }, [categories])
-  console.log("visits", visits)
+
   function loadVisits() {
-    return chart.load({
+    chart.load({
       columns: [["Visits", ...visits]],
       unload: ["Profits"],
-      axis: {
-        y: {
-          label: {
-            text: "Visits",
-            position: "outer-middle",
-          },
-        },
-      },
     })
+
+    chart.axis.labels({ y: "Visits" })
+    return null
   }
 
   function loadProfits() {
-    return chart.load({
+    chart.load({
       columns: [["Profits", ...profitsPerUser]],
       unload: ["Visits"],
     })
+    chart.axis.labels({ y: "Dollar (NZD)" })
+    return null
   }
 
   return (
