@@ -59,5 +59,18 @@ router.get("/profitPerPatient", (req, res) => {
       res.status(500).json({ message: "Cannot get profit per patient data" })
     })
 })
+//  /api/v1/patients/totalVisits
+router.get("/totalVisits", (req, res) => {
+  db.visitsPatientTotal()
+    .then((visits) => {
+      // console.log(res)
+      res.json(visits)
+      return null
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ message: "Cannot get total visits" })
+    })
+})
 
 module.exports = router

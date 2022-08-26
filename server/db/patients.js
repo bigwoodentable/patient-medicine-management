@@ -1,6 +1,6 @@
 const connection = require("./connection")
 const { randomId } = require("./helper")
-const { profitPerPatient } = require("./reports")
+const { profitPerPatient, totalVisits } = require("./reports")
 
 function getPatients(db = connection) {
   return db("patients")
@@ -39,7 +39,25 @@ async function profitPerPatientTotal(db = connection) {
     const name = await getNameById(id.patientId)
     allPatientsProfits.push({ ...name[0], ...profit[0] })
   }
-  return allPatientsProfits
+  const noNullProfits = allPatientsProfits.filter(
+    (patient) => patient.totalProfit
+  )
+  return noNullProfits
+}
+
+async function visitsPatientTotal(db = connection) {
+  const AllId = await getAllId()
+  const allPatientsVisits = []
+  for (const id of AllId) {
+    const visits = await totalVisits(id.patientId)
+    const name = await getNameById(id.patientId)
+    allPatientsVisits.push({ ...name[0], ...visits[0] })
+  }
+  //Only patients less than 2 visits
+  const aboveTwoVisits = allPatientsVisits.filter(
+    (patient) => patient.visits > 1
+  )
+  return aboveTwoVisits
 }
 
 function getAllId(db = connection) {
@@ -60,4 +78,5 @@ module.exports = {
   insertPatient,
   getPatientById,
   profitPerPatientTotal,
+  visitsPatientTotal,
 }

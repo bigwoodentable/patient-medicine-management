@@ -64,10 +64,20 @@ function profitPerPatient(patientId, db = connection) {
     .sum("total_profit as totalProfit")
 }
 
+//input patientId to get total number of reports (numb of visits)
+function totalVisits(patientId, db = connection) {
+  return db("reports")
+    .where("patient_id", patientId)
+    .count("report_id as visits")
+}
+
+totalVisits(1).then((res) => console.log(res))
+
 module.exports = {
   getReportsById,
   getPrescriptionsByReportId,
   addReportById,
   addPrescriptionsById,
   profitPerPatient,
+  totalVisits,
 }

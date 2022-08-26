@@ -28,3 +28,7 @@ export function getPatientById(id) {
 export function profitPerPatient() {
   return request.get(rootUrl + `/profitPerPatient`).then((res) => res.body)
 }
+
+export function visitsPerPatient() {
+  return request.get(rootUrl + `/totalVisits`).then((res) => res.body)
+}

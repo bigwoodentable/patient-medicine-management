@@ -53,6 +53,7 @@
     "@mui/icons-material": "^5.8.3",
     "@mui/material": "^5.8.3",
     "@vscode/sqlite3": "^5.0.7",
+    "c3": "^0.7.20",
     "d3": "^7.6.1",
     "dotenv": "^16.0.1",
     "express": "^4.17.1",
@@ -63,6 +64,7 @@
     "lodash": "^4.17.21",
     "pg": "^8.7.3",
     "psql": "^0.0.1",
+    "react-d3-library": "^1.1.8",
     "superagent": "^6.1.0",
     "uuid": "^8.3.2"
   },

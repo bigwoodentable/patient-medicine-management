@@ -1,40 +1,98 @@
-// App.js
-
 import React, { useEffect, useState } from "react"
-
-import { drawChart } from "./Test-d3"
-
-const dataset = [
-  [10, 30, 40, 20],
-
-  [10, 40, 30, 20, 50, 10],
-
-  [60, 30, 40, 20, 30],
-]
-
-var i = 0
+import c3 from "c3"
+import * as d3 from "d3"
+import { Button } from "@mui/material"
+import { profitPerPatient, visitsPerPatient } from "../apis/patients"
 
 function Test() {
-  const [data, setData] = useState([])
+  const [chart, setChart] = useState({})
+  const [profitsPerUser, setProfitsPerUser] = useState([])
+  const [categories, setCategories] = useState([])
+  const [visits, setVisits] = useState([])
 
   useEffect(() => {
-    changeChart()
+    profitPerPatient()
+      .then((patients) => {
+        const prof = []
+        const cat = []
+        patients.map((patient) => {
+          prof.push(patient.totalProfit)
+          cat.push(patient.name)
+        })
+        setProfitsPerUser(prof)
+        setCategories(cat)
+        return null
+      })
+      .catch((err) => console.error(err))
+
+    visitsPerPatient()
+      .then((patients) => {
+        //Patients' names are not used here but it is provided by the API
+        const vis = []
+        patients.map((patient) => {
+          vis.push(patient.visits)
+        })
+        setVisits(vis)
+        return null
+      })
+      .catch((err) => console.error(err))
   }, [])
 
-  const changeChart = () => {
-    drawChart(400, 600, dataset[i++])
+  useEffect(() => {
+    const chartObj = c3.generate({
+      bindto: "#chart",
+      data: {
+        columns: [["Profits", ...profitsPerUser]],
+        type: "bar",
+      },
+      axis: {
+        x: {
+          type: "category",
+          categories: categories,
+        },
+        y: {
+          label: {
+            text: "Dollar (NZD)",
+            position: "outer-middle",
+          },
+          tick: {
+            format: d3.format("$,"),
+          },
+        },
+      },
+    })
 
-    if (i === dataset.length) i = 0
+    setChart(chartObj)
+  }, [categories])
+  console.log("visits", visits)
+  function loadVisits() {
+    return chart.load({
+      columns: [["Visits", ...visits]],
+      unload: ["Profits"],
+      axis: {
+        y: {
+          label: {
+            text: "Visits",
+            position: "outer-middle",
+          },
+        },
+      },
+    })
+  }
+
+  function loadProfits() {
+    return chart.load({
+      columns: [["Profits", ...profitsPerUser]],
+      unload: ["Visits"],
+    })
   }
 
   return (
-    <div className="App">
-      <h2>Graphs with React</h2>
-
-      <button onClick={changeChart}>Change Data</button>
-
-      <div id="chart"></div>
-    </div>
+    <>
+      <div id="chart" />
+      <Button onClick={loadVisits}>Total Visits</Button>
+      <Button onClick={loadProfits}>Total profit per patient</Button>
+    </>
   )
 }
 
