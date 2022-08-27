@@ -1,29 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react"
 
-import { Formik, Form, Field, FieldArray } from 'formik'
-import { updateAllStocks } from '../../apis/stocks'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import Button from '@material-ui/core/Button'
-import { Box, IconButton, Paper, Typography } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
-import AddIcon from '@mui/icons-material/Add'
-import { fetchMeds } from '../../actions/medicines'
+import { Formik, Form, Field, FieldArray } from "formik"
+import { updateAllStocks } from "../../apis/stocks"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import Button from "@material-ui/core/Button"
+import { Box, IconButton, Paper, Typography } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete"
+import AddIcon from "@mui/icons-material/Add"
+import { fetchStocks } from "../../actions/stocks"
 
 function EditStockForm() {
-  const stocksData = useSelector((state) => state.stocks)
-  const medInfo = useSelector((state) => state.medicines)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(fetchMeds())
-  }, [])
-
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const stocksData = useSelector((state) => state.stocks)
+  console.log("stocksData", stocksData)
+  useEffect(() => {
+    dispatch(fetchStocks())
+  }, [])
 
   async function handleSubmit(values) {
     try {
-      await updateAllStocks(values, medInfo, navigate)
+      await updateAllStocks(values, navigate)
     } catch (error) {
       console.log(error)
     }
@@ -32,11 +30,11 @@ function EditStockForm() {
   return (
     <Box
       sx={{
-        display: 'grid',
-        '& .MuiTextField-root': { m: 1 },
-        width: '80%',
-        maxWidth: '650px',
-        justifyContent: 'center',
+        display: "grid",
+        "& .MuiTextField-root": { m: 1 },
+        width: "80%",
+        maxWidth: "650px",
+        justifyContent: "center",
       }}
       noValidate
       autoComplete="off"
@@ -62,8 +60,19 @@ function EditStockForm() {
                               width: 160,
                               marginRight: 16,
                               marginTop: 16,
-                              border: '0.5px solid grey',
-                              borderRadius: '5px',
+                              border: "0.5px solid grey",
+                              borderRadius: "5px",
+                            }}
+                            name={`stocks.${index}.code`}
+                          />
+                          <Field
+                            style={{
+                              height: 40,
+                              width: 160,
+                              marginRight: 16,
+                              marginTop: 16,
+                              border: "0.5px solid grey",
+                              borderRadius: "5px",
                             }}
                             name={`stocks.${index}.medName`}
                           />
@@ -73,8 +82,19 @@ function EditStockForm() {
                               width: 160,
                               marginRight: 16,
                               marginTop: 16,
-                              border: '0.5px solid grey',
-                              borderRadius: '5px',
+                              border: "0.5px solid grey",
+                              borderRadius: "5px",
+                            }}
+                            name={`stocks.${index}.cost`}
+                          />
+                          <Field
+                            style={{
+                              height: 40,
+                              width: 160,
+                              marginRight: 16,
+                              marginTop: 16,
+                              border: "0.5px solid grey",
+                              borderRadius: "5px",
                             }}
                             name={`stocks.${index}.totalQuantity`}
                           />
@@ -84,8 +104,10 @@ function EditStockForm() {
                             size="large"
                             onClick={() =>
                               arrayHelpers.insert(index + 1, {
-                                id: '',
-                                medName: '',
+                                id: "",
+                                code: "",
+                                medName: "",
+                                cost: 0,
                                 totalQuantity: 0,
                               })
                             }
@@ -104,9 +126,9 @@ function EditStockForm() {
                     ) : (
                       <Box
                         sx={{
-                          display: 'grid',
+                          display: "grid",
                           Button: { mt: 3, mr: 2 },
-                          justifyContent: 'center',
+                          justifyContent: "center",
                         }}
                       >
                         <Button
@@ -114,8 +136,10 @@ function EditStockForm() {
                           variant="outlined"
                           onClick={() =>
                             arrayHelpers.push({
-                              id: '',
-                              medName: '',
+                              id: "",
+                              code: "",
+                              medName: "",
+                              cost: 0,
                               totalQuantity: 0,
                             })
                           }
@@ -128,9 +152,9 @@ function EditStockForm() {
 
                     <Box
                       sx={{
-                        display: 'grid',
+                        display: "grid",
                         Button: { mt: 3, mr: 2 },
-                        justifyContent: 'center',
+                        justifyContent: "center",
                       }}
                     >
                       <Button

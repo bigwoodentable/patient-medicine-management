@@ -3,9 +3,11 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable('stocks', (table) => {
-    table.integer('total_quantity')
-    table.string('med_name').references('medicines.med_name')
+  return knex.schema.createTable("stocks", (table) => {
+    table.string("code")
+    table.string("med_name")
+    table.decimal("cost", 8, 2)
+    table.integer("total_quantity")
     // table.string('med_name').references('med_name').inTable('medicines')
   })
 }
@@ -15,5 +17,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable('stocks')
+  return knex.schema.dropTable("stocks")
 }

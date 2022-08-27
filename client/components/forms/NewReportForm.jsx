@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Formik, Field, Form, FieldArray } from 'formik'
-import { addReportById } from '../../apis/reports'
-import { Link, useNavigate, useParams } from 'react-router-dom'
-import Button from '@material-ui/core/Button'
-import { Box, Paper, Typography } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import ReportCalc from '../ReportCalc.jsx'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchMeds } from '../../actions/medicines'
+import React, { useEffect, useState } from "react"
+import { Formik, Field, Form, FieldArray } from "formik"
+import { addReportById } from "../../apis/reports"
+import { Link, useNavigate, useParams } from "react-router-dom"
+import Button from "@material-ui/core/Button"
+import { Box, Paper, Typography } from "@mui/material"
+import DeleteIcon from "@mui/icons-material/Delete"
+import ArrowBackIcon from "@mui/icons-material/ArrowBack"
+import ReportCalc from "../ReportCalc.jsx"
+import { useDispatch, useSelector } from "react-redux"
 import {
   removeSpacesEnds,
   removeSpacesAll,
   loopObj,
   removeEmpty,
   calcFinances,
-} from '../../helper'
-import Stock from '../Stock'
-import { fetchStocks } from '../../actions/stocks'
-import { Grid } from '@material-ui/core'
+} from "../../helper"
+import Stock from "../Stock"
+import { fetchStocks } from "../../actions/stocks"
+import { Grid } from "@material-ui/core"
 
 //onClick calculate - pass prescriptions
 //fetch medicine info on redux
@@ -67,24 +66,24 @@ function NewReportForm() {
 
   const initialValues = {
     reports: {
-      diagnosis: '',
-      prescriptionNumber: '0',
-      prescriptionPrice: '0',
+      diagnosis: "",
+      prescriptionNumber: "0",
+      prescriptionPrice: "0",
       prescriptions: [
         {
-          medName: '',
+          medName: "",
           prescribedQuantity: 0,
         },
         {
-          medName: '',
+          medName: "",
           prescribedQuantity: 0,
         },
         {
-          medName: '',
+          medName: "",
           prescribedQuantity: 0,
         },
         {
-          medName: '',
+          medName: "",
           prescribedQuantity: 0,
         },
       ],
@@ -93,7 +92,7 @@ function NewReportForm() {
 
   return (
     <>
-      <Link style={{ textDecoration: 'none' }} to={`/patient/${patientId}`}>
+      <Link style={{ textDecoration: "none" }} to={`/patient/${patientId}`}>
         <Button variant="outlined" size="small">
           <ArrowBackIcon sx={{ mr: 1 }} /> Patient
         </Button>
@@ -101,12 +100,12 @@ function NewReportForm() {
       <Typography variant="h4" sx={{ ml: 2, mb: 4, mt: 3 }}>
         New Report
       </Typography>
-      <Box sx={{ maxWidth: '1000px' }}>
+      <Box sx={{ maxWidth: "1000px" }}>
         <Box
           sx={{
-            display: 'grid',
+            display: "grid",
             gap: 1,
-            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridTemplateColumns: "repeat(2, 1fr)",
           }}
         >
           <Box>
@@ -120,9 +119,9 @@ function NewReportForm() {
               {({ values }) => (
                 <Box
                   sx={{
-                    display: 'grid',
-                    width: '500px',
-                    justifyContent: 'center',
+                    display: "grid",
+                    width: "500px",
+                    justifyContent: "center",
                     // bgcolor: 'yellow',
                   }}
                 >
@@ -141,8 +140,8 @@ function NewReportForm() {
                           marginRight: 16,
                           marginTop: 16,
                           marginBottom: 8,
-                          border: '0.5px solid grey',
-                          borderRadius: '5px',
+                          border: "0.5px solid grey",
+                          borderRadius: "5px",
                         }}
                         name="reports.diagnosis"
                         as="textarea"
@@ -160,8 +159,8 @@ function NewReportForm() {
                                       width: 160,
                                       marginRight: 16,
                                       marginTop: 16,
-                                      border: '0.5px solid grey',
-                                      borderRadius: '5px',
+                                      border: "0.5px solid grey",
+                                      borderRadius: "5px",
                                     }}
                                     name={`reports.prescriptions.${index}.medName`}
                                     placeholder="Medicine Name"
@@ -173,8 +172,8 @@ function NewReportForm() {
                                       width: 160,
                                       marginRight: 16,
                                       marginTop: 16,
-                                      border: '0.5px solid grey',
-                                      borderRadius: '5px',
+                                      border: "0.5px solid grey",
+                                      borderRadius: "5px",
                                     }}
                                     name={`reports.prescriptions.${index}.prescribedQuantity`}
                                     placeholder="Quantity"
@@ -199,8 +198,8 @@ function NewReportForm() {
                                 marginRight: 16,
                                 marginTop: 16,
                                 marginBottom: 8,
-                                border: '0.5px solid grey',
-                                borderRadius: '5px',
+                                border: "0.5px solid grey",
+                                borderRadius: "5px",
                               }}
                               label="Prescription Number"
                               name="reports.prescriptionNumber"
@@ -216,17 +215,17 @@ function NewReportForm() {
                                 marginRight: 16,
                                 marginTop: 16,
                                 marginBottom: 8,
-                                border: '0.5px solid grey',
-                                borderRadius: '5px',
+                                border: "0.5px solid grey",
+                                borderRadius: "5px",
                               }}
                               label="Prescription Price"
                               name="reports.prescriptionPrice"
                             />
                             <Box
                               sx={{
-                                display: 'grid',
+                                display: "grid",
                                 Button: { mt: 3, mr: 2 },
-                                justifyContent: 'center',
+                                justifyContent: "center",
                               }}
                             >
                               <Button
@@ -234,7 +233,7 @@ function NewReportForm() {
                                 variant="outlined"
                                 onClick={() =>
                                   push({
-                                    medName: '',
+                                    medName: "",
                                     prescribedQuantity: 0,
                                   })
                                 }
@@ -270,12 +269,12 @@ function NewReportForm() {
           <Box sx={{ mb: 4 }}>
             <Box
               sx={{
-                width: '95%',
-                borderRadius: '5px',
+                width: "95%",
+                borderRadius: "5px",
                 // bgcolor: 'purple',
               }}
             >
-              <Paper elevation={3} sx={{ height: '125px', p: 3 }}>
+              <Paper elevation={3} sx={{ height: "125px", p: 3 }}>
                 <Typography>
                   <b>Calculation Results:</b>
                   <br />

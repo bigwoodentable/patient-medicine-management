@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem"
 import AdbIcon from "@mui/icons-material/Adb"
 import { Link } from "react-router-dom"
 
-const pages = ["Home", "Patients", "Stocks", "Medicines"]
+const pages = ["Home", "Patients", "Stocks"]
 // const settings = ["Profile", "Account", "Dashboard", "Logout"]
 
 const ResponsiveAppBar = () => {
@@ -45,7 +45,6 @@ const ResponsiveAppBar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -88,23 +87,18 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((text) => (
-                <MenuItem key={text} onClick={handleCloseNavMenu}>
-                  <Link
-                    to={`/${text}`}
-                    style={{ textDecoration: "none", color: "black" }}
-                  >
-                    <Typography textAlign="center">
-                      {" "}
-                      {text === "Stocks"
-                        ? `Current ${text}`
-                        : text === "Medicines"
-                        ? `Medicine Info`
-                        : text}
-                    </Typography>
-                  </Link>
-                </MenuItem>
-              ))}
+              {pages.map((text) => {
+                return (
+                  <MenuItem key={text} onClick={handleCloseNavMenu}>
+                    <Link
+                      to={text === "Home" ? `/` : `/${text}`}
+                      style={{ textDecoration: "none", color: "black" }}
+                    >
+                      <Typography textAlign="center"> {text}</Typography>
+                    </Link>
+                  </MenuItem>
+                )
+              })}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -134,7 +128,7 @@ const ResponsiveAppBar = () => {
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 <Link
-                  to={`/${text}`}
+                  to={text === "Home" ? `/` : `/${text}`}
                   style={{ textDecoration: "none", color: "black" }}
                 >
                   {text === "Stocks"

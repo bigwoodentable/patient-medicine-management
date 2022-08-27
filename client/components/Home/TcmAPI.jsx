@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchMeds } from "../../actions/medicines"
+import { fetchStocks } from "../../actions/stocks"
 import { getMedFromAPI } from "../../apis/external"
 import _ from "lodash"
 
@@ -10,9 +10,9 @@ function Test() {
   const [searchTerm, setSearchTerm] = useState("")
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(fetchMeds())
+    dispatch(fetchStocks())
   }, [])
-  const meds = useSelector((state) => state.medicines)
+  const meds = useSelector((state) => state.stocks)
   const randomNumb = Math.floor(Math.random() * meds.length)
   useEffect(() => {
     meds[randomNumb] ? setSearchTerm(meds[randomNumb].medName) : null

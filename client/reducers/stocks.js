@@ -1,4 +1,4 @@
-import { SET_STOCKS } from '../actions/stocks'
+import { SET_STOCKS } from "../actions/stocks"
 
 const initialState = []
 
