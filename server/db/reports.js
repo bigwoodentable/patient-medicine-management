@@ -71,8 +71,6 @@ function totalVisits(patientId, db = connection) {
     .count("report_id as visits")
 }
 
-totalVisits(1).then((res) => console.log(res))
-
 module.exports = {
   getReportsById,
   getPrescriptionsByReportId,

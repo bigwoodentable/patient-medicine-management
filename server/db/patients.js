@@ -71,8 +71,6 @@ async function getNameById(id, db = connection) {
   return Promise.resolve([{ name: `${name[0].fname} ${name[0].lname}` }])
 }
 
-getNameById(2).then((res) => console.log(res))
-
 module.exports = {
   getPatients,
   insertPatient,

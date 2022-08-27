@@ -11,32 +11,32 @@ import NewReportForm from "./forms/NewReportForm.jsx"
 import Test from "./Test.jsx"
 import Navbar from "./Navbar.jsx"
 
-const MainStyle = styled("div")(({ theme }) => ({
-  flexGrow: 1,
-  overflow: "auto",
-  minHeight: "100%",
-  paddingLeft: theme.spacing(32),
-  paddingTop: 90,
-  paddingBottom: theme.spacing(10),
-}))
+// const MainStyle = styled("div")(({ theme }) => ({
+//   flexGrow: 1,
+//   overflow: "auto",
+//   minHeight: "100%",
+//   paddingLeft: theme.spacing(32),
+//   paddingTop: 90,
+//   paddingBottom: theme.spacing(10),
+// }))
 
 function App() {
   return (
     <div>
       {/* <Sidebar /> */}
       <Navbar />
-      <MainStyle>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/newPatient" element={<NewPatientForm />} />
-          <Route path="/patients" element={<ExistingPatients />} />
-          <Route path="/patient/:id" element={<Patient />} />
-          <Route path="/newReportForm/:id" element={<NewReportForm />} />
-          <Route path="/editStock" element={<EditStockForm />} />
-          <Route path="/Stocks" element={<Stock />} />
-          <Route path="/test" element={<Test />} />
-        </Routes>
-      </MainStyle>
+      {/* <MainStyle> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/newPatient" element={<NewPatientForm />} />
+        <Route path="/patients" element={<ExistingPatients />} />
+        <Route path="/patient/:id" element={<Patient />} />
+        <Route path="/newReportForm/:id" element={<NewReportForm />} />
+        <Route path="/editStock" element={<EditStockForm />} />
+        <Route path="/Stocks" element={<Stock />} />
+        <Route path="/test" element={<Test />} />
+      </Routes>
+      {/* </MainStyle> */}
     </div>
   )
 }

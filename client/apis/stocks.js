@@ -8,7 +8,6 @@ export function getAllStocks() {
 }
 
 export function updateAllStocks(values, navigate) {
-  console.log("API")
   //remove empty entries
   const rmEmptyEntries = removeEmpty(values.stocks)
 

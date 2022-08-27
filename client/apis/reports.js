@@ -1,7 +1,7 @@
-import request from 'superagent'
-import { calcFinances, removeEmpty, removeSpacesAll } from '../helper'
+import request from "superagent"
+import { calcFinances, removeEmpty, removeSpacesAll } from "../helper"
 
-const rootUrl = '/api/v1/reports'
+const rootUrl = "/api/v1/reports"
 
 export function getReportsById(patientId) {
   return request.get(rootUrl + `/${patientId}`).then((res) => res.body)
@@ -15,13 +15,12 @@ export function addReportById(
   patientId,
   navigate
 ) {
-  console.log('API')
   const { prescriptions, prescriptionNumber, prescriptionPrice } = newReport
   let adjustedReport = {}
 
   //check if medicines prescribed
-  if (prescriptions[0].medName === '') {
-    if (confirm('Would you like to continue with no prescriptions?')) {
+  if (prescriptions[0].medName === "") {
+    if (confirm("Would you like to continue with no prescriptions?")) {
       //if intended to have no prescriptions, clear prescriptions array
       adjustedReport = { ...newReport, prescriptions: [] }
     } else {
@@ -45,7 +44,6 @@ export function addReportById(
     })
 
     if (!correctPrescription) {
-      console.log('API-correctPrescription')
       alert(
         "Please make sure medicines' names are spelt correctly and are in current stocks"
       )

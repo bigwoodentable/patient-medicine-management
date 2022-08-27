@@ -14,7 +14,6 @@ function EditStockForm() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const stocksData = useSelector((state) => state.stocks)
-  console.log("stocksData", stocksData)
   useEffect(() => {
     dispatch(fetchStocks())
   }, [])

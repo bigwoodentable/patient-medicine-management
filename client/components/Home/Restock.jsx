@@ -11,7 +11,6 @@ function Test() {
     dispatch(fetchStocks())
   }, [])
   const stocks = useSelector((state) => state.stocks)
-  console.log("stocks", stocks)
 
   const underStock = stocks.filter((stock) => stock.totalQuantity <= 30)
 
