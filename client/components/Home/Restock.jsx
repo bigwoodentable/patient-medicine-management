@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { fetchStocks } from "../../actions/stocks"
 import { getMedFromAPI } from "../../apis/external"
 import _ from "lodash"
+import { Box } from "@mui/system"
+import { Typography } from "@mui/material"
 
 function Test() {
   const [notFound, setNotFound] = useState(0)
@@ -15,14 +17,24 @@ function Test() {
   const underStock = stocks.filter((stock) => stock.totalQuantity <= 30)
 
   return (
-    <div>
-      <h3>Stock under 30g: </h3>
-      {underStock.map((stock, i) => (
-        <p key={i}>
-          {stock.medName} {stock.totalQuantity}g remaining
-        </p>
-      ))}
-    </div>
+    <Box>
+      <Typography
+        style={{
+          fontSize: "16px",
+          paddingTop: "15px",
+          textDecoration: "underline",
+        }}
+      >
+        Stocks under 30g
+      </Typography>
+      <ol style={{ fontSize: "14px", marginTop: "3px" }}>
+        {underStock.map((stock, i) => (
+          <li key={i}>
+            {stock.medName} - {stock.totalQuantity}g
+          </li>
+        ))}
+      </ol>
+    </Box>
   )
 }
 

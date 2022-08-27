@@ -37,7 +37,7 @@ const ResponsiveAppBar = () => {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{ background: "#0F2845" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -129,13 +129,12 @@ const ResponsiveAppBar = () => {
               >
                 <Link
                   to={text === "Home" ? `/` : `/${text}`}
-                  style={{ textDecoration: "none", color: "black" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "white",
+                  }}
                 >
-                  {text === "Stocks"
-                    ? `Current ${text}`
-                    : text === "Medicines"
-                    ? `Medicine Info`
-                    : text}
+                  {text}
                 </Link>
               </Button>
             ))}

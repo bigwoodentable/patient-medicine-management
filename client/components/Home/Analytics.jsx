@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import c3 from "c3"
 import * as d3 from "d3"
-import { Button } from "@mui/material"
+import { Box, Button, Grid } from "@mui/material"
 import { profitPerPatient, visitsPerPatient } from "../../apis/patients"
 
-function Test() {
+function Analytics() {
   const [chart, setChart] = useState({})
   const [profitsPerUser, setProfitsPerUser] = useState([])
   const [categories, setCategories] = useState([])
@@ -60,6 +60,19 @@ function Test() {
           // },
         },
       },
+      size: {
+        width: 480,
+      },
+      padding: {
+        top: 50,
+        bottom: 10,
+      },
+      color: {
+        pattern: ["#ff7f0e", "#1f77b4"],
+      },
+      bar: {
+        width: "auto",
+      },
     })
 
     setChart(chartObj)
@@ -86,11 +99,29 @@ function Test() {
 
   return (
     <>
-      <div id="chart" />
-      <Button onClick={loadVisits}>Total Visits</Button>
-      <Button onClick={loadProfits}>Total profit per patient</Button>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box id="chart" style={{ fontFamily: "sans-serif" }} />
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          style={{
+            width: "100%",
+            borderTop: "1px solid lightgrey",
+          }}
+        >
+          <Button onClick={loadVisits}> Visits per user</Button>
+          <Button onClick={loadProfits}> Profits per user </Button>
+        </Grid>
+      </Grid>
     </>
   )
 }
 
-export default Test
+export default Analytics
