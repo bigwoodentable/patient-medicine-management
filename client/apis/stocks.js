@@ -7,7 +7,7 @@ export function getAllStocks() {
   return request.get(rootUrl + "/all").then((res) => res.body)
 }
 
-export function updateAllStocks(values, navigate) {
+export function updateAllStocks(values, handleClose) {
   //remove empty entries
   const rmEmptyEntries = removeEmpty(values.stocks)
 
@@ -47,5 +47,5 @@ export function updateAllStocks(values, navigate) {
     .put(rootUrl + "/update")
     .send(formattedStocks)
     .then((res) => res.json)
-    .then(navigate("/stocks"))
+    .then(handleClose())
 }

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { visuallyHidden } from '@mui/utils'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchStocks } from '../actions/stocks.js'
+import React, { useEffect, useState } from "react"
+import { visuallyHidden } from "@mui/utils"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchStocks } from "../actions/stocks.js"
 import {
   Table,
   TableBody,
@@ -16,11 +16,12 @@ import {
   FormControlLabel,
   Switch,
   IconButton,
-} from '@mui/material'
-import StockItem from './StockItem.jsx'
-import { Link } from 'react-router-dom'
-import EditIcon from '@mui/icons-material/Edit'
-import WaitIndicator from './WaitIndicator.jsx'
+} from "@mui/material"
+import StockItem from "./StockItem.jsx"
+import { Link } from "react-router-dom"
+import EditIcon from "@mui/icons-material/Edit"
+import WaitIndicator from "./WaitIndicator.jsx"
+import EditStockForm from "./forms/EditStockForm.jsx"
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -33,35 +34,35 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
+  return order === "desc"
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy)
 }
 
 const headCells = [
   {
-    id: 'code',
+    id: "code",
     numeric: true,
     disablePadding: true,
-    label: 'Code',
+    label: "Code",
   },
   {
-    id: 'medName',
+    id: "medName",
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: "Name",
   },
   {
-    id: 'cost',
+    id: "cost",
     numeric: true,
     disablePadding: false,
-    label: 'Cost/100g',
+    label: "Cost/100g",
   },
   {
-    id: 'totalQuantity',
+    id: "totalQuantity",
     numeric: true,
     disablePadding: false,
-    label: 'Quantity(g)',
+    label: "Quantity(g)",
   },
 ]
 
@@ -77,20 +78,20 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            sx={{ fontWeight: 'bold' }}
+            sx={{ fontWeight: "bold" }}
             align="center"
-            padding={headCell.disablePadding ? 'none' : 'normal'}
+            padding={headCell.disablePadding ? "none" : "normal"}
             sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
+              direction={orderBy === headCell.id ? order : "asc"}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  {order === "desc" ? "sorted descending" : "sorted ascending"}
                 </Box>
               ) : null}
             </TableSortLabel>
@@ -102,21 +103,30 @@ function EnhancedTableHead(props) {
 }
 
 function Stock() {
-  const [order, setOrder] = useState('asc')
-  const [orderBy, setOrderBy] = useState('Code')
+  const [order, setOrder] = useState("asc")
+  const [orderBy, setOrderBy] = useState("Code")
   const [page, setPage] = useState(0)
   const [dense, setDense] = useState(false)
   const [rowsPerPage, setRowsPerPage] = useState(10)
+  const [open, setOpen] = useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const rows = useSelector((state) => state.stocks)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchStocks())
-  }, [])
+  }, [open])
 
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc'
-    setOrder(isAsc ? 'desc' : 'asc')
+    const isAsc = orderBy === property && order === "asc"
+    setOrder(isAsc ? "desc" : "asc")
     setOrderBy(property)
   }
 
@@ -138,74 +148,75 @@ function Stock() {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0
 
   return (
-    <Box>
-      <Paper sx={{ mr: 4, mb: 4 }}>
-        <Box
-          m={1}
-          //margin
-          display="flex"
-          justifyContent="flex-end"
-        >
-          <Link to="/editStock">
-            <IconButton color="primary" size="large">
+    <>
+      <EditStockForm open={open} handleClose={handleClose} />
+      <Box>
+        <Paper sx={{ mr: 4, mb: 4 }}>
+          <Box
+            m={1}
+            //margin
+            display="flex"
+            justifyContent="flex-end"
+          >
+            <IconButton color="primary" size="large" onClick={handleClickOpen}>
               <EditIcon />
             </IconButton>
-          </Link>
-        </Box>
-        <TableContainer>
-          <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
-          >
-            <EnhancedTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              rowCount={rows.length}
-            />
-            <TableBody>
-              {rows
-                .slice()
-                .sort(getComparator(order, orderBy))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const labelId = `enhanced-table-checkbox-${index}`
+          </Box>
+          <TableContainer>
+            <Table
+              sx={{ minWidth: 750 }}
+              aria-labelledby="tableTitle"
+              size={dense ? "small" : "medium"}
+            >
+              <EnhancedTableHead
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={rows.length}
+              />
+              <TableBody>
+                {rows
+                  .slice()
+                  .sort(getComparator(order, orderBy))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const labelId = `enhanced-table-checkbox-${index}`
 
-                  return (
-                    <TableRow hover tabIndex={-1} key={index}>
-                      {<StockItem stockData={row} labelId={labelId} />}
-                    </TableRow>
-                  )
-                })}
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: (dense ? 33 : 53) * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 30, 50, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
+                    return (
+                      <TableRow hover tabIndex={-1} key={index}>
+                        {<StockItem stockData={row} labelId={labelId} />}
+                      </TableRow>
+                    )
+                  })}
+                {emptyRows > 0 && (
+                  <TableRow
+                    style={{
+                      height: (dense ? 33 : 53) * emptyRows,
+                    }}
+                  >
+                    <TableCell colSpan={6} />
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 30, 50, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+        <FormControlLabel
+          control={<Switch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
         />
-      </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
-      <WaitIndicator />
-    </Box>
+        <WaitIndicator />
+      </Box>
+    </>
   )
 }
 

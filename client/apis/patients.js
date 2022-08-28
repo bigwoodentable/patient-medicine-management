@@ -3,7 +3,7 @@ import { removeSpacesAll } from "../helper"
 
 const rootUrl = "/api/v1/patients"
 
-export function addPatient(patient, navigate) {
+export function addPatient(patient, handleClose) {
   const formattedPatient = {
     ...patient,
     fname: removeSpacesAll(patient.fname).toUpperCase(),
@@ -14,7 +14,7 @@ export function addPatient(patient, navigate) {
     .post(rootUrl + "/add")
     .send(formattedPatient)
     .then((res) => res.json)
-    .then(navigate("/patients"))
+    .then(handleClose())
 }
 
 export function getPatients() {
