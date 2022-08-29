@@ -20,17 +20,16 @@ function Test() {
     <Box>
       <Typography
         style={{
-          fontSize: "16px",
+          fontSize: "14px",
           paddingTop: "15px",
-          textDecoration: "underline",
         }}
       >
-        Stocks under 30g
+        Stocks under 30g:
       </Typography>
       <ol style={{ fontSize: "14px", marginTop: "3px" }}>
         {underStock.map((stock, i) => (
           <li key={i}>
-            {stock.medName} - {stock.totalQuantity}g
+            {stock.medName}: {stock.totalQuantity}g
           </li>
         ))}
       </ol>

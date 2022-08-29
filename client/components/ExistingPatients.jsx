@@ -162,9 +162,10 @@ function ExistingPatients() {
       >
         <Box
           style={{
-            width: "70%",
-            minWidth: "400px",
-            maxWidth: "700px",
+            width: "100%",
+            margin: "0px 25px 0px 25px",
+            // minWidth: "400px",
+            // maxWidth: "700px",
           }}
         >
           <Paper>
@@ -207,7 +208,7 @@ function ExistingPatients() {
                           >
                             {`${row.fname} ${row.lname}`}
                           </TableCell>
-                          <TableCell align="right">
+                          <TableCell align="center">
                             <Link
                               to={`/patient/${row.patientId}`}
                               style={{ textDecoration: "none" }}

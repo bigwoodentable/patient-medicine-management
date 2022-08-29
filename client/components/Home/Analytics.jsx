@@ -49,6 +49,9 @@ function Analytics() {
         x: {
           type: "category",
           categories: categories,
+          tick: {
+            // rotate: 90,
+          },
         },
         y: {
           label: {
@@ -61,18 +64,19 @@ function Analytics() {
         },
       },
       size: {
-        width: 480,
+        width: 580,
+        height: 480,
       },
       padding: {
         top: 50,
-        bottom: 10,
+        // bottom: 150,
       },
       color: {
         pattern: ["#ff7f0e", "#1f77b4"],
       },
-      bar: {
-        width: "auto",
-      },
+      // bar: {
+      //   width: "auto",
+      // },
     })
 
     setChart(chartObj)

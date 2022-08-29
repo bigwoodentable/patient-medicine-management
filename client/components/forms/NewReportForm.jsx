@@ -92,7 +92,7 @@ function NewReportForm() {
   }
 
   return (
-    <Box style={{ margin: "80px 25px 25px 25px" }}>
+    <Box style={{ margin: "30px 25px 25px 25px" }}>
       <Link style={{ textDecoration: "none" }} to={`/patient/${patientId}`}>
         <Button
           variant="contained"
@@ -104,7 +104,7 @@ function NewReportForm() {
         </Button>
       </Link>
       <Box sx={{ display: "flex", flexDirection: "row", mt: 2 }}>
-        <Box sx={{ flexGrow: "1", flexShrink: "1" }}>
+        <Box sx={{ flexGrow: "1", minWidth: "600px" }}>
           <Formik
             initialValues={initialValues}
             onSubmit={(values) => {
@@ -282,7 +282,7 @@ function NewReportForm() {
           </Formik>
         </Box>
 
-        <Box sx={{ flexGrow: "3", flexShrink: "3" }}>
+        <Box sx={{ flexGrow: "3" }}>
           <Box style={{ margin: "8px 25px 0px 25px" }}>
             <Paper elevation={3} sx={{ height: "125px", p: 2 }}>
               <Typography style={{ fontWeight: "bold", fontSize: 18 }}>

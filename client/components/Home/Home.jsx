@@ -10,14 +10,17 @@ function Home() {
   return (
     <>
       <Box
+        className="cover"
         style={{
           padding: 20,
-          background: "linear-gradient(to bottom, #136F96, #A7C5D1, #A7C5D1)",
-          height: "100vh",
         }}
       >
-        <Grid container spacing={{ xs: 1, sm: 1, md: 2 }}>
-          <Grid item xs={12} sm={12} md={7}>
+        <Grid
+          container
+          spacing={{ xs: 1, sm: 1, md: 2 }}
+          style={{ minWidth: "640px" }}
+        >
+          <Grid item xs={12} sm={12} md={12} lg={7}>
             <Paper
               elevation={2}
               style={{
@@ -42,7 +45,6 @@ function Home() {
                 marginTop: "16px",
                 marginBottom: "8px",
                 border: "0.25px solid lightgrey",
-
                 fontFamily: "sans-serif",
               }}
             >
@@ -68,7 +70,7 @@ function Home() {
               </Box>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={12} md={5}>
+          <Grid item xs={12} sm={12} md={12} lg={5}>
             <Paper elevation={2}>
               <Typography
                 style={{

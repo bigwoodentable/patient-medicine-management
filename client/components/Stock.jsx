@@ -150,7 +150,7 @@ function Stock() {
   return (
     <>
       <EditStockForm open={open} handleClose={handleClose} />
-      <Box style={{ height: "100vh", margin: "25px" }}>
+      <Box style={{ height: "100vh", margin: "20px 25px 25px 25px" }}>
         <Paper>
           <Box display="flex" justifyContent="flex-end">
             <IconButton color="primary" size="large" onClick={handleClickOpen}>

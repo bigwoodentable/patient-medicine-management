@@ -158,7 +158,7 @@ const ResponsiveAppBar = () => {
               mr: 2,
               display: { xs: "flex", sm: "none", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
+              fontFamily: "Sans-serif",
               fontWeight: 700,
               letterSpacing: ".3rem",
               color: "inherit",

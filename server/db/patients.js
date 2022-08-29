@@ -42,9 +42,14 @@ async function profitPerPatientTotal(db = connection) {
   const noNullProfits = allPatientsProfits.filter(
     (patient) => patient.totalProfit
   )
-  return noNullProfits
-}
+  //Top 5 profits
+  const topFive = noNullProfits
+    .sort((a, b) => b.totalProfit - a.totalProfit)
+    .slice(0, 5)
 
+  return topFive
+}
+visitsPatientTotal().then((res) => null)
 async function visitsPatientTotal(db = connection) {
   const AllId = await getAllId()
   const allPatientsVisits = []
@@ -53,11 +58,12 @@ async function visitsPatientTotal(db = connection) {
     const name = await getNameById(id.patientId)
     allPatientsVisits.push({ ...name[0], ...visits[0] })
   }
-  //Only patients less than 2 visits
-  const aboveTwoVisits = allPatientsVisits.filter(
-    (patient) => patient.visits > 1
-  )
-  return aboveTwoVisits
+  //Top 5 visits
+  const topFive = allPatientsVisits
+    .sort((a, b) => b.visits - a.visits)
+    .slice(0, 5)
+
+  return topFive
 }
 
 function getAllId(db = connection) {

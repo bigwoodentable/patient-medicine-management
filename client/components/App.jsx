@@ -15,6 +15,7 @@ import { Box, createMuiTheme, createTheme, CssBaseline } from "@mui/material"
 import { blue, grey, indigo, lightBlue, orange } from "@mui/material/colors"
 import { cyan } from "@material-ui/core/colors"
 import "../styles.css"
+import Footer from "./Footer.jsx"
 
 function App() {
   const theme = createTheme({
@@ -43,7 +44,7 @@ function App() {
       <CssBaseline>
         <Box className="app">
           <Navbar />
-          <Box style={{ marginTop: "70px" }}>
+          <Box style={{ marginTop: "70px", paddingBottom: "56px" }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/newPatient" element={<NewPatientForm />} />
@@ -55,6 +56,7 @@ function App() {
               <Route path="/test" element={<Test />} />
             </Routes>
           </Box>
+          <Footer />
         </Box>
       </CssBaseline>
     </ThemeProvider>
