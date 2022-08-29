@@ -10,34 +10,54 @@ import { styled } from "@mui/system"
 import NewReportForm from "./forms/NewReportForm.jsx"
 import Test from "./Test.jsx"
 import Navbar from "./Navbar.jsx"
-
-// const MainStyle = styled("div")(({ theme }) => ({
-//   flexGrow: 1,
-//   overflow: "auto",
-//   minHeight: "100%",
-//   paddingLeft: theme.spacing(32),
-//   paddingTop: 90,
-//   paddingBottom: theme.spacing(10),
-// }))
+import { ThemeProvider } from "@mui/system"
+import { Box, createMuiTheme, createTheme, CssBaseline } from "@mui/material"
+import { blue, grey, indigo, lightBlue, orange } from "@mui/material/colors"
+import { cyan } from "@material-ui/core/colors"
+import "../styles.css"
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: indigo[600],
+        light: indigo[400],
+        dark: indigo[900],
+      },
+      secondary: {
+        main: orange[600],
+        light: orange[400],
+        dark: orange[900],
+      },
+      delete: {
+        main: grey[600],
+        dark: grey[900],
+      },
+      add: {
+        main: grey[300],
+      },
+    },
+  })
   return (
-    <div>
-      {/* <Sidebar /> */}
-      <Navbar />
-      {/* <MainStyle> */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/newPatient" element={<NewPatientForm />} />
-        <Route path="/patients" element={<ExistingPatients />} />
-        <Route path="/patient/:id" element={<Patient />} />
-        <Route path="/newReportForm/:id" element={<NewReportForm />} />
-        <Route path="/editStock" element={<EditStockForm />} />
-        <Route path="/Stocks" element={<Stock />} />
-        <Route path="/test" element={<Test />} />
-      </Routes>
-      {/* </MainStyle> */}
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline>
+        <Box className="app">
+          <Navbar />
+          <Box style={{ marginTop: "70px" }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/newPatient" element={<NewPatientForm />} />
+              <Route path="/patients" element={<ExistingPatients />} />
+              <Route path="/patient/:id" element={<Patient />} />
+              <Route path="/newReportForm/:id" element={<NewReportForm />} />
+              <Route path="/editStock" element={<EditStockForm />} />
+              <Route path="/Stocks" element={<Stock />} />
+              <Route path="/test" element={<Test />} />
+            </Routes>
+          </Box>
+        </Box>
+      </CssBaseline>
+    </ThemeProvider>
   )
 }
 

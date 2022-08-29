@@ -40,7 +40,6 @@ function NewPatientForm() {
     setOpen(false)
   }
 
-  console.log("NewPatientForm", open)
   const navigate = useNavigate()
 
   const handleSubmit = async (patient) => {

@@ -30,8 +30,6 @@ const SignupSchema = Yup.object().shape({
 })
 
 function NewPatientForm({ open, handleClose }) {
-  console.log("NewPatientForm", open)
-
   const handleSubmit = async (patient) => {
     try {
       await addPatient(patient, handleClose)
@@ -50,13 +48,13 @@ function NewPatientForm({ open, handleClose }) {
   return (
     <>
       <Box
-        sx={{
-          "& .MuiTextField-root": { m: 1 },
-          width: "80%",
-          maxWidth: "650px",
-        }}
-        noValidate
-        autoComplete="off"
+      // sx={{
+      //   "& .MuiTextField-root": { m: 1 },
+      //   width: "80%",
+      //   maxWidth: "650px",
+      // }}
+      // noValidate
+      // autoComplete="off"
       >
         <Dialog open={open} onClose={handleClose}>
           <Formik
@@ -65,13 +63,7 @@ function NewPatientForm({ open, handleClose }) {
             onSubmit={(values) => handleSubmit(values)}
           >
             {({ values, errors, touched }) => (
-              <Box
-                sx={{
-                  display: "grid",
-                  width: "500px",
-                  justifyContent: "center",
-                }}
-              >
+              <Box display="grid" width="500px" justifyContent="center">
                 <Paper
                   elevation={3}
                   sx={{
@@ -79,7 +71,12 @@ function NewPatientForm({ open, handleClose }) {
                   }}
                 >
                   <Form>
-                    <DialogTitle sx={{ mb: 4, mt: 3 }}>New Patient</DialogTitle>
+                    <DialogTitle sx={{ mb: 4, mt: 3 }}>
+                      {" "}
+                      <Typography variant="h5" align="center">
+                        New Patient
+                      </Typography>
+                    </DialogTitle>
                     <DialogContent>
                       <Field
                         style={{
@@ -160,11 +157,26 @@ function NewPatientForm({ open, handleClose }) {
                         as="textarea"
                       />
                     </DialogContent>
-                    <DialogActions>
-                      <Button color="primary" variant="contained" type="submit">
-                        Submit
-                      </Button>
-                    </DialogActions>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        mt: 4,
+                        button: { mt: 2, mr: 2 },
+                        justifyContent: "center",
+                        borderTop: "0.25px solid lightgrey",
+                      }}
+                    >
+                      <DialogActions>
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          type="submit"
+                        >
+                          Submit
+                        </Button>
+                      </DialogActions>
+                    </Box>
                   </Form>
                 </Paper>
               </Box>

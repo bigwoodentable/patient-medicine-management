@@ -13,6 +13,7 @@ function Home() {
         style={{
           padding: 20,
           background: "linear-gradient(to bottom, #136F96, #A7C5D1, #A7C5D1)",
+          height: "100vh",
         }}
       >
         <Grid container spacing={{ xs: 1, sm: 1, md: 2 }}>

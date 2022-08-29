@@ -11,10 +11,13 @@ import Avatar from "@mui/material/Avatar"
 import Button from "@mui/material/Button"
 import Tooltip from "@mui/material/Tooltip"
 import MenuItem from "@mui/material/MenuItem"
-import AdbIcon from "@mui/icons-material/Adb"
+import CameraIcon from "@mui/icons-material/Camera"
 import { Link } from "react-router-dom"
+import DashboardIcon from "@mui/icons-material/Dashboard"
+import GroupIcon from "@mui/icons-material/Group"
+import InventoryIcon from "@mui/icons-material/Inventory"
 
-const pages = ["Home", "Patients", "Stocks"]
+const pages = ["Dashboard", "Patients", "Stocks"]
 // const settings = ["Profile", "Account", "Dashboard", "Logout"]
 
 const ResponsiveAppBar = () => {
@@ -37,27 +40,16 @@ const ResponsiveAppBar = () => {
   }
 
   return (
-    <AppBar position="static" style={{ background: "#0F2845" }}>
-      <Container maxWidth="xl">
+    <AppBar position="fixed" style={{ background: "#0F2845" }}>
+      <Container maxWidth="100%">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
+          <CameraIcon
+            color="secondary"
             sx={{
-              mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
+              mr: 1,
             }}
-          >
-            Inventory Management
-          </Typography>
-
+          />
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -87,26 +79,66 @@ const ResponsiveAppBar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((text) => {
+              {pages.map((text, i) => {
                 return (
                   <MenuItem key={text} onClick={handleCloseNavMenu}>
                     <Link
-                      to={text === "Home" ? `/` : `/${text}`}
+                      to={text === "Dashboard" ? `/` : `/${text}`}
                       style={{ textDecoration: "none", color: "black" }}
                     >
-                      <Typography textAlign="center"> {text}</Typography>
+                      {" "}
+                      {text === "Dashboard" ? (
+                        <Typography>
+                          {" "}
+                          <DashboardIcon
+                            style={{
+                              paddingTop: "10px",
+                            }}
+                          />{" "}
+                          {text}{" "}
+                        </Typography>
+                      ) : text === "Patients" ? (
+                        <>
+                          <Typography>
+                            {" "}
+                            <GroupIcon
+                              style={{
+                                paddingTop: "10px",
+                              }}
+                            />{" "}
+                            {text}{" "}
+                          </Typography>
+                        </>
+                      ) : (
+                        <>
+                          <Typography>
+                            {" "}
+                            <InventoryIcon
+                              style={{
+                                paddingTop: "10px",
+                              }}
+                            />{" "}
+                            {text}{" "}
+                          </Typography>
+                        </>
+                      )}
                     </Link>
                   </MenuItem>
                 )
               })}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+          <CameraIcon
+            color="secondary"
+            sx={{
+              display: { xs: "flex", md: "none" },
+              mr: 1,
+            }}
+          />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -120,7 +152,12 @@ const ResponsiveAppBar = () => {
           >
             Inventory Management
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex", lg: "flex" },
+            }}
+          >
             {pages.map((text) => (
               <Button
                 key={text}
@@ -128,7 +165,7 @@ const ResponsiveAppBar = () => {
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 <Link
-                  to={text === "Home" ? `/` : `/${text}`}
+                  to={text === "Dashboard" ? `/` : `/${text}`}
                   style={{
                     textDecoration: "none",
                     color: "white",

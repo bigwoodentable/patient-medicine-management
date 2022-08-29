@@ -5,14 +5,21 @@ import { updateAllStocks } from "../../apis/stocks"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import Button from "@material-ui/core/Button"
-import { Box, Dialog, IconButton, Paper, Typography } from "@mui/material"
+import {
+  Box,
+  Dialog,
+  FormLabel,
+  IconButton,
+  InputLabel,
+  Paper,
+  Typography,
+} from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import AddIcon from "@mui/icons-material/Add"
 import { fetchStocks } from "../../actions/stocks"
 import { DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
 
 function EditStockForm({ open, handleClose }) {
-  console.log("EditStockForm")
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const stocksData = useSelector((state) => state.stocks)
@@ -32,146 +39,194 @@ function EditStockForm({ open, handleClose }) {
     <Box
       sx={{
         display: "grid",
-        "& .MuiTextField-root": { m: 1 },
-        width: "80%",
-        maxWidth: "650px",
         justifyContent: "center",
       }}
       noValidate
       autoComplete="off"
     >
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        maxWidth="md"
+        fullWidth="true"
+        sx={{ minWidth: "md" }}
+      >
         <Formik initialValues={{ stocks: stocksData }} onSubmit={handleSubmit}>
           {({ values }) => (
-            <Paper elevation={3} sx={{ p: 3 }}>
-              <Form>
-                <DialogTitle sx={{ mb: 4, mt: 3 }}>New Patient</DialogTitle>
-                <DialogContent>
-                  <FieldArray
-                    name="stocks"
-                    render={(arrayHelpers) => (
-                      <>
-                        {values.stocks && values.stocks.length > 0 ? (
-                          values.stocks.map((stock, index) => (
-                            <Box key={index}>
+            <Form>
+              <DialogTitle>
+                <Typography variant="h5" align="center">
+                  Edit Stock{" "}
+                </Typography>
+              </DialogTitle>
+              <DialogContent>
+                <FieldArray
+                  name="stocks"
+                  render={(arrayHelpers) => (
+                    <>
+                      {values.stocks && values.stocks.length > 0 ? (
+                        values.stocks.map((stock, index) => (
+                          <Box
+                            key={index}
+                            sx={{
+                              display: "flex",
+                              flexDirection: "row",
+                              // mt: 4,
+                              // justifyContent: "center",
+                            }}
+                          >
+                            <Box>
+                              <InputLabel
+                                sx={{
+                                  fontSize: "12px",
+                                  mt: "10px",
+                                  // pb: "45px",
+                                }}
+                              >
+                                Code
+                              </InputLabel>
                               <Field
                                 style={{
                                   height: 40,
                                   width: 160,
-                                  marginRight: 16,
-                                  marginTop: 16,
+                                  marginRight: 8,
+                                  marginTop: 2,
                                   border: "0.5px solid grey",
                                   borderRadius: "5px",
                                 }}
                                 name={`stocks.${index}.code`}
                               />
+                            </Box>
+                            <Box>
+                              <InputLabel
+                                sx={{ fontSize: "12px", mt: "10px", p: "0px" }}
+                              >
+                                Name{" "}
+                              </InputLabel>
                               <Field
                                 style={{
                                   height: 40,
                                   width: 160,
-                                  marginRight: 16,
-                                  marginTop: 16,
+                                  marginRight: 8,
+                                  marginTop: 2,
                                   border: "0.5px solid grey",
                                   borderRadius: "5px",
                                 }}
                                 name={`stocks.${index}.medName`}
                               />
+                            </Box>
+                            <Box>
+                              <InputLabel
+                                sx={{ fontSize: "12px", mt: "10px", p: "0px" }}
+                              >
+                                Cost/100g{" "}
+                              </InputLabel>
                               <Field
                                 style={{
                                   height: 40,
                                   width: 160,
-                                  marginRight: 16,
-                                  marginTop: 16,
+                                  marginRight: 8,
+                                  marginTop: 2,
                                   border: "0.5px solid grey",
                                   borderRadius: "5px",
                                 }}
                                 name={`stocks.${index}.cost`}
                               />
+                            </Box>
+                            <Box>
+                              <InputLabel
+                                sx={{ fontSize: "12px", mt: "10px", p: "0px" }}
+                              >
+                                Quantity(g)
+                              </InputLabel>
                               <Field
                                 style={{
                                   height: 40,
                                   width: 160,
-                                  marginRight: 16,
-                                  marginTop: 16,
+                                  marginRight: 8,
+                                  marginTop: 2,
                                   border: "0.5px solid grey",
                                   borderRadius: "5px",
                                 }}
                                 name={`stocks.${index}.totalQuantity`}
                               />
-
-                              <Button
-                                color="primary"
-                                variant="text"
-                                size="large"
-                                onClick={() =>
-                                  arrayHelpers.insert(index + 1, {
-                                    id: "",
-                                    code: "",
-                                    medName: "",
-                                    cost: 0,
-                                    totalQuantity: 0,
-                                  })
-                                }
-                              >
-                                <AddIcon />
-                              </Button>
-                              {/* <DialogActions> */}
-                              <Button
-                                color="primary"
-                                size="large"
-                                onClick={() => arrayHelpers.remove(index)} // remove a medicine from the list
-                              >
-                                <DeleteIcon />
-                              </Button>
-                              {/* </DialogActions> */}
                             </Box>
-                          ))
-                        ) : (
-                          <Box
-                            sx={{
-                              display: "grid",
-                              Button: { mt: 3, mr: 2 },
-                              justifyContent: "center",
-                            }}
-                          >
-                            <DialogActions>
-                              <Button
-                                color="secondary"
-                                variant="outlined"
-                                onClick={() =>
-                                  arrayHelpers.push({
-                                    id: "",
-                                    code: "",
-                                    medName: "",
-                                    cost: 0,
-                                    totalQuantity: 0,
-                                  })
-                                }
-                              >
-                                {/* show this when user has removed all medicines from the list */}
-                                Add a medicine
-                              </Button>
-                            </DialogActions>
+                            <Button
+                              color="primary"
+                              variant="text"
+                              size="large"
+                              onClick={() =>
+                                arrayHelpers.insert(index + 1, {
+                                  id: "",
+                                  code: "",
+                                  medName: "",
+                                  cost: 0,
+                                  totalQuantity: 0,
+                                })
+                              }
+                            >
+                              <AddIcon />
+                            </Button>
+                            {/* <DialogActions> */}
+                            <Button
+                              color="delete"
+                              size="large"
+                              onClick={() => arrayHelpers.remove(index)} // remove a medicine from the list
+                            >
+                              <DeleteIcon />
+                            </Button>
+                            {/* </DialogActions> */}
                           </Box>
-                        )}
+                        ))
+                      ) : (
                         <Box
                           sx={{
                             display: "grid",
-                            Button: { mt: 3, mr: 2 },
+                            Button: { mt: 2, mr: 2 },
                             justifyContent: "center",
                           }}
                         >
                           <DialogActions>
                             <Button
-                              color="primary"
-                              variant="contained"
-                              // fullWidth
-                              type="submit"
+                              color="secondary"
+                              variant="outlined"
+                              onClick={() =>
+                                arrayHelpers.push({
+                                  id: "",
+                                  code: "",
+                                  medName: "",
+                                  cost: 0,
+                                  totalQuantity: 0,
+                                })
+                              }
                             >
-                              Submit
+                              {/* show this when user has removed all medicines from the list */}
+                              Add a medicine
                             </Button>
                           </DialogActions>
-
+                        </Box>
+                      )}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          mt: 4,
+                          button: { mt: 2, mr: 2 },
+                          justifyContent: "center",
+                          borderTop: "0.25px solid lightgrey",
+                        }}
+                      >
+                        <DialogActions>
+                          <Button
+                            color="primary"
+                            variant="contained"
+                            // fullWidth
+                            type="submit"
+                          >
+                            Submit
+                          </Button>
+                        </DialogActions>
+                        <DialogActions>
                           <Button
                             color="primary"
                             variant="outlined"
@@ -179,13 +234,13 @@ function EditStockForm({ open, handleClose }) {
                           >
                             Reset
                           </Button>
-                        </Box>
-                      </>
-                    )}
-                  />
-                </DialogContent>
-              </Form>
-            </Paper>
+                        </DialogActions>
+                      </Box>
+                    </>
+                  )}
+                />
+              </DialogContent>
+            </Form>
           )}
         </Formik>
       </Dialog>
