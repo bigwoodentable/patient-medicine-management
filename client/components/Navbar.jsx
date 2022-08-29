@@ -46,11 +46,16 @@ const ResponsiveAppBar = () => {
           <CameraIcon
             color="secondary"
             sx={{
-              display: { xs: "none", md: "flex" },
+              display: { xs: "none", sm: "flex", md: "flex" },
               mr: 1,
             }}
           />
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", sm: "none", md: "none" },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -76,62 +81,72 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: { xs: "block", sm: "none", md: "none" },
               }}
             >
-              {pages.map((text, i) => {
-                return (
-                  <MenuItem key={text} onClick={handleCloseNavMenu}>
-                    <Link
-                      to={text === "Dashboard" ? `/` : `/${text}`}
-                      style={{ textDecoration: "none", color: "black" }}
-                    >
-                      {" "}
-                      {text === "Dashboard" ? (
-                        <Typography>
-                          {" "}
-                          <DashboardIcon
-                            style={{
-                              paddingTop: "10px",
-                            }}
-                          />{" "}
-                          {text}{" "}
-                        </Typography>
-                      ) : text === "Patients" ? (
-                        <>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
+                  p: 1,
+                }}
+              >
+                {pages.map((text, i) => {
+                  return (
+                    <MenuItem key={text} onClick={handleCloseNavMenu}>
+                      <Link
+                        to={text === "Dashboard" ? `/` : `/${text}`}
+                        style={{ textDecoration: "none", color: "black" }}
+                      >
+                        {" "}
+                        {text === "Dashboard" ? (
                           <Typography>
                             {" "}
-                            <GroupIcon
+                            <DashboardIcon
                               style={{
                                 paddingTop: "10px",
                               }}
                             />{" "}
                             {text}{" "}
                           </Typography>
-                        </>
-                      ) : (
-                        <>
-                          <Typography>
-                            {" "}
-                            <InventoryIcon
-                              style={{
-                                paddingTop: "10px",
-                              }}
-                            />{" "}
-                            {text}{" "}
-                          </Typography>
-                        </>
-                      )}
-                    </Link>
-                  </MenuItem>
-                )
-              })}
+                        ) : text === "Patients" ? (
+                          <>
+                            <Typography>
+                              {" "}
+                              <GroupIcon
+                                style={{
+                                  paddingTop: "10px",
+                                }}
+                              />{" "}
+                              {text}{" "}
+                            </Typography>
+                          </>
+                        ) : (
+                          <>
+                            <Typography>
+                              {" "}
+                              <InventoryIcon
+                                style={{
+                                  paddingTop: "10px",
+                                }}
+                              />{" "}
+                              {text}{" "}
+                            </Typography>
+                          </>
+                        )}
+                      </Link>
+                    </MenuItem>
+                  )
+                })}
+              </Box>
             </Menu>
           </Box>
           <CameraIcon
             color="secondary"
             sx={{
-              display: { xs: "flex", md: "none" },
+              display: { xs: "flex", sm: "none", md: "none" },
               mr: 1,
             }}
           />
@@ -141,7 +156,7 @@ const ResponsiveAppBar = () => {
             component="a"
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
+              display: { xs: "flex", sm: "none", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
@@ -155,7 +170,7 @@ const ResponsiveAppBar = () => {
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", md: "flex", lg: "flex" },
+              display: { xs: "none", sm: "flex", md: "flex", lg: "flex" },
             }}
           >
             {pages.map((text) => (
