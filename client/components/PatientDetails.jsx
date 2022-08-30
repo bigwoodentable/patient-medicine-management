@@ -1,25 +1,27 @@
-import { Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { clearWaiting, setWaiting } from '../actions/waiting.js'
-import { getPatientById } from '../apis/patients.js'
+import { Typography } from "@mui/material"
+import React, { useEffect, useRef, useState } from "react"
+import { useDispatch } from "react-redux"
+import { clearWaiting, setWaiting } from "../actions/waiting.js"
+import { getPatientById } from "../apis/patients.js"
 
-function PatientDetails(props) {
+function PatientDetails({ patientId, patientDetails }) {
   //This works at getting patientId
-  const { patientId } = props
-  const [patientDetails, setPatientDetails] = useState({})
-  const dispatch = useDispatch()
+  // const { patientId } = props
+  // const [patientDetails, setPatientDetails] = useState({})
 
-  useEffect(async () => {
-    try {
-      dispatch(setWaiting())
-      const details = await getPatientById(patientId)
-      setPatientDetails(details)
-      dispatch(clearWaiting())
-    } catch (error) {
-      console.error(error)
-    }
-  }, [])
+  // useEffect(async () => {
+  //   try {
+  //     console.log("PatientDetials")
+  //     props.setLoading(true)
+  //     props.timer.current = window.setTimeout(async () => {
+  //       const details = await getPatientById(patientId)
+  //       props.setLoading(false)
+  //       setPatientDetails(details)
+  //     }, 450)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }, [])
 
   return patientDetails.fname ? (
     <>

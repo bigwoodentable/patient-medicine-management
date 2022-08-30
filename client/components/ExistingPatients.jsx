@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { visuallyHidden } from "@mui/utils"
 import {
   Table,
@@ -17,6 +17,7 @@ import {
   IconButton,
   Grid,
   Typography,
+  LinearProgress,
 } from "@mui/material"
 import { Link } from "react-router-dom"
 import { getPatients } from "../apis/patients.js"
@@ -107,6 +108,8 @@ function ExistingPatients() {
   const [rowsPerPage, setRowsPerPage] = useState(5)
   const [rows, setRows] = useState([])
   const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const timer = useRef(0)
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -116,13 +119,12 @@ function ExistingPatients() {
     setOpen(false)
   }
 
-  const dispatch = useDispatch()
   useEffect(async () => {
     try {
-      dispatch(setWaiting())
+      setLoading(true)
       const patientNames = await getPatients()
-      dispatch(clearWaiting())
       setRows(patientNames)
+      setLoading(false)
     } catch (error) {
       console.error(error)
     }
@@ -154,113 +156,130 @@ function ExistingPatients() {
   return (
     <>
       <NewPatientForm open={open} handleClose={handleClose} />
-      <Grid
-        container
-        justifyContent="center"
-        alignItems="top"
-        style={{ minHeight: "100vh", paddingTop: "20px" }}
-      >
-        <Box
+      {!loading && (
+        <Grid
+          container
+          justifyContent="center"
+          alignItems="top"
+          style={{ minHeight: "100vh", paddingTop: "20px" }}
+        >
+          <Box
+            style={{
+              width: "100%",
+              margin: "0px 25px 0px 25px",
+              // minWidth: "400px",
+              // maxWidth: "700px",
+            }}
+          >
+            <Paper>
+              <Box
+                //margin
+                display="flex"
+                justifyContent="flex-end"
+              >
+                <IconButton
+                  color="primary"
+                  size="large"
+                  onClick={handleClickOpen}
+                >
+                  <AddIcon />
+                </IconButton>
+              </Box>
+              <TableContainer>
+                <Table size={dense ? "small" : "medium"}>
+                  <EnhancedTableHead
+                    order={order}
+                    orderBy={orderBy}
+                    onRequestSort={handleRequestSort}
+                    rowCount={rows.length}
+                  />
+                  <TableBody>
+                    {rows
+                      .slice()
+                      .sort(getComparator(order, orderBy))
+                      .slice(
+                        page * rowsPerPage,
+                        page * rowsPerPage + rowsPerPage
+                      )
+                      .map((row, index) => {
+                        const labelId = `enhanced-table-checkbox-${index}`
+
+                        return (
+                          <TableRow hover tabIndex={-1} key={index}>
+                            <TableCell
+                              component="th"
+                              id={labelId}
+                              scope="row"
+                              align="center"
+                            >
+                              {`${row.fname} ${row.lname}`}
+                            </TableCell>
+                            <TableCell align="center">
+                              <Link
+                                to={`/patient/${row.patientId}`}
+                                style={{ textDecoration: "none" }}
+                              >
+                                <Button variant="contained">
+                                  <PermIdentityOutlinedIcon
+                                    style={{
+                                      marginRight: "4px",
+                                      fontSize: "medium",
+                                    }}
+                                  />
+                                  <Typography
+                                    variant="body2"
+                                    style={{ marginTop: "2px" }}
+                                  >
+                                    Details
+                                  </Typography>
+                                </Button>
+                              </Link>
+                            </TableCell>
+                          </TableRow>
+                        )
+                      })}
+                    {emptyRows > 0 && (
+                      <TableRow
+                        style={{
+                          height: (dense ? 33 : 53) * emptyRows,
+                        }}
+                      >
+                        <TableCell colSpan={6} />
+                      </TableRow>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 30, 50, 100]}
+                component="div"
+                count={rows.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Paper>
+            <FormControlLabel
+              control={<Switch checked={dense} onChange={handleChangeDense} />}
+              label="Dense padding"
+            />
+          </Box>
+        </Grid>
+      )}
+      {loading && (
+        <Grid
+          container
+          justifyContent="center"
+          alignContent="center"
           style={{
-            width: "100%",
-            margin: "0px 25px 0px 25px",
-            // minWidth: "400px",
-            // maxWidth: "700px",
+            height: "100vh",
+            paddingBottom: "100px",
           }}
         >
-          <Paper>
-            <Box
-              //margin
-              display="flex"
-              justifyContent="flex-end"
-            >
-              <IconButton
-                color="primary"
-                size="large"
-                onClick={handleClickOpen}
-              >
-                <AddIcon />
-              </IconButton>
-            </Box>
-            <TableContainer>
-              <Table size={dense ? "small" : "medium"}>
-                <EnhancedTableHead
-                  order={order}
-                  orderBy={orderBy}
-                  onRequestSort={handleRequestSort}
-                  rowCount={rows.length}
-                />
-                <TableBody>
-                  {rows
-                    .slice()
-                    .sort(getComparator(order, orderBy))
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row, index) => {
-                      const labelId = `enhanced-table-checkbox-${index}`
-
-                      return (
-                        <TableRow hover tabIndex={-1} key={index}>
-                          <TableCell
-                            component="th"
-                            id={labelId}
-                            scope="row"
-                            align="center"
-                          >
-                            {`${row.fname} ${row.lname}`}
-                          </TableCell>
-                          <TableCell align="center">
-                            <Link
-                              to={`/patient/${row.patientId}`}
-                              style={{ textDecoration: "none" }}
-                            >
-                              <Button variant="contained">
-                                <PermIdentityOutlinedIcon
-                                  style={{
-                                    marginRight: "4px",
-                                    fontSize: "medium",
-                                  }}
-                                />
-                                <Typography
-                                  variant="body2"
-                                  style={{ marginTop: "2px" }}
-                                >
-                                  Details
-                                </Typography>
-                              </Button>
-                            </Link>
-                          </TableCell>
-                        </TableRow>
-                      )
-                    })}
-                  {emptyRows > 0 && (
-                    <TableRow
-                      style={{
-                        height: (dense ? 33 : 53) * emptyRows,
-                      }}
-                    >
-                      <TableCell colSpan={6} />
-                    </TableRow>
-                  )}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 30, 50, 100]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Paper>
-          <FormControlLabel
-            control={<Switch checked={dense} onChange={handleChangeDense} />}
-            label="Dense padding"
-          />
-          <WaitIndicator />
-        </Box>
-      </Grid>
+          {/* <LinearProgress color="secondary" style={{ width: "60%" }} /> */}
+        </Grid>
+      )}
     </>
   )
 }

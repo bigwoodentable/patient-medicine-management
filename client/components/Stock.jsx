@@ -209,7 +209,6 @@ function Stock() {
           control={<Switch checked={dense} onChange={handleChangeDense} />}
           label="Dense padding"
         />
-        <WaitIndicator />
       </Box>
     </>
   )

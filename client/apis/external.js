@@ -11,6 +11,4 @@ export function getMedFromAPI(searchTerm) {
     .then((res) => {
       return res.body.newslist[0]
     })
-
-  // .then(navigate('/patients'))
 }
