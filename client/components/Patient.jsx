@@ -29,11 +29,11 @@ function Patient() {
     try {
       console.log("PatientDetials")
       setLoading(true)
-      timer.current = window.setTimeout(async () => {
-        const details = await getPatientById(patientId)
-        setPatientDetails(details)
-        setLoading(false)
-      }, 400)
+      // timer.current = window.setTimeout(async () => {
+      const details = await getPatientById(patientId)
+      setPatientDetails(details)
+      setLoading(false)
+      // }, 0)
     } catch (error) {
       console.error(error)
     }
@@ -160,7 +160,7 @@ function Patient() {
               paddingBottom: "100px",
             }}
           >
-            <LinearProgress color="secondary" style={{ width: "60%" }} />
+            {/* <LinearProgress color="secondary" style={{ width: "60%" }} /> */}
           </Grid>
         )}
       </ThemeProvider>

@@ -122,9 +122,13 @@ function ExistingPatients() {
   useEffect(async () => {
     try {
       setLoading(true)
+      // timer.current = window.setTimeout(async () => {}, 450)
       const patientNames = await getPatients()
-      setRows(patientNames)
+      const sortedPatients = patientNames.sort((a, b) =>
+        a.fname.localeCompare(b.fname)
+      )
       setLoading(false)
+      setRows(sortedPatients)
     } catch (error) {
       console.error(error)
     }

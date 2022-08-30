@@ -118,7 +118,8 @@ function Stock() {
     setOpen(false)
   }
 
-  const rows = useSelector((state) => state.stocks)
+  const rowsState = useSelector((state) => state.stocks)
+  const rows = rowsState.sort((a, b) => a.code.localeCompare(b.code))
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchStocks())

@@ -62,12 +62,14 @@ async function visitsPatientTotal(db = connection) {
   const topFive = allPatientsVisits
     .sort((a, b) => b.visits - a.visits)
     .slice(0, 5)
-
+  console.log("visits", topFive)
   return topFive
 }
 
 function getAllId(db = connection) {
-  return db("patients").select("patient_id as patientId")
+  return db("patients")
+    .where("status", "active")
+    .select("patient_id as patientId")
 }
 
 async function getNameById(id, db = connection) {

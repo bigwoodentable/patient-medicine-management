@@ -7,7 +7,8 @@ import { profitPerPatient, visitsPerPatient } from "../../apis/patients"
 function Analytics() {
   const [chart, setChart] = useState({})
   const [profitsPerUser, setProfitsPerUser] = useState([])
-  const [categories, setCategories] = useState([])
+  const [categoriesProf, setCategoriesProfit] = useState([])
+  const [categoriesVis, setCategoriesVisits] = useState([])
   const [visits, setVisits] = useState([])
 
   useEffect(() => {
@@ -20,7 +21,7 @@ function Analytics() {
           cat.push(patient.name)
         })
         setProfitsPerUser(prof)
-        setCategories(cat)
+        setCategoriesProfit(cat)
         return null
       })
       .catch((err) => console.error(err))
@@ -28,11 +29,15 @@ function Analytics() {
     visitsPerPatient()
       .then((patients) => {
         //Patients' names are not used here but it is provided by the API
+
         const vis = []
+        const cat = []
         patients.map((patient) => {
           vis.push(patient.visits)
+          cat.push(patient.name)
         })
         setVisits(vis)
+        setCategoriesVisits(cat)
         return null
       })
       .catch((err) => console.error(err))
@@ -48,7 +53,7 @@ function Analytics() {
       axis: {
         x: {
           type: "category",
-          categories: categories,
+          categories: categoriesProf,
           tick: {
             // rotate: 90,
           },
@@ -80,11 +85,12 @@ function Analytics() {
     })
 
     setChart(chartObj)
-  }, [categories])
+  }, [categoriesProf])
 
   function loadVisits() {
     chart.load({
       columns: [["Visits", ...visits]],
+      categories: categoriesVis,
       unload: ["Profits"],
     })
 
@@ -95,6 +101,7 @@ function Analytics() {
   function loadProfits() {
     chart.load({
       columns: [["Profits", ...profitsPerUser]],
+      categories: categoriesProf,
       unload: ["Visits"],
     })
     chart.axis.labels({ y: "Dollar (NZD)" })

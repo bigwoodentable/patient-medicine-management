@@ -63,7 +63,7 @@ router.get("/profitPerPatient", (req, res) => {
 router.get("/totalVisits", (req, res) => {
   db.visitsPatientTotal()
     .then((visits) => {
-      // console.log(res)
+      console.log("route", visits)
       res.json(visits)
       return null
     })
