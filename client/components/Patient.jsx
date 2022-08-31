@@ -3,6 +3,7 @@ import {
   Button,
   createTheme,
   Grid,
+  IconButton,
   LinearProgress,
   Paper,
   ThemeProvider,
@@ -11,23 +12,51 @@ import {
 import { grey, indigo, orange } from "@mui/material/colors"
 import { flexbox } from "@mui/system"
 import React, { useEffect, useRef, useState } from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import PatientDetails from "./PatientDetails.jsx"
 import Reports from "./Reports.jsx"
 import WaitIndicator from "./WaitIndicator.jsx"
 import AddCircleIcon from "@mui/icons-material/AddCircle"
-import { getPatientById } from "../apis/patients.js"
+import { getPatientById, updatePatientById } from "../apis/patients.js"
+import EditIcon from "@mui/icons-material/Edit"
+import EditPatientForm from "./forms/EditPatientForm.jsx"
+import DeleteIcon from "@mui/icons-material/Delete"
 
 function Patient() {
   const [loading, setLoading] = useState(false)
   const [patientDetails, setPatientDetails] = useState({})
+  const [open, setOpen] = useState(false)
+  const [updated, setUpdated] = useState(0)
+  const navigate = useNavigate()
   const timer = useRef(0)
   //useParams works
   const { id: patientId } = useParams()
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const handleDelete = async () => {
+    const deleteStatus = {
+      status: "deleted",
+    }
+    const del = confirm("Are you sure you would like to delete this patient?")
+    if (del) {
+      try {
+        await updatePatientById(patientId, deleteStatus)
+        navigate("/Patients")
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    return null
+  }
 
   useEffect(async () => {
     try {
-      console.log("PatientDetials")
       setLoading(true)
       // timer.current = window.setTimeout(async () => {
       const details = await getPatientById(patientId)
@@ -37,7 +66,7 @@ function Patient() {
     } catch (error) {
       console.error(error)
     }
-  }, [])
+  }, [updated])
 
   const themePatient = createTheme({
     breakpoints: {
@@ -73,10 +102,16 @@ function Patient() {
   return (
     <>
       <ThemeProvider theme={themePatient}>
+        <EditPatientForm
+          open={open}
+          handleClose={handleClose}
+          patientId={patientId}
+          setUpdated={setUpdated}
+        />
         {!loading && (
           <Paper
             style={{
-              height: "100vh",
+              height: "100%",
               margin: "25px",
               marginTop: "100px",
               background: " rgba(240,242,246,255)",
@@ -99,7 +134,22 @@ function Patient() {
                 md={4}
                 style={{ maxWidth: "500px", marginBottom: "18px" }}
               >
-                <Paper sx={{ width: "380px", p: 3 }} elevation={2}>
+                <Paper sx={{ width: "380px", p: 2 }} elevation={2}>
+                  <Box
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "flex-end",
+                      marginBottom: "15px",
+                    }}
+                  >
+                    <IconButton color="primary" onClick={handleClickOpen}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton color="delete" onClick={handleDelete}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
                   <PatientDetails
                     patientId={patientId}
                     patientDetails={patientDetails}

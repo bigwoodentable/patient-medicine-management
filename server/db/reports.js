@@ -31,17 +31,8 @@ function addReportById(reportBasics, patientId, db = connection) {
   return db("reports").insert(newReport)
 }
 
-//input prescriptions + reportId, add inputs + date
-function addPrescriptionsById(prescriptions, reportId, db = connection) {
-  prescriptions.forEach(async (prescription) => {
-    return await db("prescriptions").insert({
-      prescribed_quantity: prescription.prescribedQuantity,
-      med_name: prescription.medName,
-      report_id: reportId,
-    })
-  })
-
-  return null
+function deleteReportById(reportId, db = connection) {
+  return db("reports").where("report_id", reportId).del()
 }
 
 //input prescriptions + reportId, add inputs + date
@@ -56,12 +47,44 @@ function addPrescriptionsById(prescriptions, reportId, db = connection) {
 
   return null
 }
+
+//input prescriptions + reportId, add inputs + date
+function addPrescriptionsById(prescriptions, reportId, db = connection) {
+  prescriptions.forEach(async (prescription) => {
+    return await db("prescriptions").insert({
+      prescribed_quantity: prescription.prescribedQuantity,
+      med_name: prescription.medName,
+      report_id: reportId,
+    })
+  })
+
+  return null
+}
+
+// function revenuePerPatient(patientId, db = connection) {
+
+// }
 
 //input patientId to get total profit
+async function revenuePerPatient(patientId) {
+  const profits = await profitPerPatient(patientId)
+  const costs = await costsPerPatient(patientId)
+  return [{ totalRevenue: profits[0].totalProfit + costs[0].totalCosts }]
+}
+
 function profitPerPatient(patientId, db = connection) {
   return db("reports")
     .where("patient_id", patientId)
     .sum("total_profit as totalProfit")
+}
+
+revenuePerPatient(1).then((res) => console.log(res))
+costsPerPatient(1).then((res) => console.log(res))
+
+function costsPerPatient(patientId, db = connection) {
+  return db("reports")
+    .where("patient_id", patientId)
+    .sum("total_costs as totalCosts")
 }
 
 //input patientId to get total number of reports (numb of visits)
@@ -76,6 +99,7 @@ module.exports = {
   getPrescriptionsByReportId,
   addReportById,
   addPrescriptionsById,
-  profitPerPatient,
+  revenuePerPatient,
   totalVisits,
+  deleteReportById,
 }

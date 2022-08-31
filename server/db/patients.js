@@ -1,6 +1,10 @@
 const connection = require("./connection")
 const { randomId } = require("./helper")
-const { profitPerPatient, totalVisits } = require("./reports")
+const {
+  profitPerPatient,
+  totalVisits,
+  revenuePerPatient,
+} = require("./reports")
 
 function getPatients(db = connection) {
   return db("patients")
@@ -31,25 +35,29 @@ function getPatientById(id, db = connection) {
     .first()
 }
 
-async function profitPerPatientTotal(db = connection) {
+function updatePatientById(id, data, db = connection) {
+  return db("patients").where("patient_id", id).update(data)
+}
+revenuePerPatientTotal().then((res) => console.log(res))
+async function revenuePerPatientTotal(db = connection) {
   const AllId = await getAllId()
   const allPatientsProfits = []
   for (const id of AllId) {
-    const profit = await profitPerPatient(id.patientId)
+    const revenue = await revenuePerPatient(id.patientId)
     const name = await getNameById(id.patientId)
-    allPatientsProfits.push({ ...name[0], ...profit[0] })
+    allPatientsProfits.push({ ...name[0], ...revenue[0] })
   }
   const noNullProfits = allPatientsProfits.filter(
-    (patient) => patient.totalProfit
+    (patient) => patient.totalRevenue
   )
   //Top 5 profits
   const topFive = noNullProfits
-    .sort((a, b) => b.totalProfit - a.totalProfit)
+    .sort((a, b) => b.totalRevenue - a.totalRevenue)
     .slice(0, 5)
 
   return topFive
 }
-visitsPatientTotal().then((res) => null)
+
 async function visitsPatientTotal(db = connection) {
   const AllId = await getAllId()
   const allPatientsVisits = []
@@ -62,7 +70,6 @@ async function visitsPatientTotal(db = connection) {
   const topFive = allPatientsVisits
     .sort((a, b) => b.visits - a.visits)
     .slice(0, 5)
-  console.log("visits", topFive)
   return topFive
 }
 
@@ -83,6 +90,7 @@ module.exports = {
   getPatients,
   insertPatient,
   getPatientById,
-  profitPerPatientTotal,
+  revenuePerPatientTotal,
   visitsPatientTotal,
+  updatePatientById,
 }

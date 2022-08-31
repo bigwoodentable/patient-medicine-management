@@ -48,6 +48,16 @@ router.post("/add/:patientId", async (req, res) => {
   }
 })
 
+router.delete("/delete/:reportId", async (req, res) => {
+  const reportId = Number(req.params.reportId)
+  try {
+    await db.deleteReportById(reportId)
+    return res.json("success in deleting the report")
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 module.exports = router
 
 //  /api/v1/reports/:patientId

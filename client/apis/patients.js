@@ -25,8 +25,14 @@ export function getPatientById(id) {
   return request.get(rootUrl + `/details/${id}`).then((res) => res.body)
 }
 
-export function profitPerPatient() {
-  return request.get(rootUrl + `/profitPerPatient`).then((res) => res.body)
+export function updatePatientById(id, updatedInfo) {
+  return request
+    .put(rootUrl + `/update/${id}`)
+    .send(updatedInfo)
+    .then((res) => res.body)
+}
+export function revenuePerPatient() {
+  return request.get(rootUrl + `/revenuePerPatient`).then((res) => res.body)
 }
 
 export function visitsPerPatient() {

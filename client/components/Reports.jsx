@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { getReportsById } from '../apis/reports.js'
-import ReportsItem from './ReportsItem.jsx'
+import React, { useEffect, useState } from "react"
+import { getReportsById } from "../apis/reports.js"
+import ReportsItem from "./ReportsItem.jsx"
 
 function Reports(props) {
   const { patientId } = props
 
   const [reports, setReports] = useState([])
+  const [deletedReport, setdeletedReport] = useState(0)
 
   useEffect(async () => {
     try {
@@ -14,12 +15,19 @@ function Reports(props) {
     } catch (error) {
       console.error(error)
     }
-  }, [])
+  }, [deletedReport])
 
   return reports
     .slice(0)
     .reverse()
-    .map((report, i) => <ReportsItem key={i} report={report} />)
+    .map((report, i) => (
+      <ReportsItem
+        key={i}
+        report={report}
+        patientId={patientId}
+        setdeletedReport={setdeletedReport}
+      />
+    ))
 }
 
 export default Reports

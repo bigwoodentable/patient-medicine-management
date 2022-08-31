@@ -7,6 +7,10 @@ export function getReportsById(patientId) {
   return request.get(rootUrl + `/${patientId}`).then((res) => res.body)
 }
 
+export function deleteReportByReportId(reportId) {
+  return request.delete(rootUrl + `/delete/${reportId}`).then(() => null)
+}
+
 export function addReportById(
   newReport,
   totalCosts,

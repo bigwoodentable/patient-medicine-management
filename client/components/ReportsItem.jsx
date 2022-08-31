@@ -11,10 +11,14 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
-import { Box, Divider } from "@mui/material"
+import { Box, Divider, IconButton } from "@mui/material"
+import { deleteReportByReportId } from "../apis/reports"
+import { useNavigate } from "react-router-dom"
+import DeleteIcon from "@mui/icons-material/Delete"
 
-function ReportsItem(props) {
+function ReportsItem({ report, patientId, setdeletedReport }) {
   const {
+    reportId,
     dateAdded,
     diagnosis,
     prescription,
@@ -22,8 +26,21 @@ function ReportsItem(props) {
     prescriptionNumber,
     totalCosts,
     totalProfits,
-  } = props.report
-
+  } = report
+  const navigate = useNavigate()
+  const handleDelete = async () => {
+    const del = confirm("Are you sure you would like to delete this report?")
+    if (del) {
+      try {
+        await deleteReportByReportId(reportId)
+        setdeletedReport((deletedReport) => deletedReport + 1)
+        navigate(`/patient/${patientId}`)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    return null
+  }
   return (
     <>
       <Paper elevation={4} style={{ border: "0.25px solid lightgrey" }}>
@@ -41,9 +58,23 @@ function ReportsItem(props) {
               padding: "0px",
             }}
           >
+            {" "}
             <Box
               style={{
-                paddingTop: "15px",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "flex-end",
+                marginRight: "20px",
+                marginTop: "5px",
+              }}
+            >
+              <IconButton color="delete" onClick={handleDelete}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
+            <Box
+              style={{
+                paddingTop: "5px",
                 paddingLeft: "25px",
                 paddingRight: "25px",
               }}
