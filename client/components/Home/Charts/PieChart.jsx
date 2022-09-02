@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import c3 from "c3"
 import * as d3 from "d3"
 import { Box, Button, Grid, Paper } from "@mui/material"
-import { profitPerPatient, visitsPerPatient } from "../../../apis/patients"
 import { getTopFivePrescriptions } from "../../../apis/prescriptions"
 import { Typography } from "@material-ui/core"
 
@@ -13,6 +12,7 @@ function Analytics() {
   //Pie Chart
   useEffect(async () => {
     const topFiveMeds = await getTopFivePrescriptions()
+    console.log(topFiveMeds)
     setPieChartData(topFiveMeds)
   }, [])
 

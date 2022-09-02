@@ -7,8 +7,15 @@ import BarChart from "./Charts/BarChart"
 import PieChart from "./Charts/PieChart"
 import { Box } from "@mui/system"
 import { Grid, Paper, Typography } from "@mui/material"
+import { useState } from "react"
+import { Button } from "@material-ui/core"
 
 function Home() {
+  const [nextMed, setNextMed] = useState(0)
+  function handleNext() {
+    console.log("nextMed", nextMed)
+    setNextMed(nextMed + 1)
+  }
   return (
     <>
       <Box
@@ -73,8 +80,9 @@ function Home() {
                     overflowY: "scroll",
                   }}
                 >
-                  <TcmAPI />
+                  <TcmAPI nextMed={nextMed} />
                 </Box>
+                <Button onClick={handleNext}>Next</Button>
               </Grid>
             </Paper>
             <Paper
