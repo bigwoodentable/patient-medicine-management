@@ -146,7 +146,7 @@ function Patient() {
                     <IconButton color="primary" onClick={handleClickOpen}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton color="delete" onClick={handleDelete}>
+                    <IconButton onClick={handleDelete}>
                       <DeleteIcon />
                     </IconButton>
                   </Box>

@@ -48,16 +48,15 @@ function EditStockForm({ open, handleClose }) {
         open={open}
         onClose={handleClose}
         maxWidth="md"
-        fullWidth="true"
+        // fullWidth="true"
         sx={{ minWidth: "md" }}
       >
         <Formik initialValues={{ stocks: stocksData }} onSubmit={handleSubmit}>
           {({ values }) => (
             <Form>
-              <DialogTitle>
-                <Typography variant="h5" align="center">
-                  Edit Stock{" "}
-                </Typography>
+              <DialogTitle align="center">
+                {/* <Typography variant="h5" align="center"> */}
+                Edit Stock {/* </Typography> */}
               </DialogTitle>
               <DialogContent>
                 <FieldArray
@@ -169,7 +168,6 @@ function EditStockForm({ open, handleClose }) {
                             </Button>
                             {/* <DialogActions> */}
                             <Button
-                              color="delete"
                               size="large"
                               onClick={() => arrayHelpers.remove(index)} // remove a medicine from the list
                             >

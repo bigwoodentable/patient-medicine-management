@@ -65,11 +65,9 @@ function EditPatientForm({ open, handleClose, patientId, setUpdated }) {
                   }}
                 >
                   <Form>
-                    <DialogTitle sx={{ mb: 4, mt: 3 }}>
+                    <DialogTitle sx={{ mb: 4, mt: 3 }} align="center">
                       {" "}
-                      <Typography variant="h5" align="center">
-                        Edit Patient Details
-                      </Typography>
+                      Edit Patient Details
                     </DialogTitle>
                     <DialogContent>
                       <Field

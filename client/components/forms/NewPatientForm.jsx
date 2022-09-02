@@ -71,11 +71,9 @@ function NewPatientForm({ open, handleClose }) {
                   }}
                 >
                   <Form>
-                    <DialogTitle sx={{ mb: 4, mt: 3 }}>
+                    <DialogTitle sx={{ mb: 4, mt: 3 }} align="center">
                       {" "}
-                      <Typography variant="h5" align="center">
-                        New Patient
-                      </Typography>
+                      New Patient
                     </DialogTitle>
                     <DialogContent>
                       <Field
