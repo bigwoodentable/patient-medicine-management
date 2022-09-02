@@ -13,7 +13,6 @@ import { Button } from "@material-ui/core"
 function Home() {
   const [nextMed, setNextMed] = useState(0)
   function handleNext() {
-    console.log("nextMed", nextMed)
     setNextMed(nextMed + 1)
   }
   return (
@@ -82,7 +81,13 @@ function Home() {
                 >
                   <TcmAPI nextMed={nextMed} />
                 </Box>
-                <Button onClick={handleNext}>Next</Button>
+                <Button
+                  color="primary"
+                  style={{ marginTop: "15px" }}
+                  onClick={handleNext}
+                >
+                  Next
+                </Button>
               </Grid>
             </Paper>
             <Paper
