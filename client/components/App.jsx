@@ -53,7 +53,7 @@ function App() {
               <Route path="/newReportForm/:id" element={<NewReportForm />} />
               <Route path="/editStock" element={<EditStockForm />} />
               <Route path="/Stocks" element={<Stock />} />
-              <Route path="/test" element={<Test />} />
+              {/* <Route path="/test" element={<Test />} /> */}
             </Routes>
           </Box>
           <Footer />

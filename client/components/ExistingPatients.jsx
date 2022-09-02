@@ -17,21 +17,11 @@ import {
   IconButton,
   Grid,
   Typography,
-  LinearProgress,
 } from "@mui/material"
 import { Link } from "react-router-dom"
 import { getPatients } from "../apis/patients.js"
 import AddIcon from "@mui/icons-material/Add"
-import FirstPageIcon from "@mui/icons-material/FirstPage"
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft"
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight"
-import LastPageIcon from "@mui/icons-material/LastPage"
-import { useTheme } from "@emotion/react"
-import { useDispatch } from "react-redux"
-import { clearWaiting, setWaiting } from "../actions/waiting.js"
-import WaitIndicator from "./WaitIndicator"
 import NewPatientForm from "./forms/NewPatientForm.jsx"
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined"
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

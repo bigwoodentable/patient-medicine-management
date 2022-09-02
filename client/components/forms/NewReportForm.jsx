@@ -73,19 +73,19 @@ function NewReportForm() {
       prescriptions: [
         {
           medName: "",
-          prescribedQuantity: 0,
+          prescribedQuantity: "",
         },
         {
           medName: "",
-          prescribedQuantity: 0,
+          prescribedQuantity: "",
         },
         {
           medName: "",
-          prescribedQuantity: 0,
+          prescribedQuantity: "",
         },
         {
           medName: "",
-          prescribedQuantity: 0,
+          prescribedQuantity: "",
         },
       ],
     },
@@ -157,7 +157,7 @@ function NewReportForm() {
                         marginTop: "20px",
                       }}
                     >
-                      Prescriptions
+                      Medicines
                     </Typography>
                     <FieldArray name="reports.prescriptions">
                       {({ insert, remove, push }) => (
@@ -187,8 +187,8 @@ function NewReportForm() {
                                     borderRadius: "5px",
                                   }}
                                   name={`reports.prescriptions.${index}.prescribedQuantity`}
-                                  placeholder="Quantity"
-                                  type="number"
+                                  placeholder="Quantity(g) "
+                                  type="text"
                                 />
                                 <Button
                                   color="primary"
@@ -204,16 +204,13 @@ function NewReportForm() {
                                 >
                                   <AddIcon />
                                 </Button>
-                                <Button
-                                  color="delete"
-                                  onClick={() => remove(index)}
-                                >
+                                <Button onClick={() => remove(index)}>
                                   <DeleteIcon />
                                 </Button>
                               </Box>
                             ))}
                           <Typography
-                            sx={{ mt: 4 }}
+                            sx={{ pt: 4 }}
                             style={{ fontSize: "14px" }}
                           >
                             Number of prescriptions:

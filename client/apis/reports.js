@@ -106,6 +106,7 @@ export function addReportById(
       prescribedQuantity: Number(report.prescribedQuantity),
     }
   })
+
   const reportAdjusted = {
     reportBasics,
     prescriptions: prescriptionsAdjusted,

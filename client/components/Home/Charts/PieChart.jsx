@@ -12,7 +12,6 @@ function Analytics() {
   //Pie Chart
   useEffect(async () => {
     const topFiveMeds = await getTopFivePrescriptions()
-    console.log(topFiveMeds)
     setPieChartData(topFiveMeds)
   }, [])
 

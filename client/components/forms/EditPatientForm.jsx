@@ -19,13 +19,29 @@ import { removeSpacesAll } from "../../helper"
 import AddIcon from "@mui/icons-material/Add"
 
 const SignupSchema = Yup.object().shape({
-  fname: Yup.string().required("First Name Required"),
-  lname: Yup.string().required("Last Name Required"),
+  fname: Yup.string().required(
+    <Typography style={{ fontSize: "11px", color: "red" }}>
+      First Name Required
+    </Typography>
+  ),
+  lname: Yup.string().required(
+    <Typography style={{ fontSize: "11px", color: "red" }}>
+      Last Name Required{" "}
+    </Typography>
+  ),
   age: Yup.number()
-    .required("Age Required")
+    .required(
+      <Typography style={{ fontSize: "11px", color: "red" }}>
+        Age Required
+      </Typography>
+    )
     .positive()
     .integer()
-    .typeError("Positive Number Required"),
+    .typeError(
+      <Typography style={{ fontSize: "11px", color: "red" }}>
+        Positive Number Required
+      </Typography>
+    ),
   // email: Yup.string().email('Invalid email').required('Required'),
 })
 

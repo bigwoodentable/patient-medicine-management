@@ -38,7 +38,7 @@ function getPatientById(id, db = connection) {
 function updatePatientById(id, data, db = connection) {
   return db("patients").where("patient_id", id).update(data)
 }
-revenuePerPatientTotal().then((res) => console.log(res))
+
 async function revenuePerPatientTotal(db = connection) {
   const AllId = await getAllId()
   const allPatientsProfits = []

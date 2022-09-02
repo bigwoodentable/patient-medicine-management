@@ -78,9 +78,6 @@ function profitPerPatient(patientId, db = connection) {
     .sum("total_profit as totalProfit")
 }
 
-revenuePerPatient(1).then((res) => console.log(res))
-costsPerPatient(1).then((res) => console.log(res))
-
 function costsPerPatient(patientId, db = connection) {
   return db("reports")
     .where("patient_id", patientId)

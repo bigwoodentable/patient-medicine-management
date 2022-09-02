@@ -10,12 +10,10 @@ import {
   Typography,
 } from "@mui/material"
 import { grey, indigo, orange } from "@mui/material/colors"
-import { flexbox } from "@mui/system"
 import React, { useEffect, useRef, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import PatientDetails from "./PatientDetails.jsx"
 import Reports from "./Reports.jsx"
-import WaitIndicator from "./WaitIndicator.jsx"
 import AddCircleIcon from "@mui/icons-material/AddCircle"
 import { getPatientById, updatePatientById } from "../apis/patients.js"
 import EditIcon from "@mui/icons-material/Edit"

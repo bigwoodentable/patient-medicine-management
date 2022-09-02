@@ -1,7 +1,6 @@
 import request from "superagent"
 
 export function getMedFromAPI(searchTerm) {
-  console.log("external API")
   return request
     .post("http://api.tianapi.com/zhongyao/index")
     .set("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")

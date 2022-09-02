@@ -18,9 +18,9 @@ import {
   IconButton,
 } from "@mui/material"
 import StockItem from "./StockItem.jsx"
-import { Link } from "react-router-dom"
+
 import EditIcon from "@mui/icons-material/Edit"
-import WaitIndicator from "./WaitIndicator.jsx"
+
 import EditStockForm from "./forms/EditStockForm.jsx"
 
 function descendingComparator(a, b, orderBy) {

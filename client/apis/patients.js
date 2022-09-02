@@ -26,9 +26,16 @@ export function getPatientById(id) {
 }
 
 export function updatePatientById(id, updatedInfo) {
+  const formattedInfo = {
+    fname: updatedInfo.fname.toUpperCase(),
+    lname: updatedInfo.lname.toUpperCase(),
+    age: updatedInfo.age,
+    notes: updatedInfo.notes,
+  }
+
   return request
     .put(rootUrl + `/update/${id}`)
-    .send(updatedInfo)
+    .send(formattedInfo)
     .then((res) => res.body)
 }
 export function revenuePerPatient() {

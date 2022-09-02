@@ -66,8 +66,10 @@
     "psql": "^0.0.1",
     "react-d3-library": "^1.1.8",
     "react-external-link": "^2.0.0",
+    "react-spinners": "^0.13.4",
     "react-transition-group": "^4.4.5",
     "superagent": "^6.1.0",
+    "use-state-if-mounted": "^1.0.7",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
