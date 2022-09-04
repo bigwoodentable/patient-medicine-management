@@ -13,8 +13,13 @@ router.get("/:patientId", async (req, res) => {
   const patientId = req.params.patientId
   try {
     const reportBasics = await db.getReportsById(patientId)
+
+    const sortedReportBasics = reportBasics.sort(
+      (a, b) => Date.parse(a.dateAdded) - Date.parse(b.dateAdded)
+    )
+
     const reportsFunc = async (arr = []) => {
-      for (const report of reportBasics) {
+      for (const report of sortedReportBasics) {
         const prescription = await db.getPrescriptionsByReportId(
           report.reportId
         )
