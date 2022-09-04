@@ -23,6 +23,7 @@ import { getPatients } from "../apis/patients.js"
 import AddIcon from "@mui/icons-material/Add"
 import NewPatientForm from "./forms/NewPatientForm.jsx"
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined"
+
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1
@@ -99,7 +100,19 @@ function ExistingPatients() {
   const [rows, setRows] = useState([])
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  const timer = useRef(0)
+
+  useEffect(() => {
+    setLoading(true)
+    getPatients()
+      .then((patientNames) => {
+        const sortedPatients = patientNames.sort((a, b) =>
+          a.fname.localeCompare(b.fname)
+        )
+        setLoading(false)
+        setRows(sortedPatients)
+      })
+      .catch((err) => console.error(err))
+  }, [open])
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -109,28 +122,13 @@ function ExistingPatients() {
     setOpen(false)
   }
 
-  useEffect(async () => {
-    try {
-      setLoading(true)
-      // timer.current = window.setTimeout(async () => {}, 450)
-      const patientNames = await getPatients()
-      const sortedPatients = patientNames.sort((a, b) =>
-        a.fname.localeCompare(b.fname)
-      )
-      setLoading(false)
-      setRows(sortedPatients)
-    } catch (error) {
-      console.error(error)
-    }
-  }, [open])
-
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc"
     setOrder(isAsc ? "desc" : "asc")
     setOrderBy(property)
   }
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (newPage) => {
     setPage(newPage)
   }
 
@@ -161,16 +159,10 @@ function ExistingPatients() {
             style={{
               width: "100%",
               margin: "0px 25px 0px 25px",
-              // minWidth: "400px",
-              // maxWidth: "700px",
             }}
           >
             <Paper>
-              <Box
-                //margin
-                display="flex"
-                justifyContent="flex-end"
-              >
+              <Box display="flex" justifyContent="flex-end">
                 <IconButton
                   color="primary"
                   size="large"

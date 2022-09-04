@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material"
 import React, { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
-import { clearWaiting, setWaiting } from "../actions/waiting.js"
 import { getPatientById } from "../apis/patients.js"
 
 function PatientDetails({ patientId, patientDetails }) {

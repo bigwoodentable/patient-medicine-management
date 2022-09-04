@@ -1,38 +1,23 @@
 import React, { useEffect } from "react"
-
 import { Formik, Form, Field, FieldArray } from "formik"
 import { updateAllStocks } from "../../apis/stocks"
 import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
 import Button from "@material-ui/core/Button"
-import {
-  Box,
-  Dialog,
-  FormLabel,
-  IconButton,
-  InputLabel,
-  Paper,
-  Typography,
-} from "@mui/material"
+import { Box, Dialog, InputLabel } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import AddIcon from "@mui/icons-material/Add"
 import { fetchStocks } from "../../actions/stocks"
 import { DialogActions, DialogContent, DialogTitle } from "@material-ui/core"
 
 function EditStockForm({ open, handleClose }) {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
   const stocksData = useSelector((state) => state.stocks)
   useEffect(() => {
     dispatch(fetchStocks())
   }, [])
 
-  async function handleSubmit(values) {
-    try {
-      await updateAllStocks(values, handleClose)
-    } catch (error) {
-      console.log(error)
-    }
+  function handleSubmit(values) {
+    updateAllStocks(values, handleClose).then((err) => console.error(err))
   }
 
   return (
@@ -48,16 +33,12 @@ function EditStockForm({ open, handleClose }) {
         open={open}
         onClose={handleClose}
         maxWidth="md"
-        // fullWidth="true"
         sx={{ minWidth: "md" }}
       >
         <Formik initialValues={{ stocks: stocksData }} onSubmit={handleSubmit}>
           {({ values }) => (
             <Form>
-              <DialogTitle align="center">
-                {/* <Typography variant="h5" align="center"> */}
-                Edit Stock {/* </Typography> */}
-              </DialogTitle>
+              <DialogTitle align="center">Edit Stock</DialogTitle>
               <DialogContent>
                 <FieldArray
                   name="stocks"
@@ -70,8 +51,6 @@ function EditStockForm({ open, handleClose }) {
                             sx={{
                               display: "flex",
                               flexDirection: "row",
-                              // mt: 4,
-                              // justifyContent: "center",
                             }}
                           >
                             <Box>
@@ -79,7 +58,6 @@ function EditStockForm({ open, handleClose }) {
                                 sx={{
                                   fontSize: "12px",
                                   mt: "10px",
-                                  // pb: "45px",
                                 }}
                               >
                                 Code
@@ -166,14 +144,13 @@ function EditStockForm({ open, handleClose }) {
                             >
                               <AddIcon />
                             </Button>
-                            {/* <DialogActions> */}
+
                             <Button
                               size="large"
                               onClick={() => arrayHelpers.remove(index)} // remove a medicine from the list
                             >
                               <DeleteIcon />
                             </Button>
-                            {/* </DialogActions> */}
                           </Box>
                         ))
                       ) : (
@@ -198,7 +175,7 @@ function EditStockForm({ open, handleClose }) {
                                 })
                               }
                             >
-                              {/* show this when user has removed all medicines from the list */}
+                              {/* this displays when user has removed all input fields from the list to allow them to add input fields back */}
                               Add a medicine
                             </Button>
                           </DialogActions>
@@ -218,7 +195,6 @@ function EditStockForm({ open, handleClose }) {
                           <Button
                             color="primary"
                             variant="contained"
-                            // fullWidth
                             type="submit"
                           >
                             Submit
@@ -247,132 +223,3 @@ function EditStockForm({ open, handleClose }) {
 }
 
 export default EditStockForm
-//----------------------------
-// regular React code
-//
-// function EditStock() {
-//   //API get data
-// const stocksData = [
-//   { id: 1, medName: 'medOne', totalQuantity: 300 },
-//   { id: 2, medName: 'medTwo', totalQuantity: 200 },
-//   { id: 3, medName: 'medThree', totalQuantity: 400 },
-// ]
-
-//   const [newStock, setNewStock] = useState(stocksData)
-
-//   const handleChange = (e, stock, category) => {
-//     const newStockArr = newStock.reduce((t, v) => {
-//       v.id === stock.id
-//         ? t.push({ ...v, [category]: e.target.value })
-//         : t.push(v)
-//       return t
-//     }, [])
-
-//     setNewStock(newStockArr)
-//   }
-
-// const handleSubmit = (e) => {
-//   e.preventDefault()
-//   //send back through API function
-
-//   console.log('newStock: ', newStock)
-// }
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       {stocksData.map((stock) => {
-//         return (
-//           <div key={stock.id}>
-//             <input
-//               type="text"
-//               name="medName"
-//               placeholder={stock.medName}
-//               value={
-//                 newStock.find((stockState) => stockState.id === stock.id)
-//                   .medName
-//               }
-//               onChange={(e) => handleChange(e, stock, 'medName')}
-//             />
-//             <input
-//               //needs to be an number
-//               type="text"
-//               name="totalQuantity"
-//               placeholder={stock.totalQuantity}
-//               value={
-//                 newStock.find((stockState) => stockState.id === stock.id)
-//                   .totalQuantity
-//               }
-//               onChange={(e) => handleChange(e, stock, 'totalQuantity')}
-//             />
-//           </div>
-//         )
-//       })}
-//       <input type="submit" />
-//     </form>
-//   )
-// }
-
-//----------------------------
-// regular React code
-//
-// function EditStock() {
-//   //API get data
-// const stocksData = [
-//   { id: 1, medName: 'medOne', totalQuantity: 300 },
-//   { id: 2, medName: 'medTwo', totalQuantity: 200 },
-//   { id: 3, medName: 'medThree', totalQuantity: 400 },
-// ]
-
-//   const [newStock, setNewStock] = useState(stocksData)
-
-//   const handleChange = (e, stock, category) => {
-//     const newStockArr = newStock.reduce((t, v) => {
-//       v.id === stock.id
-//         ? t.push({ ...v, [category]: e.target.value })
-//         : t.push(v)
-//       return t
-//     }, [])
-
-//     setNewStock(newStockArr)
-//   }
-
-// const handleSubmit = (e) => {
-//   e.preventDefault()
-//   //send back through API function
-
-//   console.log('newStock: ', newStock)
-// }
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       {stocksData.map((stock) => {
-//         return (
-//           <div key={stock.id}>
-//             <input
-//               type="text"
-//               name="medName"
-//               placeholder={stock.medName}
-//               value={
-//                 newStock.find((stockState) => stockState.id === stock.id)
-//                   .medName
-//               }
-//               onChange={(e) => handleChange(e, stock, 'medName')}
-//             />
-//             <input
-//               //needs to be an number
-//               type="text"
-//               name="totalQuantity"
-//               placeholder={stock.totalQuantity}
-//               value={
-//                 newStock.find((stockState) => stockState.id === stock.id)
-//                   .totalQuantity
-//               }
-//               onChange={(e) => handleChange(e, stock, 'totalQuantity')}
-//             />
-//           </div>
-//         )
-//       })}
-//       <input type="submit" />
-//     </form>
-//   )
-// }

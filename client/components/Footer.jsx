@@ -1,13 +1,7 @@
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Box,
-  Button,
-  Typography,
-} from "@material-ui/core"
+import { BottomNavigation, Box } from "@material-ui/core"
 import GitHubIcon from "@mui/icons-material/GitHub"
 import React from "react"
-import { Link } from "react-router-dom"
+
 import { ExternalLink } from "react-external-link"
 
 function Footer() {

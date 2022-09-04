@@ -1,22 +1,16 @@
-import React, { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { addPatient, updatePatientById } from "./../../apis/patients"
+import React from "react"
+import { updatePatientById } from "./../../apis/patients"
 import Button from "@material-ui/core/Button"
-import TextField from "@material-ui/core/TextField"
 import { Box, Paper } from "@mui/material"
 import {
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  IconButton,
   Typography,
 } from "@material-ui/core"
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik"
-import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import * as Yup from "yup"
-import { removeSpacesAll } from "../../helper"
-import AddIcon from "@mui/icons-material/Add"
 
 const SignupSchema = Yup.object().shape({
   fname: Yup.string().required(
@@ -46,14 +40,13 @@ const SignupSchema = Yup.object().shape({
 })
 
 function EditPatientForm({ open, handleClose, patientId, setUpdated }) {
-  const handleSubmit = async (patient) => {
-    try {
-      await updatePatientById(patientId, patient)
-      setUpdated((updated) => updated + 1)
-      handleClose()
-    } catch (error) {
-      console.error(error)
-    }
+  function handleSubmit(patient) {
+    updatePatientById(patientId, patient)
+      .then(() => {
+        setUpdated((updated) => updated + 1)
+        handleClose()
+      })
+      .catch((err) => console.error(err))
   }
 
   const initialValues = {
@@ -72,7 +65,7 @@ function EditPatientForm({ open, handleClose, patientId, setUpdated }) {
             validationSchema={SignupSchema}
             onSubmit={(values) => handleSubmit(values)}
           >
-            {({ values, errors, touched }) => (
+            {({ errors, touched }) => (
               <Box display="grid" width="500px" justifyContent="center">
                 <Paper
                   elevation={3}
@@ -100,7 +93,6 @@ function EditPatientForm({ open, handleClose, patientId, setUpdated }) {
                         className={
                           errors.fname && touched.fname ? "input-error" : null
                         }
-                        // helperText={errors.fname}
                       />
                       <ErrorMessage
                         name="fname"

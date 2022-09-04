@@ -3,28 +3,15 @@ import { Formik, Field, Form, FieldArray } from "formik"
 import { addReportById } from "../../apis/reports"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import Button from "@material-ui/core/Button"
-import { Box, Paper, ThemeProvider, Typography } from "@mui/material"
+import { Box, Paper, Typography } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import ArrowBackIcon from "@mui/icons-material/ArrowBack"
 import ReportCalc from "../ReportCalc.jsx"
 import { useDispatch, useSelector } from "react-redux"
-import {
-  removeSpacesEnds,
-  removeSpacesAll,
-  loopObj,
-  removeEmpty,
-  calcFinances,
-} from "../../helper"
+import { calcFinances } from "../../helper"
 import Stock from "../Stock"
 import { fetchStocks } from "../../actions/stocks"
-import { createTheme, Grid } from "@material-ui/core"
 import AddIcon from "@mui/icons-material/Add"
-import { green, grey, indigo, orange, red } from "@material-ui/core/colors"
-//onClick calculate - pass prescriptions
-//fetch medicine info on redux
-//based on medName, multiply the prescribed quantity with the cost
-//sum it up
-//pass it as props
 
 function NewReportForm() {
   const [totalCosts, setTotalCosts] = useState(0)
@@ -50,19 +37,17 @@ function NewReportForm() {
     setTotalProfit(prescriptionNumber * prescriptionPrice - finances.totalCosts)
   }
 
-  async function handleSubmit(newReport) {
-    try {
-      await addReportById(
-        newReport,
-        totalCosts,
-        totalProfits,
-        medInfo,
-        patientId,
-        navigate
-      )
-    } catch (error) {
-      console.error(error)
-    }
+  function handleSubmit(newReport) {
+    addReportById(
+      newReport,
+      totalCosts,
+      totalProfits,
+      medInfo,
+      patientId,
+      navigate
+    )
+      .then(() => null)
+      .catch((err) => console.error(error))
   }
 
   const initialValues = {
@@ -118,7 +103,7 @@ function NewReportForm() {
                   display: "grid",
                   minWidth: "550px",
                   justifyContent: "center",
-                  // bgcolor: "yellow",
+
                   p: 1,
                 }}
               >
@@ -127,7 +112,6 @@ function NewReportForm() {
                   sx={{
                     p: 3,
                   }}
-                  // style={{ background: "red" }}
                 >
                   <Form>
                     <Typography
@@ -160,7 +144,7 @@ function NewReportForm() {
                       Medicines
                     </Typography>
                     <FieldArray name="reports.prescriptions">
-                      {({ insert, remove, push }) => (
+                      {({ insert, remove }) => (
                         <Box>
                           {values.reports.prescriptions.length > 0 &&
                             values.reports.prescriptions.map((v, index) => (
@@ -181,7 +165,7 @@ function NewReportForm() {
                                 <Field
                                   style={{
                                     height: 40,
-                                    // width: 160,
+
                                     margin: "16, 16, 0, 0",
                                     border: "0.5px solid grey",
                                     borderRadius: "5px",
@@ -198,7 +182,7 @@ function NewReportForm() {
                                     insert(index + 1, {
                                       id: "",
                                       medName: "",
-                                      prescribedQuantity: 0,
+                                      prescribedQuantity: "",
                                     })
                                   }
                                 >
@@ -264,7 +248,6 @@ function NewReportForm() {
                               color="primary"
                               variant="contained"
                               type="submit"
-                              // onclick={}
                             >
                               Submit
                             </Button>
@@ -290,7 +273,6 @@ function NewReportForm() {
                   borderTop: "1px solid lightgrey",
                   margin: "10px 0px 20px 0px",
                   padding: "10px 0px 10px 0px",
-                  // background: "red",
                 }}
               >
                 <ReportCalc profits={totalProfits} costs={totalCosts} />

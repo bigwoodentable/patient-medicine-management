@@ -6,14 +6,14 @@ import Home from "./Home/Home.jsx"
 import NewPatientForm from "./forms/NewPatientForm.jsx"
 import Patient from "./Patient.jsx"
 import Stock from "./Stock.jsx"
-import { styled } from "@mui/system"
+
 import NewReportForm from "./forms/NewReportForm.jsx"
 import Test from "./Test.jsx"
 import Navbar from "./Navbar.jsx"
 import { ThemeProvider } from "@mui/system"
-import { Box, createMuiTheme, createTheme, CssBaseline } from "@mui/material"
-import { blue, grey, indigo, lightBlue, orange } from "@mui/material/colors"
-import { cyan } from "@material-ui/core/colors"
+import { Box, createTheme, CssBaseline } from "@mui/material"
+import { grey, indigo, orange } from "@mui/material/colors"
+
 import "../styles.css"
 import Footer from "./Footer.jsx"
 
