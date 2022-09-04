@@ -40,6 +40,7 @@ function updatePatientById(id, data, db = connection) {
   return db("patients").where("patient_id", id).update(data)
 }
 
+//async await syntax seems clearer than .then() in this situation
 async function revenuePerPatientTotal(db = connection) {
   const AllId = await getAllId()
   const allPatientsProfits = []
@@ -59,6 +60,7 @@ async function revenuePerPatientTotal(db = connection) {
   return topFive
 }
 
+//async await syntax seems clearer than .then() in this situation
 async function visitsPatientTotal(db = connection) {
   const AllId = await getAllId()
   const allPatientsVisits = []

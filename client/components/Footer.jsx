@@ -25,11 +25,7 @@ function Footer() {
               marginRight: "10px",
             }}
           >
-            <ExternalLink
-              href="https://google.com"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <ExternalLink href="#" target="_blank" rel="noreferrer">
               <GitHubIcon
                 align="right"
                 fontSize="large"

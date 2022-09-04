@@ -8,9 +8,10 @@ import { Typography } from "@material-ui/core"
 function PieChart() {
   const [pieChartData, setPieChartData] = useState({})
 
-  useEffect(async () => {
-    const topFiveMeds = await getTopFivePrescriptions()
-    setPieChartData(topFiveMeds)
+  useEffect(() => {
+    getTopFivePrescriptions().then((topFiveMeds) =>
+      setPieChartData(topFiveMeds)
+    )
   }, [])
 
   useEffect(() => {

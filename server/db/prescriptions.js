@@ -6,9 +6,11 @@ async function getTopPrescriptions(db = connection) {
   for (let med of allMedsPrescribed) {
     const count = await db("prescriptions")
       .where("med_name", med.med_name)
-      .count()
-
-    medsWithCount.push({ medName: med.med_name, count: count[0]["count(*)"] })
+      .sum("prescribed_quantity")
+    medsWithCount.push({
+      medName: med.med_name,
+      count: count[0]["sum(`prescribed_quantity`)"],
+    })
   }
   const topFive = medsWithCount.sort((a, b) => b.count - a.count).slice(0, 5)
   return topFive

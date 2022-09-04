@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { visuallyHidden } from "@mui/utils"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchStocks } from "../actions/stocks.js"
+import { fetchStocks } from "../../actions/stocks.js"
 import {
   Table,
   TableBody,
@@ -19,7 +19,7 @@ import {
 } from "@mui/material"
 import StockItem from "./StockItem.jsx"
 import EditIcon from "@mui/icons-material/Edit"
-import EditStockForm from "./forms/EditStockForm.jsx"
+import EditStockForm from "../forms/EditStockForm.jsx"
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

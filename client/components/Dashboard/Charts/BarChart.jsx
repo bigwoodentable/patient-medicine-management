@@ -45,7 +45,7 @@ function BarChart() {
       tooltip: {
         format: {
           value: function (value, ratio, id, index) {
-            return `$${value}`
+            return `= ${value}`
           },
         },
       },

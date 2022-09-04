@@ -19,9 +19,9 @@ import {
   Typography,
 } from "@mui/material"
 import { Link } from "react-router-dom"
-import { getPatients } from "../apis/patients.js"
+import { getPatients } from "../../apis/patients.js"
 import AddIcon from "@mui/icons-material/Add"
-import NewPatientForm from "./forms/NewPatientForm.jsx"
+import NewPatientForm from "../forms/NewPatientForm.jsx"
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined"
 
 function descendingComparator(a, b, orderBy) {

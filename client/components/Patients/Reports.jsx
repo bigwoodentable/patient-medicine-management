@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { getReportsById } from "../apis/reports.js"
+import { getReportsById } from "../../apis/reports.js"
 import ReportsItem from "./ReportsItem.jsx"
 import { useStateIfMounted } from "use-state-if-mounted"
 
@@ -9,12 +9,11 @@ function Reports(props) {
   const [deletedReport, setdeletedReport] = useState(0)
 
   useEffect(async () => {
-    try {
-      const reportsList = await getReportsById(patientId)
-      setReports(reportsList)
-    } catch (error) {
-      console.error(error)
-    }
+    getReportsById(patientId)
+      .then((reportsList) => {
+        setReports(reportsList)
+      })
+      .catch((err) => console.error(err))
   }, [deletedReport])
 
   return reports

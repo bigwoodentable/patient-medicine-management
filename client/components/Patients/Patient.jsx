@@ -13,11 +13,11 @@ import { grey, indigo, orange } from "@mui/material/colors"
 import React, { useEffect, useRef, useState } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom"
 import PatientDetails from "./PatientDetails.jsx"
-import Reports from "./Reports.jsx"
+import Reports from "../Patients/Reports.jsx"
 import AddCircleIcon from "@mui/icons-material/AddCircle"
-import { getPatientById, updatePatientById } from "../apis/patients.js"
+import { getPatientById, updatePatientById } from "../../apis/patients.js"
 import EditIcon from "@mui/icons-material/Edit"
-import EditPatientForm from "./forms/EditPatientForm.jsx"
+import EditPatientForm from "../forms/EditPatientForm.jsx"
 import DeleteIcon from "@mui/icons-material/Delete"
 
 function Patient() {
@@ -37,7 +37,7 @@ function Patient() {
     setOpen(false)
   }
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     const deleteStatus = {
       status: "deleted",
     }

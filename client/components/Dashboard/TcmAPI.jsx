@@ -36,17 +36,18 @@ function TcmAPI({ nextMed }) {
   //   if (searchTerm !== "") {
   //     setLoading(true)
   //     timer.current = window.setTimeout(async () => {
-  //       try {
-  //         const info = await getMedFromAPI(searchTerm)
-  //         setMedApi({ info: info.content, title: info.title })
-  //         setLoading(false)
-  //       } catch (error) {
-  //         setLoading(false)
-  //         // console.error(error)
-  //         setMedApi({
-  //           info: `Unable to load data, please press Next below. <br><br> `,
+  //       getMedFromAPI(searchTerm)
+  //         .then((info) => {
+  //           setMedApi({ info: info.content, title: info.title })
+  //           setLoading(false)
   //         })
-  //       }
+  //         .catch((error) => {
+  //           setLoading(false)
+  //           // console.error(error)
+  //           setMedApi({
+  //             info: `Unable to load data, please press Next below. <br><br> `,
+  //           })
+  //         })
   //     }, 300)
   //   }
   // }, [searchTerm])
