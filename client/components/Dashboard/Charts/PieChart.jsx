@@ -32,7 +32,7 @@ function PieChart() {
       tooltip: {
         format: {
           value: function (value, ratio, id, index) {
-            return `: ${value}g`
+            return `: ${value} tablets`
           },
         },
       },

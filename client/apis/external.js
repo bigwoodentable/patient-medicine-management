@@ -1,15 +1,23 @@
-import request from "superagent"
+const axios = require("axios")
 
 export function getMedFromAPI(searchTerm) {
-  return request
-    .post("http://api.tianapi.com/zhongyao/index")
-    .set("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
-    .send({
-      // key: "ce9f59a024df6d8b8c20a40f9e49b16b",
-      key: "ea62feb0c41ef3f44c87e93c1be1fa7d",
-      word: searchTerm,
+  console.log("api - searchterm", searchTerm)
+  const options = {
+    method: "GET",
+    url: "https://drug-info-and-price-history.p.rapidapi.com/1/druginfo",
+    params: { drug: searchTerm },
+    headers: {
+      "X-RapidAPI-Key": "96be9089f0mshafc1ca49678f1ebp13fe0bjsn99859d74bb9e",
+      "X-RapidAPI-Host": "drug-info-and-price-history.p.rapidapi.com",
+    },
+  }
+
+  return axios
+    .request(options)
+    .then(function (response) {
+      return response.data[0]
     })
-    .then((res) => {
-      return res.body.newslist[0]
+    .catch(function (error) {
+      console.error(error)
     })
 }

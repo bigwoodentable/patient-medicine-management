@@ -96,7 +96,7 @@ function EditStockForm({ open, handleClose }) {
                               <InputLabel
                                 sx={{ fontSize: "12px", mt: "10px", p: "0px" }}
                               >
-                                Cost/100g{" "}
+                                Cost per Tablet{" "}
                               </InputLabel>
                               <Field
                                 style={{
@@ -114,7 +114,7 @@ function EditStockForm({ open, handleClose }) {
                               <InputLabel
                                 sx={{ fontSize: "12px", mt: "10px", p: "0px" }}
                               >
-                                Quantity(g)
+                                Quantity(tablets)
                               </InputLabel>
                               <Field
                                 style={{
