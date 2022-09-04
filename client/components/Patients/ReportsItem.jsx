@@ -126,7 +126,7 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
                         bgcolor="lightgrey"
                         align="center"
                       >
-                        Quantity
+                        Tablets per Day
                       </TableCell>
                     </TableRow>
                   </TableHead>
