@@ -18,9 +18,7 @@ import {
   IconButton,
 } from "@mui/material"
 import StockItem from "./StockItem.jsx"
-
 import EditIcon from "@mui/icons-material/Edit"
-
 import EditStockForm from "./forms/EditStockForm.jsx"
 
 function descendingComparator(a, b, orderBy) {
@@ -120,6 +118,7 @@ function Stock() {
 
   const rowsState = useSelector((state) => state.stocks)
   const rows = rowsState.sort((a, b) => a.code.localeCompare(b.code))
+
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchStocks())

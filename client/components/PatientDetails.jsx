@@ -1,9 +1,7 @@
 import { Typography } from "@mui/material"
-import React, { useEffect, useRef, useState } from "react"
-import { useDispatch } from "react-redux"
-import { getPatientById } from "../apis/patients.js"
+import React from "react"
 
-function PatientDetails({ patientId, patientDetails }) {
+function PatientDetails({ patientDetails }) {
   return patientDetails.fname ? (
     <>
       <Typography variant="h4" component="div">

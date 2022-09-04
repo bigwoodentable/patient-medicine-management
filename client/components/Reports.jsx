@@ -6,7 +6,6 @@ import { useStateIfMounted } from "use-state-if-mounted"
 function Reports(props) {
   const { patientId } = props
   const [reports, setReports] = useStateIfMounted([])
-  // const [reports, setReports] = useState([])
   const [deletedReport, setdeletedReport] = useState(0)
 
   useEffect(async () => {

@@ -17,8 +17,6 @@ router.get("/all", (req, res) => {
     })
 })
 
-//Review if updating all the stocks everytime there's an edit is the best method
-// it auto increments the id, so only need [{"med_name": "name}...]
 // /api/v1/stocks/update
 router.put("/update", (req, res) => {
   const newStocks = req.body

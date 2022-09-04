@@ -1,8 +1,6 @@
 import React from "react"
-
 import TcmAPI from "./TcmAPI"
 import Restock from "./Restock"
-import Analytics from "./Analytics"
 import BarChart from "./Charts/BarChart"
 import PieChart from "./Charts/PieChart"
 import { Box } from "@mui/system"
@@ -30,18 +28,7 @@ function Home() {
         >
           <Grid item xs={12} sm={12} md={12} lg={7}>
             <BarChart />
-
-            {/* <Paper
-              elevation={2}
-              style={{
-                marginTop: "16px",
-                marginBottom: "8px",
-                border: "0.25px solid lightgrey",
-                fontFamily: "sans-serif",
-              }}
-            > */}
             <PieChart />
-            {/* </Paper> */}
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={5}>
             <Paper elevation={2}>

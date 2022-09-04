@@ -61,10 +61,6 @@ function addPrescriptionsById(prescriptions, reportId, db = connection) {
   return null
 }
 
-// function revenuePerPatient(patientId, db = connection) {
-
-// }
-
 //input patientId to get total profit
 async function revenuePerPatient(patientId) {
   const profits = await profitPerPatient(patientId)

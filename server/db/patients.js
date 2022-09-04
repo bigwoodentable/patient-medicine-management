@@ -1,5 +1,6 @@
 const connection = require("./connection")
 const { randomId } = require("./helper")
+
 const {
   profitPerPatient,
   totalVisits,

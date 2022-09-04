@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react"
 import c3 from "c3"
-import * as d3 from "d3"
 import { Box, Button, Grid, Paper } from "@mui/material"
 import { revenuePerPatient, visitsPerPatient } from "../../../apis/patients"
-import { getTopFivePrescriptions } from "../../../apis/prescriptions"
 import { Typography } from "@material-ui/core"
 
-function Analytics() {
-  //Bar Chart States
+function BarChart() {
   const [barChart, setBarChart] = useState({})
   const [revenuePerUser, setRevenuePerUser] = useState([])
   const [categoriesRev, setCategoriesRev] = useState([])
   const [categoriesVis, setCategoriesVisits] = useState([])
   const [visits, setVisits] = useState([])
 
-  //Bar Chart
   useEffect(() => {
     const barChartObj = c3.generate({
       bindto: "#barChart",
@@ -26,18 +22,13 @@ function Analytics() {
         x: {
           type: "category",
           categories: categoriesRev,
-          tick: {
-            // rotate: 90,
-          },
+          tick: {},
         },
         y: {
           label: {
             text: "Dollar (NZD)",
             position: "outer-middle",
           },
-          // tick: {
-          //   format: d3.format("$,"),
-          // },
         },
       },
       size: {
@@ -80,8 +71,6 @@ function Analytics() {
 
     visitsPerPatient()
       .then((patients) => {
-        //Patients' names are not used here but it is provided by the API
-
         const vis = []
         const cat = []
         patients.map((patient) => {
@@ -163,4 +152,4 @@ function Analytics() {
   )
 }
 
-export default Analytics
+export default BarChart

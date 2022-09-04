@@ -27,7 +27,7 @@ function Patient() {
   const [updated, setUpdated] = useState(0)
   const navigate = useNavigate()
   const timer = useRef(0)
-  //useParams works
+
   const { id: patientId } = useParams()
   const handleClickOpen = () => {
     setOpen(true)
@@ -43,27 +43,24 @@ function Patient() {
     }
     const del = confirm("Are you sure you would like to delete this patient?")
     if (del) {
-      try {
-        await updatePatientById(patientId, deleteStatus)
-        navigate("/Patients")
-      } catch (error) {
-        console.error(error)
-      }
+      updatePatientById(patientId, deleteStatus)
+        .then(() => navigate("/Patients"))
+        .catch((err) => console.error(err))
     }
     return null
   }
 
-  useEffect(async () => {
-    try {
-      setLoading(true)
-      // timer.current = window.setTimeout(async () => {
-      const details = await getPatientById(patientId)
-      setPatientDetails(details)
-      setLoading(false)
-      // }, 0)
-    } catch (error) {
-      console.error(error)
-    }
+  useEffect(() => {
+    setLoading(true)
+    // timer.current = window.setTimeout(async () => {
+    getPatientById(patientId)
+      .then((details) => {
+        setPatientDetails(details)
+        setLoading(false)
+        return null
+      })
+      .catch((err) => console.error(err))
+    // }, 0)
   }, [updated])
 
   const themePatient = createTheme({

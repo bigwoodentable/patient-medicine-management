@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchStocks } from "../../actions/stocks"
-import { getMedFromAPI } from "../../apis/external"
+
 import _ from "lodash"
 import { Box } from "@mui/system"
 import { Typography } from "@mui/material"
 
 function Test() {
-  const [notFound, setNotFound] = useState(0)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchStocks())

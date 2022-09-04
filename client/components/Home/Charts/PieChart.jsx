@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react"
 import c3 from "c3"
 import * as d3 from "d3"
-import { Box, Button, Grid, Paper } from "@mui/material"
+import { Box, Grid, Paper } from "@mui/material"
 import { getTopFivePrescriptions } from "../../../apis/prescriptions"
 import { Typography } from "@material-ui/core"
 
-function Analytics() {
-  //Pie Chart States
+function PieChart() {
   const [pieChartData, setPieChartData] = useState({})
 
-  //Pie Chart
   useEffect(async () => {
     const topFiveMeds = await getTopFivePrescriptions()
     setPieChartData(topFiveMeds)
@@ -42,7 +40,6 @@ function Analytics() {
 
   return (
     <>
-      {/* Pie */}
       <Paper
         elevation={2}
         style={{
@@ -77,4 +74,4 @@ function Analytics() {
   )
 }
 
-export default Analytics
+export default PieChart

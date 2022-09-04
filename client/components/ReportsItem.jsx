@@ -11,7 +11,7 @@ import TableContainer from "@mui/material/TableContainer"
 import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 import Paper from "@mui/material/Paper"
-import { Box, Divider, IconButton } from "@mui/material"
+import { Box, IconButton } from "@mui/material"
 import { deleteReportByReportId } from "../apis/reports"
 import { useNavigate } from "react-router-dom"
 import DeleteIcon from "@mui/icons-material/Delete"
@@ -28,28 +28,26 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
     totalProfits,
   } = report
   const navigate = useNavigate()
-  const handleDelete = async () => {
+
+  function handleDelete() {
     const del = confirm("Are you sure you would like to delete this report?")
     if (del) {
-      try {
-        await deleteReportByReportId(reportId)
-        setdeletedReport((deletedReport) => deletedReport + 1)
-        navigate(`/patient/${patientId}`)
-      } catch (error) {
-        console.error(error)
-      }
+      deleteReportByReportId(reportId)
+        .then(() => {
+          setdeletedReport((deletedReport) => deletedReport + 1)
+          navigate(`/patient/${patientId}`)
+          return null
+        })
+        .catch((err) => console.error(err))
     }
     return null
   }
+
   return (
     <>
       <Paper elevation={4} style={{ border: "0.25px solid lightgrey" }}>
         <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography style={{ fontWeight: "bold" }}>{dateAdded}</Typography>
           </AccordionSummary>
           <AccordionDetails
@@ -134,10 +132,7 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
                   </TableHead>
                   <TableBody sx={{ width: "10px" }}>
                     {prescription.map((medicine, i) => (
-                      <TableRow
-                        key={i}
-                        // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                      >
+                      <TableRow key={i}>
                         <TableCell component="th" scope="row" align="center">
                           {medicine.medName}
                         </TableCell>
@@ -155,7 +150,7 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
               elevation={2}
               style={{
                 marginTop: "25px",
-                // borderTop: "3px solid lightGrey",
+
                 marginLeft: "25px",
                 marginRight: "25px",
                 marginBottom: "25px",
@@ -163,11 +158,7 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
               }}
             >
               <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                >
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                   <Typography variant="h8" fontWeight={"bold"}>
                     More Information
                   </Typography>
@@ -247,32 +238,4 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
   )
 }
 
-// ;<Box
-//   sx={{ mb: 1, mt: 3 }}
-//   style={{
-//     borderTop: "0.5px solid grey",
-//     paddingTop: "15px",
-//     paddingLeft: "25px",
-//     paddingRight: "25px",
-//   }}
-// >
-//   <Typography variant="h8">
-//     <b>Information</b>
-//   </Typography>
-//   <Box
-//     sx={{
-//       border: 1,
-//       borderColor: "lightgrey",
-//       p: 3,
-//       borderRadius: "2px",
-//     }}
-//   >
-//     <Typography>Prescription Number - {prescriptionNumber}</Typography>
-//   </Box>
-// </Box>
-{
-  /* <Typography>Prescription Price: {prescriptionPrice}</Typography>
-<Typography>Total Costs: {totalCosts}</Typography>
-<Typography>Total Profit: {totalProfits}</Typography> */
-}
 export default ReportsItem

@@ -1,6 +1,5 @@
-import { Typography } from '@material-ui/core'
-import { Box, Paper } from '@mui/material'
-import React from 'react'
+import { Typography } from "@material-ui/core"
+import React from "react"
 
 function ReportCalc(props) {
   const { profits, costs } = props
