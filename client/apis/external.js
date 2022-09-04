@@ -1,7 +1,6 @@
 const axios = require("axios")
 
 export function getMedFromAPI(searchTerm) {
-  console.log("api - searchterm", searchTerm)
   const options = {
     method: "GET",
     url: "https://drug-info-and-price-history.p.rapidapi.com/1/druginfo",
