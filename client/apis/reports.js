@@ -21,7 +21,7 @@ export function addReportById(
 ) {
   const { prescriptions, prescriptionNumber, prescriptionPrice } = newReport
   let formattedReport = {}
-
+  console.log("api - prescriptions", prescriptions)
   //check if medicines prescribed
   if (prescriptions[0].medName === "") {
     if (confirm("Would you like to continue with no prescriptions?")) {
@@ -36,7 +36,7 @@ export function addReportById(
       ...newReport,
       prescriptions: removeEmpty(prescriptions),
     }
-
+    console.log("api - rmEmptyPrescrips", rmEmptyPrescrips)
     //Remove white spaces from the medicine names
     const rmSpacePrescriptions = rmEmptyPrescrips.prescriptions.map((med) => {
       return { ...med, medName: removeSpacesAll(med.medName) }
@@ -76,7 +76,7 @@ export function addReportById(
       prescriptions: rmSpacePrescriptions,
     }
   }
-
+  console.log("api - formattedReport", formattedReport)
   //calculate total profits and total costs
   let finances = {}
   if (totalCosts === 0) {
@@ -111,7 +111,7 @@ export function addReportById(
     reportBasics,
     prescriptions: prescriptionsFormatted,
   }
-
+  console.log("api - ReportFormattedCombined", ReportFormattedCombined)
   return request
     .post(rootUrl + `/add/${patientId}`)
     .send(ReportFormattedCombined)

@@ -8,7 +8,7 @@ const router = express.Router()
 router.get("/topFive", (req, res) => {
   db.getTopPrescriptions()
     .then((topFivePrescriptions) => {
-      console.log("db", topFivePrescriptions)
+      console.log("route - topFivePrescriptions", topFivePrescriptions)
       return res.json(topFivePrescriptions)
     })
     .catch((err) => console.error(`Cannot get top 5 prescribed medicines`))

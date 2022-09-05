@@ -33,7 +33,9 @@ function deleteAllStocks(db = connection) {
 }
 
 function updateQuantByName(prescriptions, db = connection) {
+  console.log("updateQuantByName - prescriptions", prescriptions)
   prescriptions.forEach(async (prescription) => {
+    console.log("updateQuantByName - inloop prescription", prescription)
     return await db("stocks")
       .where("med_name", "=", prescription.medName)
       .decrement("total_quantity", Number(prescription.prescribedQuantity))

@@ -39,6 +39,8 @@ function deleteReportById(reportId, db = connection) {
 
 //input prescriptions + reportId, add inputs + date
 function addPrescriptionsById(prescriptions, reportId, db = connection) {
+  console.log("addPrescriptionsById - prescriptions", prescriptions)
+  console.log("addPrescriptionsById - reportId", reportId)
   prescriptions.forEach(async (prescription) => {
     return await db("prescriptions").insert({
       prescribed_quantity: prescription.prescribedQuantity,
