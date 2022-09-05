@@ -6,38 +6,38 @@ import { getTopFivePrescriptions } from "../../../apis/prescriptions"
 import { Typography } from "@material-ui/core"
 
 function PieChart() {
-  // const [pieChartData, setPieChartData] = useState({})
+  const [pieChartData, setPieChartData] = useState({})
 
-  // useEffect(() => {
-  //   getTopFivePrescriptions().then((topFiveMeds) =>
-  //     setPieChartData(topFiveMeds)
-  //   )
-  // }, [])
+  useEffect(() => {
+    getTopFivePrescriptions().then((topFiveMeds) =>
+      setPieChartData(topFiveMeds)
+    )
+  }, [])
 
-  // useEffect(() => {
-  //   const pieChartObj = c3.generate({
-  //     bindto: "#pieChart",
-  //     data: {
-  //       columns: pieChartData,
-  //       type: "pie",
-  //     },
-  //     pie: {
-  //       label: {
-  //         format: function (value, ratio, id) {
-  //           return d3.format("")(value)
-  //         },
-  //         show: false,
-  //       },
-  //     },
-  //     tooltip: {
-  //       format: {
-  //         value: function (value, ratio, id, index) {
-  //           return `: ${value}g`
-  //         },
-  //       },
-  //     },
-  //   })
-  // }, [pieChartData])
+  useEffect(() => {
+    const pieChartObj = c3.generate({
+      bindto: "#pieChart",
+      data: {
+        columns: pieChartData,
+        type: "pie",
+      },
+      pie: {
+        label: {
+          format: function (value, ratio, id) {
+            return d3.format("")(value)
+          },
+          show: false,
+        },
+      },
+      tooltip: {
+        format: {
+          value: function (value, ratio, id, index) {
+            return `: ${value}g`
+          },
+        },
+      },
+    })
+  }, [pieChartData])
 
   return (
     <>
