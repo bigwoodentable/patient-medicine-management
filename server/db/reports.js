@@ -1,4 +1,5 @@
 const connection = require("./connection")
+const { randomId } = require("./helper")
 
 function getReportsById(patientId, db = connection) {
   return db("reports")
@@ -23,6 +24,7 @@ function getPrescriptionsByReportId(reportId, db = connection) {
 //input diagnosis + patient_id, add inputs + date
 function addReportById(reportBasics, patientId, db = connection) {
   const newReport = {
+    report_id: randomId(),
     date_added: new Date(Date.now()).toLocaleDateString(),
     ...reportBasics,
     patient_id: patientId,
