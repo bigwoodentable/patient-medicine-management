@@ -9,34 +9,38 @@ function PieChart() {
   const [pieChartData, setPieChartData] = useState({})
 
   useEffect(() => {
-    getTopFivePrescriptions().then((topFiveMeds) =>
-      setPieChartData(topFiveMeds)
-    )
+    getTopFivePrescriptions().then((topFiveMeds) => {
+      console.log("topFiveMeds from api", topFiveMeds)
+      return setPieChartData(topFiveMeds)
+    })
   }, [])
 
   useEffect(() => {
-    const pieChartObj = c3.generate({
-      bindto: "#pieChart",
-      data: {
-        columns: pieChartData,
-        type: "pie",
-      },
-      pie: {
-        label: {
-          format: function (value, ratio, id) {
-            return d3.format("")(value)
-          },
-          show: false,
+    console.log("useEffect", pieChartData)
+    if (pieChartData !== {}) {
+      const pieChartObj = c3.generate({
+        bindto: "#pieChart",
+        data: {
+          columns: pieChartData,
+          type: "pie",
         },
-      },
-      tooltip: {
-        format: {
-          value: function (value, ratio, id, index) {
-            return `: ${value}g`
+        pie: {
+          label: {
+            format: function (value, ratio, id) {
+              return d3.format("")(value)
+            },
+            show: false,
           },
         },
-      },
-    })
+        tooltip: {
+          format: {
+            value: function (value, ratio, id, index) {
+              return `: ${value}g`
+            },
+          },
+        },
+      })
+    }
   }, [pieChartData])
 
   return (
