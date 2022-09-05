@@ -10,7 +10,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('patients').insert([
         {
-          patient_id: 1,
+          patient_id: '1',
           fname: 'mike',
           lname: 'lee',
           age: 51,
@@ -19,7 +19,7 @@ exports.seed = function (knex) {
           date_added: '2018-11-30',
         },
         {
-          patient_id: 2,
+          patient_id: '2',
           fname: 'john',
           lname: 'chan',
           age: 31,
@@ -28,7 +28,7 @@ exports.seed = function (knex) {
           date_added: '2018-11-30',
         },
         {
-          patient_id: 3,
+          patient_id: '3',
           fname: 'james',
           lname: 'wong',
           age: 55,
