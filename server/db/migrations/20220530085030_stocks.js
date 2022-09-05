@@ -4,7 +4,7 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable('stocks', (table) => {
-    table.integer('total_quantity')
+    table.integer('total_quantity').primary()
     // table.string('med_name').references('medicines.med_name')
     table.string('med_name').references('med_name').inTable('medicines')
   })
