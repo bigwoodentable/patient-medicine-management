@@ -20,6 +20,7 @@ import {
 import StockItem from './StockItem.jsx'
 import { Link } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit'
+import WaitIndicator from './WaitIndicator.jsx'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -203,6 +204,7 @@ function Stock() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <WaitIndicator />
     </Box>
   )
 }

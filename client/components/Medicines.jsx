@@ -20,6 +20,7 @@ import MedicineItem from './MedicineItem.jsx'
 import { Link } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit'
 import { fetchMeds } from '../actions/medicines.js'
+import WaitIndicator from './WaitIndicator.jsx'
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -197,6 +198,7 @@ function Medicines() {
         control={<Switch checked={dense} onChange={handleChangeDense} />}
         label="Dense padding"
       />
+      <WaitIndicator />
     </Box>
   )
 }

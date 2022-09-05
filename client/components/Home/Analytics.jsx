@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import c3 from "c3"
 import * as d3 from "d3"
 import { Button } from "@mui/material"
-import { profitPerPatient, visitsPerPatient } from "../apis/patients"
+import { profitPerPatient, visitsPerPatient } from "../../apis/patients"
 
 function Test() {
   const [chart, setChart] = useState({})

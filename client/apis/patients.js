@@ -1,7 +1,7 @@
-import request from 'superagent'
-import { removeSpacesAll } from '../helper'
+import request from "superagent"
+import { removeSpacesAll } from "../helper"
 
-const rootUrl = '/api/v1/patients'
+const rootUrl = "/api/v1/patients"
 
 export function addPatient(patient, navigate) {
   const formattedPatient = {
@@ -11,16 +11,24 @@ export function addPatient(patient, navigate) {
   }
 
   return request
-    .post(rootUrl + '/add')
+    .post(rootUrl + "/add")
     .send(formattedPatient)
     .then((res) => res.json)
-    .then(navigate('/patients'))
+    .then(navigate("/patients"))
 }
 
 export function getPatients() {
-  return request.get(rootUrl + '/').then((res) => res.body)
+  return request.get(rootUrl + "/").then((res) => res.body)
 }
 
 export function getPatientById(id) {
   return request.get(rootUrl + `/details/${id}`).then((res) => res.body)
+}
+
+export function profitPerPatient() {
+  return request.get(rootUrl + `/profitPerPatient`).then((res) => res.body)
+}
+
+export function visitsPerPatient() {
+  return request.get(rootUrl + `/totalVisits`).then((res) => res.body)
 }

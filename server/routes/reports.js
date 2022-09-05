@@ -1,14 +1,14 @@
-const express = require('express')
+const express = require("express")
 
-const db = require('../db/reports')
-const { updateQuantByName } = require('../db/stocks')
+const db = require("../db/reports")
+const { updateQuantByName } = require("../db/stocks")
 
 const router = express.Router()
 
 //  /api/v1/reports/:patientId
 
 //Using for loop
-router.get('/:patientId', async (req, res) => {
+router.get("/:patientId", async (req, res) => {
   const patientId = req.params.patientId
   try {
     const reportBasics = await db.getReportsById(patientId)
@@ -33,7 +33,7 @@ router.get('/:patientId', async (req, res) => {
 
 //  /api/v1/reports/add/:patientId
 
-router.post('/add/:patientId', async (req, res) => {
+router.post("/add/:patientId", async (req, res) => {
   const patientId = req.params.patientId
   const { reportBasics, prescriptions } = req.body
 
@@ -42,7 +42,7 @@ router.post('/add/:patientId', async (req, res) => {
     db.addPrescriptionsById(prescriptions, reportId)
     updateQuantByName(prescriptions)
 
-    return res.json('success')
+    return res.json("success")
   } catch (error) {
     console.error(error)
   }
