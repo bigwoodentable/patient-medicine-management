@@ -11,7 +11,10 @@ async function getTopPrescriptions(db = connection) {
     console.log("count - in db", count)
     medsWithCount.push({
       medName: med.med_name,
-      count: count[0]["sum(`prescribed_quantity`)"],
+      //postgres syntax
+      count: Number(count[0]["sum"]),
+      //sqlite syntax
+      // count: count[0]["sum(`prescribed_quantity`)"],
     })
   }
   console.log("medsWithCount - in db", medsWithCount)
