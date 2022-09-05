@@ -40,7 +40,11 @@ router.post("/add/:patientId", async (req, res) => {
   db.addReportById(reportBasics, patientId)
     .then((reportId) => {
       db.addPrescriptionsById(prescriptions, reportId)
+        .then(() => null)
+        .catch((err) => console.error(err))
       updateQuantByName(prescriptions)
+        .then(() => null)
+        .catch((err) => console.error(err))
       return res.json("success")
     })
     .catch((err) => console.error(err))

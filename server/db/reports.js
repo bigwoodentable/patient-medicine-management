@@ -42,6 +42,7 @@ function addPrescriptionsById(prescriptions, reportId, db = connection) {
   console.log("addPrescriptionsById - prescriptions", prescriptions)
   console.log("addPrescriptionsById - reportId", reportId)
   prescriptions.forEach(async (prescription) => {
+    console.log("addPrescriptionsById - inloop prescription", prescription)
     return await db("prescriptions").insert({
       prescribed_quantity: prescription.prescribedQuantity,
       med_name: prescription.medName,

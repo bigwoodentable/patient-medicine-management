@@ -8,7 +8,7 @@ async function getTopPrescriptions(db = connection) {
       .where("med_name", med.med_name)
       .sum("prescribed_quantity")
 
-    console.log("count - in db", count)
+    // console.log("count - in db", count)
     medsWithCount.push({
       medName: med.med_name,
       //postgres syntax
@@ -17,7 +17,7 @@ async function getTopPrescriptions(db = connection) {
       // count: count[0]["sum(`prescribed_quantity`)"],
     })
   }
-  console.log("medsWithCount - in db", medsWithCount)
+  // console.log("medsWithCount - in db", medsWithCount)
   const topFive = medsWithCount.sort((a, b) => b.count - a.count).slice(0, 5)
   return topFive
 }
