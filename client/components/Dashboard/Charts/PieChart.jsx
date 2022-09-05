@@ -6,7 +6,7 @@ import { getTopFivePrescriptions } from "../../../apis/prescriptions"
 import { Typography } from "@material-ui/core"
 
 function PieChart() {
-  const [pieChartData, setPieChartData] = useState({})
+  const [pieChartData, setPieChartData] = useState([])
 
   useEffect(() => {
     getTopFivePrescriptions().then((topFiveMeds) => {
@@ -16,8 +16,8 @@ function PieChart() {
   }, [])
 
   useEffect(() => {
-    console.log("useEffect", pieChartData)
-    if (pieChartData !== {}) {
+    if (pieChartData[0]) {
+      console.log("useEffect", pieChartData)
       const pieChartObj = c3.generate({
         bindto: "#pieChart",
         data: {
