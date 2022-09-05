@@ -7,19 +7,29 @@ export function getAllStocks() {
   return request.get(rootUrl + "/all").then((res) => res.body)
 }
 
-export function updateAllStocks(values, medInfo, navigate) {
-  console.log("API")
+export function updateAllStocks(values, handleClose) {
   //remove empty entries
   const rmEmptyEntries = removeEmpty(values.stocks)
 
-  //remove white spaces from stock names
-  const stocksRmSpaces = rmEmptyEntries.map((stock) => {
-    return { ...stock, medName: removeSpacesAll(stock.medName) }
+  //remove white spaces and format data
+  const formattedStocks = rmEmptyEntries.map((stock) => {
+    if (!Number(stock.cost)) {
+      alert(
+        `Please re-enter a number for the cost of "${stock.cost}" for Code: ${stock.code} Name: ${stock.medName}`
+      )
+      return null
+    } else {
+      return {
+        code: removeSpacesAll(stock.code).toUpperCase(),
+        medName: removeSpacesAll(stock.medName).toUpperCase(0),
+        cost: Number(stock.cost).toFixed(2),
+        totalQuantity: Number(stock.totalQuantity).toFixed(2),
+      }
+    }
   })
-
   //check for duplicated entries
   const temp = {}
-  const isDup = stocksRmSpaces.every((med) => {
+  const isDup = formattedStocks.every((med) => {
     if (temp[med.medName] === med.medName) {
       return false
     } else {
@@ -33,35 +43,9 @@ export function updateAllStocks(values, medInfo, navigate) {
     return null
   }
 
-  //Check if entered medicines' names match the names in med info
-  const unmatchedMeds = stocksRmSpaces.reduce((total, stock, index) => {
-    const matches = medInfo.find((info) => info.medName === stock.medName)
-    if (!matches) {
-      total.push(stock.medName)
-      return total
-    } else {
-      return total
-    }
-  }, [])
-
-  if (unmatchedMeds[0]) {
-    const combinedUnmatched = unmatchedMeds.join(", ")
-    alert(
-      `The following medicines are not in the Medicine Info list: ${combinedUnmatched}. Please enter a medicine into the Medicine Info list before adding it to the Current Stocks`
-    )
-    return null
-  }
-
-  const formattedStocks = stocksRmSpaces.map((stock) => {
-    return {
-      medName: stock.medName,
-      totalQuantity: Number(stock.totalQuantity).toFixed(2),
-    }
-  })
-
   return request
     .put(rootUrl + "/update")
     .send(formattedStocks)
     .then((res) => res.json)
-    .then(navigate("/stocks"))
+    .then(handleClose())
 }

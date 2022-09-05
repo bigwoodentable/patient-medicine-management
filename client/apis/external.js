@@ -5,12 +5,11 @@ export function getMedFromAPI(searchTerm) {
     .post("http://api.tianapi.com/zhongyao/index")
     .set("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
     .send({
-      key: "ce9f59a024df6d8b8c20a40f9e49b16b",
+      // key: "ce9f59a024df6d8b8c20a40f9e49b16b",
+      key: "ea62feb0c41ef3f44c87e93c1be1fa7d",
       word: searchTerm,
     })
     .then((res) => {
-      console.log(res)
       return res.body.newslist[0]
     })
-  // .then(navigate('/patients'))
 }

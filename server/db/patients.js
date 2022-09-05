@@ -1,6 +1,11 @@
 const connection = require("./connection")
 const { randomId } = require("./helper")
-const { profitPerPatient, totalVisits } = require("./reports")
+
+const {
+  profitPerPatient,
+  totalVisits,
+  revenuePerPatient,
+} = require("./reports")
 
 function getPatients(db = connection) {
   return db("patients")
@@ -31,20 +36,31 @@ function getPatientById(id, db = connection) {
     .first()
 }
 
-async function profitPerPatientTotal(db = connection) {
+function updatePatientById(id, data, db = connection) {
+  return db("patients").where("patient_id", id).update(data)
+}
+
+//async await syntax seems clearer than .then() in this situation
+async function revenuePerPatientTotal(db = connection) {
   const AllId = await getAllId()
   const allPatientsProfits = []
   for (const id of AllId) {
-    const profit = await profitPerPatient(id.patientId)
+    const revenue = await revenuePerPatient(id.patientId)
     const name = await getNameById(id.patientId)
-    allPatientsProfits.push({ ...name[0], ...profit[0] })
+    allPatientsProfits.push({ ...name[0], ...revenue[0] })
   }
   const noNullProfits = allPatientsProfits.filter(
-    (patient) => patient.totalProfit
+    (patient) => patient.totalRevenue
   )
-  return noNullProfits
+  //Top 5 profits
+  const topFive = noNullProfits
+    .sort((a, b) => b.totalRevenue - a.totalRevenue)
+    .slice(0, 5)
+
+  return topFive
 }
 
+//async await syntax seems clearer than .then() in this situation
 async function visitsPatientTotal(db = connection) {
   const AllId = await getAllId()
   const allPatientsVisits = []
@@ -53,15 +69,17 @@ async function visitsPatientTotal(db = connection) {
     const name = await getNameById(id.patientId)
     allPatientsVisits.push({ ...name[0], ...visits[0] })
   }
-  //Only patients less than 2 visits
-  const aboveTwoVisits = allPatientsVisits.filter(
-    (patient) => patient.visits > 1
-  )
-  return aboveTwoVisits
+  //Top 5 visits
+  const topFive = allPatientsVisits
+    .sort((a, b) => b.visits - a.visits)
+    .slice(0, 5)
+  return topFive
 }
 
 function getAllId(db = connection) {
-  return db("patients").select("patient_id as patientId")
+  return db("patients")
+    .where("status", "active")
+    .select("patient_id as patientId")
 }
 
 async function getNameById(id, db = connection) {
@@ -71,12 +89,11 @@ async function getNameById(id, db = connection) {
   return Promise.resolve([{ name: `${name[0].fname} ${name[0].lname}` }])
 }
 
-getNameById(2).then((res) => console.log(res))
-
 module.exports = {
   getPatients,
   insertPatient,
   getPatientById,
-  profitPerPatientTotal,
+  revenuePerPatientTotal,
   visitsPatientTotal,
+  updatePatientById,
 }

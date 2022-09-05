@@ -1,17 +1,9 @@
-// const { v4: uuidv4 } = require('uuid')
-
-// const randomId = () => uuidv4()
-
-// module.exports = {
-//   randomId,
-// }
-
 export function removeSpacesAll(txt) {
-  return txt.replace(/\s/g, '')
+  return txt.replace(/\s/g, "")
 }
 
 export function removeSpacesEnds(txt) {
-  return txt.replace(/^\s+|\s+$/g, '')
+  return txt.replace(/^\s+|\s+$/g, "")
 }
 
 export function loopObj(obj, fn) {
@@ -24,7 +16,7 @@ export function loopObj(obj, fn) {
 
 export function removeEmpty(arr) {
   return arr.filter((obj) => {
-    return obj.medName !== ''
+    return obj.medName !== ""
   })
 }
 

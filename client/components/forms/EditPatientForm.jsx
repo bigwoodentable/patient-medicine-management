@@ -1,5 +1,5 @@
 import React from "react"
-import { addPatient } from "./../../apis/patients"
+import { updatePatientById } from "./../../apis/patients"
 import Button from "@material-ui/core/Button"
 import { Box, Paper } from "@mui/material"
 import {
@@ -13,20 +13,39 @@ import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik"
 import * as Yup from "yup"
 
 const SignupSchema = Yup.object().shape({
-  fname: Yup.string().required("First Name Required"),
-  lname: Yup.string().required("Last Name Required"),
+  fname: Yup.string().required(
+    <Typography style={{ fontSize: "11px", color: "red" }}>
+      First Name Required
+    </Typography>
+  ),
+  lname: Yup.string().required(
+    <Typography style={{ fontSize: "11px", color: "red" }}>
+      Last Name Required{" "}
+    </Typography>
+  ),
   age: Yup.number()
-    .required("Age Required")
+    .required(
+      <Typography style={{ fontSize: "11px", color: "red" }}>
+        Age Required
+      </Typography>
+    )
     .positive()
     .integer()
-    .typeError("Positive Number Required"),
+    .typeError(
+      <Typography style={{ fontSize: "11px", color: "red" }}>
+        Positive Number Required
+      </Typography>
+    ),
   // email: Yup.string().email('Invalid email').required('Required'),
 })
 
-function NewPatientForm({ open, handleClose }) {
+function EditPatientForm({ open, handleClose, patientId, setUpdated }) {
   function handleSubmit(patient) {
-    addPatient(patient, handleClose)
-      .then(() => null)
+    updatePatientById(patientId, patient)
+      .then(() => {
+        setUpdated((updated) => updated + 1)
+        handleClose()
+      })
       .catch((err) => console.error(err))
   }
 
@@ -57,7 +76,7 @@ function NewPatientForm({ open, handleClose }) {
                   <Form>
                     <DialogTitle sx={{ mb: 4, mt: 3 }} align="center">
                       {" "}
-                      New Patient
+                      Edit Patient Details
                     </DialogTitle>
                     <DialogContent>
                       <Field
@@ -169,4 +188,4 @@ function NewPatientForm({ open, handleClose }) {
   )
 }
 
-export default NewPatientForm
+export default EditPatientForm

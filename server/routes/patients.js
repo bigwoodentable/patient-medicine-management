@@ -46,12 +46,12 @@ router.post("/add", (req, res) => {
     })
 })
 
-//  /api/v1/patients/profitPerPatient
-router.get("/profitPerPatient", (req, res) => {
-  db.profitPerPatientTotal()
-    .then((profit) => {
+//  /api/v1/patients/revenuePerPatient
+router.get("/revenuePerPatient", (req, res) => {
+  db.revenuePerPatientTotal()
+    .then((rev) => {
       // console.log(res)
-      res.json(profit)
+      res.json(rev)
       return null
     })
     .catch((err) => {
@@ -63,13 +63,28 @@ router.get("/profitPerPatient", (req, res) => {
 router.get("/totalVisits", (req, res) => {
   db.visitsPatientTotal()
     .then((visits) => {
-      // console.log(res)
       res.json(visits)
       return null
     })
     .catch((err) => {
       console.log(err)
       res.status(500).json({ message: "Cannot get total visits" })
+    })
+})
+
+//  /api/v1/patients/update/:id
+router.put("/update/:id", (req, res) => {
+  const id = req.params.id
+  const updatedInfo = req.body
+
+  db.updatePatientById(id, updatedInfo)
+    .then((i) => {
+      res.json(i)
+      return null
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json({ message: "Cannot update patient details" })
     })
 })
 

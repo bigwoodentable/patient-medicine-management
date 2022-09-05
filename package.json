@@ -65,7 +65,11 @@
     "pg": "^8.7.3",
     "psql": "^0.0.1",
     "react-d3-library": "^1.1.8",
+    "react-external-link": "^2.0.0",
+    "react-spinners": "^0.13.4",
+    "react-transition-group": "^4.4.5",
     "superagent": "^6.1.0",
+    "use-state-if-mounted": "^1.0.7",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -77,6 +81,7 @@
     "@babel/preset-react": "^7.12.5",
     "@testing-library/react": "11.2.2",
     "babel-loader": "^8.2.1",
+    "css-loader": "^6.7.1",
     "eslint": "^8.9.0",
     "eslint-config-eda": "^1.1.0",
     "eslint-plugin-import": "^2.25.4",
@@ -94,8 +99,10 @@
     "react-router-dom": "^6.2.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "style-loader": "^3.3.1",
     "supertest": "6.0.1",
-    "typescript": "^4.7.3",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.8.2",
     "webpack": "5.9.0",
     "webpack-cli": "4.2.0"
   },

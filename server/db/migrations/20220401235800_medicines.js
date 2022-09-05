@@ -3,10 +3,10 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable('medicines', (table) => {
-    table.string('med_name').primary()
-    table.string('code')
-    table.decimal('cost', 8, 2)
+  return knex.schema.createTable("medicines", (table) => {
+    table.string("med_name").primary()
+    table.string("code")
+    table.decimal("cost", 8, 2)
   })
 }
 
@@ -15,5 +15,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable('medicines')
+  return knex.schema.dropTable("medicines")
 }

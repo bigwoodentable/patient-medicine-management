@@ -3,7 +3,7 @@ import { removeSpacesAll } from "../helper"
 
 const rootUrl = "/api/v1/patients"
 
-export function addPatient(patient, navigate) {
+export function addPatient(patient, handleClose) {
   const formattedPatient = {
     ...patient,
     fname: removeSpacesAll(patient.fname).toUpperCase(),
@@ -14,7 +14,7 @@ export function addPatient(patient, navigate) {
     .post(rootUrl + "/add")
     .send(formattedPatient)
     .then((res) => res.json)
-    .then(navigate("/patients"))
+    .then(handleClose())
 }
 
 export function getPatients() {
@@ -25,8 +25,27 @@ export function getPatientById(id) {
   return request.get(rootUrl + `/details/${id}`).then((res) => res.body)
 }
 
-export function profitPerPatient() {
-  return request.get(rootUrl + `/profitPerPatient`).then((res) => res.body)
+export function updatePatientById(id, updatedInfo) {
+  let formattedInfo = {}
+  if (!updatedInfo.status) {
+    formattedInfo = {
+      fname: updatedInfo.fname.toUpperCase(),
+      lname: updatedInfo.lname.toUpperCase(),
+      age: updatedInfo.age,
+      notes: updatedInfo.notes,
+    }
+  } else {
+    formattedInfo = updatedInfo
+  }
+
+  return request
+    .put(rootUrl + `/update/${id}`)
+    .send(formattedInfo)
+    .then((res) => res.body)
+}
+
+export function revenuePerPatient() {
+  return request.get(rootUrl + `/revenuePerPatient`).then((res) => res.body)
 }
 
 export function visitsPerPatient() {

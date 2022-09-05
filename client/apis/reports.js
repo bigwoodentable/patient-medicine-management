@@ -1,10 +1,14 @@
-import request from 'superagent'
-import { calcFinances, removeEmpty, removeSpacesAll } from '../helper'
+import request from "superagent"
+import { calcFinances, removeEmpty, removeSpacesAll } from "../helper"
 
-const rootUrl = '/api/v1/reports'
+const rootUrl = "/api/v1/reports"
 
 export function getReportsById(patientId) {
   return request.get(rootUrl + `/${patientId}`).then((res) => res.body)
+}
+
+export function deleteReportByReportId(reportId) {
+  return request.delete(rootUrl + `/delete/${reportId}`).then(() => null)
 }
 
 export function addReportById(
@@ -15,15 +19,14 @@ export function addReportById(
   patientId,
   navigate
 ) {
-  console.log('API')
   const { prescriptions, prescriptionNumber, prescriptionPrice } = newReport
-  let adjustedReport = {}
+  let formattedReport = {}
 
   //check if medicines prescribed
-  if (prescriptions[0].medName === '') {
-    if (confirm('Would you like to continue with no prescriptions?')) {
+  if (prescriptions[0].medName === "") {
+    if (confirm("Would you like to continue with no prescriptions?")) {
       //if intended to have no prescriptions, clear prescriptions array
-      adjustedReport = { ...newReport, prescriptions: [] }
+      formattedReport = { ...newReport, prescriptions: [] }
     } else {
       return null
     }
@@ -45,7 +48,6 @@ export function addReportById(
     })
 
     if (!correctPrescription) {
-      console.log('API-correctPrescription')
       alert(
         "Please make sure medicines' names are spelt correctly and are in current stocks"
       )
@@ -69,15 +71,14 @@ export function addReportById(
     }
 
     //update report with medicine names that do not have white spaces
-    adjustedReport = {
+    formattedReport = {
       ...newReport,
       prescriptions: rmSpacePrescriptions,
     }
   }
 
-  //calculate total profits and total costs if users did not press
+  //calculate total profits and total costs
   let finances = {}
-
   if (totalCosts === 0) {
     finances = calcFinances(
       medInfo,
@@ -89,7 +90,7 @@ export function addReportById(
     finances = { totalCosts, totalProfits }
   }
 
-  const combinedReport = { ...adjustedReport, ...finances }
+  const combinedReport = { ...formattedReport, ...finances }
 
   const reportBasics = {
     prescription_price: Number(combinedReport.prescriptionPrice),
@@ -98,19 +99,21 @@ export function addReportById(
     total_costs: combinedReport.totalCosts,
     total_profit: combinedReport.totalProfits,
   }
-  const prescriptionsAdjusted = combinedReport.prescriptions.map((report) => {
+
+  const prescriptionsFormatted = combinedReport.prescriptions.map((report) => {
     return {
       medName: report.medName,
       prescribedQuantity: Number(report.prescribedQuantity),
     }
   })
-  const reportAdjusted = {
+
+  const ReportFormattedCombined = {
     reportBasics,
-    prescriptions: prescriptionsAdjusted,
+    prescriptions: prescriptionsFormatted,
   }
 
   return request
     .post(rootUrl + `/add/${patientId}`)
-    .send(reportAdjusted)
+    .send(ReportFormattedCombined)
     .then(navigate(`/patient/${patientId}`))
 }

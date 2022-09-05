@@ -3,13 +3,13 @@
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable('prescriptions', (table) => {
+  return knex.schema.createTable("prescriptions", (table) => {
     table.increments().primary()
-    table.integer('prescribed_quantity')
+    table.integer("prescribed_quantity")
     // table.string('med_name')
     // table.integer('report_id')
-    table.string('med_name').references('med_name').inTable('medicines')
-    table.integer('report_id').references('report_id').inTable('reports')
+    table.string("med_name").references("med_name").inTable("medicines")
+    table.integer("report_id").references("report_id").inTable("reports")
     // table.string('med_name').references('medicines.med_name')
     // table.integer('report_id').references('reports.report_id')
   })
@@ -20,5 +20,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable('prescriptions')
+  return knex.schema.dropTable("prescriptions")
 }
