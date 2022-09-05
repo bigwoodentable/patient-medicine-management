@@ -11,6 +11,8 @@ function PieChart() {
   useEffect(() => {
     getTopFivePrescriptions().then((topFiveMeds) => {
       console.log("topFiveMeds from api", topFiveMeds)
+      const formattedMeds = topFiveMeds.map((arr) => [arr[0], Number(arr[1])])
+      console.log("formattedMeds from api", formattedMeds)
       return setPieChartData(topFiveMeds)
     })
   }, [])
