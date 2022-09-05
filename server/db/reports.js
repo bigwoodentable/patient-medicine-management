@@ -73,7 +73,12 @@ async function revenuePerPatient(patientId) {
   const costs = await costsPerPatient(patientId)
   console.log("profits - revenuePerPatient", profits)
   console.log("costs - revenuePerPatient", costs)
-  return [{ totalRevenue: profits[0].totalProfit + costs[0].totalCosts }]
+  return [
+    {
+      totalRevenue:
+        Number(profits[0].totalProfit) + Number(costs[0].totalCosts),
+    },
+  ]
 }
 
 function profitPerPatient(patientId, db = connection) {
