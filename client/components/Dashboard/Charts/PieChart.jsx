@@ -13,7 +13,7 @@ function PieChart() {
       console.log("topFiveMeds from api", topFiveMeds)
       const formattedMeds = topFiveMeds.map((arr) => [arr[0], 5])
       console.log("formattedMeds from api", formattedMeds)
-      return setPieChartData(topFiveMeds)
+      return setPieChartData(formattedMeds)
     })
   }, [])
 
