@@ -10,7 +10,7 @@ function BarChart() {
   const [categoriesRev, setCategoriesRev] = useState([])
   const [categoriesVis, setCategoriesVisits] = useState([])
   const [visits, setVisits] = useState([])
-
+  console.log("revenuePerUser", revenuePerUser)
   useEffect(() => {
     const barChartObj = c3.generate({
       bindto: "#barChart",
