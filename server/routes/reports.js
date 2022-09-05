@@ -40,10 +40,8 @@ router.post("/add/:patientId", async (req, res) => {
   db.addReportById(reportBasics, patientId)
     .then((reportId) => {
       console.log("addReportById - reportId", reportId)
-      db.addPrescriptionsById(prescriptions, reportId).catch((err) =>
-        console.error(err)
-      )
-      updateQuantByName(prescriptions).catch((err) => console.error(err))
+      db.addPrescriptionsById(prescriptions, reportId)
+      updateQuantByName(prescriptions)
       return res.json("success")
     })
     .catch((err) => console.error(err))

@@ -30,7 +30,8 @@ function addReportById(reportBasics, patientId, db = connection) {
     patient_id: patientId,
   }
 
-  return db("reports").insert(newReport)
+  return db("reports").insert(newReport, ["report_id"])
+  // return db("reports").insert(newReport)
 }
 
 function deleteReportById(reportId, db = connection) {
@@ -46,7 +47,7 @@ function addPrescriptionsById(prescriptions, reportId, db = connection) {
     return await db("prescriptions").insert({
       prescribed_quantity: prescription.prescribedQuantity,
       med_name: prescription.medName,
-      report_id: reportId,
+      // report_id: reportId,
     })
   })
 
