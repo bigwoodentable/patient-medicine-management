@@ -43,10 +43,6 @@ function PieChart() {
     }
   }, [pieChartData])
 
-  if (pieChartData !== {}) {
-    return console.log("pieChartObj", pieChartObj)
-  }
-
   return (
     <>
       <Paper

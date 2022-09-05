@@ -12,6 +12,7 @@ async function getTopPrescriptions(db = connection) {
       count: count[0]["sum(`prescribed_quantity`)"],
     })
   }
+
   const topFive = medsWithCount.sort((a, b) => b.count - a.count).slice(0, 5)
   return topFive
 }
