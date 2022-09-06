@@ -1,4 +1,5 @@
 const connection = require("./connection")
+const { randomId } = require("./helper")
 
 function getReportsById(patientId, db = connection) {
   return db("reports")

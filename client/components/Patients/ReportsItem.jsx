@@ -43,12 +43,17 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
     return null
   }
 
+  const formatDate = new Date(dateAdded)
+  const dateAddedFormatted = formatDate.toLocaleDateString("en-NZ")
+
   return (
     <>
       <Paper elevation={4} style={{ border: "0.25px solid lightgrey" }}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography style={{ fontWeight: "bold" }}>{dateAdded}</Typography>
+            <Typography style={{ fontWeight: "bold" }}>
+              {dateAddedFormatted}
+            </Typography>
           </AccordionSummary>
           <AccordionDetails
             style={{
