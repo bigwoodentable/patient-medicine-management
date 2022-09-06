@@ -42,8 +42,7 @@ exports.seed = function (knex) {
         {
           report_id: "47",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 80,
           prescription_number: 8,
           total_costs: 152.8,
@@ -53,8 +52,7 @@ exports.seed = function (knex) {
         {
           report_id: "48",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 90,
           prescription_number: 4,
           total_costs: 59.76,
@@ -64,8 +62,7 @@ exports.seed = function (knex) {
         {
           report_id: "49",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 15,
           prescription_number: 3,
           total_costs: 41.82,
@@ -75,8 +72,7 @@ exports.seed = function (knex) {
         {
           report_id: "50",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 110,
           prescription_number: 10,
           total_costs: 989.9,
@@ -86,7 +82,7 @@ exports.seed = function (knex) {
         {
           report_id: "51",
           date_added: "9/4/2022",
-          diagnosis: "",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 200,
           prescription_number: 5,
           total_costs: 252,
@@ -96,8 +92,7 @@ exports.seed = function (knex) {
         {
           report_id: "52",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 100,
           prescription_number: 3,
           total_costs: 236.55,
@@ -107,7 +102,7 @@ exports.seed = function (knex) {
         {
           report_id: "53",
           date_added: "9/4/2022",
-          diagnosis: "",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 10,
           prescription_number: 5,
           total_costs: 57.3,
@@ -117,7 +112,7 @@ exports.seed = function (knex) {
         {
           report_id: "54",
           date_added: "9/4/2022",
-          diagnosis: "",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 250,
           prescription_number: 3,
           total_costs: 224.25,
@@ -127,7 +122,7 @@ exports.seed = function (knex) {
         {
           report_id: "55",
           date_added: "9/4/2022",
-          diagnosis: "",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 20,
           prescription_number: 4,
           total_costs: 61.4,
@@ -137,8 +132,7 @@ exports.seed = function (knex) {
         {
           report_id: "56",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 100,
           prescription_number: 5,
           total_costs: 114.5,
@@ -148,8 +142,7 @@ exports.seed = function (knex) {
         {
           report_id: "57",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 30,
           prescription_number: 20,
           total_costs: 239,
@@ -159,8 +152,7 @@ exports.seed = function (knex) {
         {
           report_id: "59",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 40,
           prescription_number: 10,
           total_costs: 56,
@@ -170,8 +162,7 @@ exports.seed = function (knex) {
         {
           report_id: "60",
           date_added: "9/4/2022",
-          diagnosis:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+          diagnosis: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
           prescription_price: 30,
           prescription_number: 7,
           total_costs: 4.97,
