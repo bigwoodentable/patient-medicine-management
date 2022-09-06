@@ -16,6 +16,7 @@ import AddIcon from "@mui/icons-material/Add"
 function NewReportForm() {
   const [totalCosts, setTotalCosts] = useState(0)
   const [totalProfits, setTotalProfit] = useState(0)
+  const [totalCharge, setTotalCharge] = useState(0)
   const { id: patientId } = useParams()
   const navigate = useNavigate()
 
@@ -35,6 +36,7 @@ function NewReportForm() {
     )
     setTotalCosts(finances.totalCosts)
     setTotalProfit(prescriptionNumber * prescriptionPrice - finances.totalCosts)
+    setTotalCharge(Number(prescriptionNumber) * Number(prescriptionPrice))
   }
 
   function handleSubmit(newReport) {
@@ -265,7 +267,7 @@ function NewReportForm() {
 
         <Box sx={{ flexGrow: "3" }}>
           <Box style={{ margin: "8px 25px 0px 25px" }}>
-            <Paper elevation={3} sx={{ height: "125px", p: 2 }}>
+            <Paper elevation={3} sx={{ minheight: "125px", p: 2 }}>
               <Typography style={{ fontWeight: "bold", fontSize: 18 }}>
                 Calculations
               </Typography>
@@ -276,7 +278,11 @@ function NewReportForm() {
                   padding: "10px 0px 10px 0px",
                 }}
               >
-                <ReportCalc profits={totalProfits} costs={totalCosts} />
+                <ReportCalc
+                  profits={totalProfits}
+                  costs={totalCosts}
+                  charge={totalCharge}
+                />
               </Box>
             </Paper>
           </Box>
