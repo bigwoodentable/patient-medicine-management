@@ -10,7 +10,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex("patients").insert([
         {
-          patient_id: 1,
+          patient_id: "1",
           fname: "Orlando",
           lname: "Collins",
           age: 51,
@@ -20,7 +20,7 @@ exports.seed = function (knex) {
           date_added: "2018-11-30",
         },
         {
-          patient_id: 2,
+          patient_id: "2",
           fname: "Diana",
           lname: "Watts",
           age: 31,
@@ -30,7 +30,7 @@ exports.seed = function (knex) {
           date_added: "2018-11-30",
         },
         {
-          patient_id: 3,
+          patient_id: "3",
           fname: "Gretchen",
           lname: "Mills",
           age: 33,
@@ -40,7 +40,7 @@ exports.seed = function (knex) {
           date_added: "2018-11-30",
         },
         {
-          patient_id: 4,
+          patient_id: "4",
           fname: "Brad",
           lname: "Fernandez",
           age: 25,
@@ -50,7 +50,7 @@ exports.seed = function (knex) {
           date_added: "2018-11-30",
         },
         {
-          patient_id: 5,
+          patient_id: "5",
           fname: "Guadalupe",
           lname: "Stevenson",
           age: 19,
@@ -60,7 +60,7 @@ exports.seed = function (knex) {
           date_added: "2018-11-30",
         },
         {
-          patient_id: 6,
+          patient_id: "6",
           fname: "Wang",
           lname: "Lee",
           age: 64,
@@ -70,7 +70,7 @@ exports.seed = function (knex) {
           date_added: "2018-11-30",
         },
         {
-          patient_id: 7,
+          patient_id: "7",
           fname: "Brooke",
           lname: "Roberts",
           age: 71,
@@ -80,7 +80,7 @@ exports.seed = function (knex) {
           date_added: "2018-11-30",
         },
         {
-          patient_id: 8,
+          patient_id: "8",
           fname: "Jamie",
           lname: "Greer",
           age: 42,
@@ -90,7 +90,7 @@ exports.seed = function (knex) {
           date_added: "2018-11-30",
         },
         {
-          patient_id: 9,
+          patient_id: "9",
           fname: "Jessie",
           lname: "Robbins",
           age: 57,

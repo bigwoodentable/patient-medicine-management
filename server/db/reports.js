@@ -23,12 +23,15 @@ function getPrescriptionsByReportId(reportId, db = connection) {
 //input diagnosis + patient_id, add inputs + date
 function addReportById(reportBasics, patientId, db = connection) {
   const newReport = {
+    report_id: randomId(),
     date_added: new Date(Date.now()).toLocaleDateString(),
     ...reportBasics,
     patient_id: patientId,
   }
-
-  return db("reports").insert(newReport)
+  //postgres syntax
+  return db("reports").insert(newReport, ["report_id"])
+  //sqlite syntax
+  // return db("reports").insert(newReport)
 }
 
 function deleteReportById(reportId, db = connection) {
@@ -41,7 +44,8 @@ function addPrescriptionsById(prescriptions, reportId, db = connection) {
     return await db("prescriptions").insert({
       prescribed_quantity: prescription.prescribedQuantity,
       med_name: prescription.medName,
-      report_id: reportId,
+      //postgres - potentially need to uncomment this
+      // report_id: reportId,
     })
   })
 
@@ -65,7 +69,12 @@ function addPrescriptionsById(prescriptions, reportId, db = connection) {
 async function revenuePerPatient(patientId) {
   const profits = await profitPerPatient(patientId)
   const costs = await costsPerPatient(patientId)
-  return [{ totalRevenue: profits[0].totalProfit + costs[0].totalCosts }]
+  return [
+    {
+      totalRevenue:
+        Number(profits[0].totalProfit) + Number(costs[0].totalCosts),
+    },
+  ]
 }
 
 function profitPerPatient(patientId, db = connection) {

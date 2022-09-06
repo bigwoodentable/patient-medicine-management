@@ -19,8 +19,8 @@ function updateAllStocks(newStocks, db = connection) {
     const stockFormatted = {
       code: stock.code,
       med_name: stock.medName,
-      total_quantity: stock.totalQuantity,
-      cost: stock.cost,
+      total_quantity: Number(stock.totalQuantity),
+      cost: Number(stock.cost),
     }
     return await db("stocks").insert(stockFormatted)
   })

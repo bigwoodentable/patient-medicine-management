@@ -9,7 +9,10 @@ async function getTopPrescriptions(db = connection) {
       .sum("prescribed_quantity")
     medsWithCount.push({
       medName: med.med_name,
-      count: count[0]["sum(`prescribed_quantity`)"],
+      //postgres syntax
+      count: Number(count[0]["sum"]),
+      //sqlite syntax
+      // count: count[0]["sum(`prescribed_quantity`)"],
     })
   }
   const topFive = medsWithCount.sort((a, b) => b.count - a.count).slice(0, 5)

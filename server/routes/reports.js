@@ -44,7 +44,10 @@ router.post("/add/:patientId", async (req, res) => {
 
   db.addReportById(reportBasics, patientId)
     .then((reportId) => {
-      db.addPrescriptionsById(prescriptions, reportId)
+      //postgres syntax
+      db.addPrescriptionsById(prescriptions, reportId[0]["report_id"])
+      //sqlite syntax
+      // db.addPrescriptionsById(prescriptions, reportId)
       updateQuantByName(prescriptions)
       return res.json("success")
     })
@@ -52,7 +55,7 @@ router.post("/add/:patientId", async (req, res) => {
 })
 
 router.delete("/delete/:reportId", (req, res) => {
-  const reportId = Number(req.params.reportId)
+  const reportId = req.params.reportId
   db.deleteReportById(reportId)
     .then(() => res.json("success in deleting the report"))
     .catch((err) => console.error(error))
