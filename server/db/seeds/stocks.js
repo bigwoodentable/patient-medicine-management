@@ -11,13 +11,13 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex("stocks").insert([
         {
-          total_quantity: randomNum(),
+          total_quantity: 15,
           med_name: "Paracetamol",
           code: "N02BE01",
           cost: randomCost(),
         },
         {
-          total_quantity: randomNum(),
+          total_quantity: 23,
           med_name: "Ibuprofen",
           code: "M01AE01",
           cost: randomCost(),
@@ -29,7 +29,7 @@ exports.seed = function (knex) {
           cost: randomCost(),
         },
         {
-          total_quantity: randomNum(),
+          total_quantity: 11,
           med_name: "Asprin",
           code: "N02BA01",
           cost: randomCost(),
