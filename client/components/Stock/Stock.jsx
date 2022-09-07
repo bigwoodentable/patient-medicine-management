@@ -54,7 +54,7 @@ const headCells = [
     id: "cost",
     numeric: true,
     disablePadding: false,
-    label: "Cost per Tablet",
+    label: "Cost per 100 Tablets",
   },
   {
     id: "totalQuantity",
