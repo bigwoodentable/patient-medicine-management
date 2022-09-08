@@ -13,12 +13,14 @@
   A React app that manages patient records and medicine inventory with charts to show relevant data. 
 </p>
 <p align="center">
-View <a href="https://patient-stock-management.herokuapp.com/" target="_blank">here</a>.
+View app <a href="https://patient-stock-management.herokuapp.com/" target="_blank">here</a>.
+</p>
+<p align="center">
+View video demo <a href="https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/videos/demo-vid.mp4?raw=true
+" target="_blank">here</a>.
 </p>
 
 ![demo image](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
-
-https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/videos/demo-vid.mp4?raw=true
 
 ## Installation & Set Up
 
