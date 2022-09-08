@@ -166,7 +166,7 @@ const ResponsiveAppBar = () => {
               textDecoration: "none",
             }}
           >
-            Patient-Stock Management
+            Patient-Meds Management
           </Typography>
           <Box
             sx={{
