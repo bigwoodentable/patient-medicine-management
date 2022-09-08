@@ -5,7 +5,16 @@
   A React app that manages patient records and medicine inventory with charts to show relevant data. View <a href="https://patient-stock-management.herokuapp.com/" target="_blank">here</a>.
 </p>
 
-![demo](https://raw.githubusercontent.com/bigwoodentable/patient-medicine-management/server/public/images/demo.png)
+  <!-- <a href="values-identity.html">
+      <div class="blogimg">
+          <img src="images/rodin.jpg" alt="blog image">
+      </div>
+      <div class ="blogTitle">
+          <p>VALUES - IDENTITY</p>
+      </div>
+  </a> -->
+
+![demo](https://github.com/bigwoodentable/patient-medicine-management/blob/server/public/images/demo.png?raw=true)
 
 https://raw.githubusercontent.com/bigwoodentable/patient-medicine-management/server/public/videos/Demo-Patient-Stock-Management-Explanation.mov
 ## Installation & Set Up
@@ -19,8 +28,8 @@ npm install
 2. Create and populate database 
 
 ```
-npx knex migrate:latest
-npx knex seed:run
+npm run knex migrate:latest
+npm run knex seed:run
 ```
 
 3. Start the server (dev)
