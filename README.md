@@ -16,7 +16,8 @@
 
 ![demo](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
 
-https://raw.githubusercontent.com/bigwoodentable/patient-medicine-management/server/public/videos/Demo-Patient-Stock-Management-Explanation.mov
+![demo](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/videos/Demo-Patient-Stock-Management-Explanation.mov?raw=true)
+
 ## Installation & Set Up
 
 1. Clone and install dependancies
