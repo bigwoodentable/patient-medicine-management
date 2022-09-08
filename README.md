@@ -18,7 +18,7 @@ View <a href="https://patient-stock-management.herokuapp.com/" target="_blank">h
 
 ![demo image](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
 
-![demo video](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/videos/demo-vid.mp4?raw=true)
+https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/videos/demo-vid.mp4?raw=true
 
 ## Installation & Set Up
 
