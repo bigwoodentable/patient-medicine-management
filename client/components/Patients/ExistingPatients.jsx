@@ -106,7 +106,7 @@ function ExistingPatients() {
     getPatients()
       .then((patientNames) => {
         const sortedPatients = patientNames.sort((a, b) =>
-          a.fname.localeCompare(b.fname)
+          a.lname.localeCompare(b.lname)
         )
         setLoading(false)
         setRows(sortedPatients)
@@ -122,7 +122,7 @@ function ExistingPatients() {
     setOpen(false)
   }
 
-  const handleRequestSort = (property) => {
+  const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc"
     setOrder(isAsc ? "desc" : "asc")
     setOrderBy(property)
@@ -198,7 +198,7 @@ function ExistingPatients() {
                               scope="row"
                               align="center"
                             >
-                              {`${row.fname} ${row.lname}`}
+                              {`${row.lname} ${row.fname}`}
                             </TableCell>
                             <TableCell align="center">
                               <Link

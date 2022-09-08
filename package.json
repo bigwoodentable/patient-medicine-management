@@ -65,6 +65,7 @@
     "pg": "^8.7.3",
     "psql": "^0.0.1",
     "react-d3-library": "^1.1.8",
+    "react-datepicker": "^4.8.0",
     "react-external-link": "^2.0.0",
     "react-spinners": "^0.13.4",
     "react-transition-group": "^4.4.5",
