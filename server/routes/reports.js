@@ -45,9 +45,9 @@ router.post("/add/:patientId", async (req, res) => {
   db.addReportById(reportBasics, patientId)
     .then((reportId) => {
       //postgres syntax
-      // db.addPrescriptionsById(prescriptions, reportId[0]["report_id"])
+      db.addPrescriptionsById(prescriptions, reportId[0]["report_id"])
       //sqlite syntax
-      db.addPrescriptionsById(prescriptions, reportId)
+      // db.addPrescriptionsById(prescriptions, reportId)
       updateQuantByName(prescriptions)
       return res.json("success")
     })

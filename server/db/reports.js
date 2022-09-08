@@ -31,10 +31,9 @@ function addReportById(reportBasics, patientId, db = connection) {
   }
 
   //postgres syntax
-  // return db("reports").insert(newReport, ["report_id"])
+  return db("reports").insert(newReport, ["report_id"])
   //sqlite syntax
-
-  return db("reports").insert(newReport)
+  // return db("reports").insert(newReport)
 }
 
 function deleteReportById(reportId, db = connection) {
