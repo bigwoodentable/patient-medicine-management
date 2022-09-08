@@ -105,11 +105,9 @@ function ExistingPatients() {
     setLoading(true)
     getPatients()
       .then((patientNames) => {
-        const sortedPatients = patientNames.sort((a, b) =>
-          a.lname.localeCompare(b.lname)
-        )
+        patientNames.sort((a, b) => a.fname.localeCompare(b.fname))
         setLoading(false)
-        setRows(sortedPatients)
+        setRows(patientNames)
       })
       .catch((err) => console.error(err))
   }, [open])

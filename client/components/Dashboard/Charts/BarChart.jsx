@@ -37,15 +37,19 @@ function BarChart() {
       },
       padding: {
         top: 50,
-        // bottom: 150,
+        bottom: 20,
       },
       color: {
         pattern: ["#ff7f0e", "#1f77b4"],
       },
       tooltip: {
+        show: true,
         format: {
           value: function (value, ratio, id, index) {
-            return `= ${value}`
+            return `Value: ${value}`
+          },
+          name: function (name, ratio, id, index) {
+            return ""
           },
         },
       },

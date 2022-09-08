@@ -42,8 +42,10 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
     }
     return null
   }
+
   const formatDate = new Date(dateAdded)
   const dateAddedFormatted = formatDate.toLocaleDateString("en-NZ")
+
   return (
     <>
       <Paper elevation={4} style={{ border: "0.25px solid lightgrey" }}>
@@ -129,7 +131,7 @@ function ReportsItem({ report, patientId, setdeletedReport }) {
                         bgcolor="lightgrey"
                         align="center"
                       >
-                        Quantity
+                        Tablets per Day
                       </TableCell>
                     </TableRow>
                   </TableHead>

@@ -10,16 +10,13 @@ function PieChart() {
 
   useEffect(() => {
     getTopFivePrescriptions().then((topFiveMeds) => {
-      // console.log("topFiveMeds from api", topFiveMeds)
       const formattedMeds = topFiveMeds.map((arr) => [arr[0], Number(arr[1])])
-      // console.log("formattedMeds from api", formattedMeds)
       return setPieChartData(formattedMeds)
     })
   }, [])
 
   useEffect(() => {
     if (pieChartData[0]) {
-      // console.log("useEffect", pieChartData)
       const pieChartObj = c3.generate({
         bindto: "#pieChart",
         data: {
@@ -37,7 +34,7 @@ function PieChart() {
         tooltip: {
           format: {
             value: function (value, ratio, id, index) {
-              return `: ${value}g`
+              return `: ${value} tablets`
             },
           },
         },

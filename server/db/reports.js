@@ -30,8 +30,11 @@ function addReportById(reportBasics, patientId, db = connection) {
     patient_id: patientId,
   }
 
-  return db("reports").insert(newReport, ["report_id"])
-  // return db("reports").insert(newReport)
+  //postgres syntax
+  // return db("reports").insert(newReport, ["report_id"])
+  //sqlite syntax
+
+  return db("reports").insert(newReport)
 }
 
 function deleteReportById(reportId, db = connection) {
@@ -47,6 +50,7 @@ function addPrescriptionsById(prescriptions, reportId, db = connection) {
     return await db("prescriptions").insert({
       prescribed_quantity: prescription.prescribedQuantity,
       med_name: prescription.medName,
+      //postgres - potentially need to uncomment this
       // report_id: reportId,
     })
   })
@@ -71,8 +75,7 @@ function addPrescriptionsById(prescriptions, reportId, db = connection) {
 async function revenuePerPatient(patientId) {
   const profits = await profitPerPatient(patientId)
   const costs = await costsPerPatient(patientId)
-  console.log("profits - revenuePerPatient", profits)
-  console.log("costs - revenuePerPatient", costs)
+
   return [
     {
       totalRevenue:

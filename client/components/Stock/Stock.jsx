@@ -54,13 +54,13 @@ const headCells = [
     id: "cost",
     numeric: true,
     disablePadding: false,
-    label: "Cost/100g",
+    label: "Cost per 100 Tablets",
   },
   {
     id: "totalQuantity",
     numeric: true,
     disablePadding: false,
-    label: "Quantity(g)",
+    label: "Quantity(tablets)",
   },
 ]
 
@@ -150,7 +150,7 @@ function Stock() {
   return (
     <>
       <EditStockForm open={open} handleClose={handleClose} />
-      <Box style={{ height: "100vh", margin: "20px 25px 25px 25px" }}>
+      <Box style={{ height: "100%", margin: "20px 25px 25px 25px" }}>
         <Paper>
           <Box display="flex" justifyContent="flex-end">
             <IconButton color="primary" size="large" onClick={handleClickOpen}>

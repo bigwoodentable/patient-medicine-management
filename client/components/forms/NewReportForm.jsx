@@ -174,7 +174,7 @@ function NewReportForm() {
                                     borderRadius: "5px",
                                   }}
                                   name={`reports.prescriptions.${index}.prescribedQuantity`}
-                                  placeholder="Quantity(g) "
+                                  placeholder="Quantity(tablets per day) "
                                   type="text"
                                 />
                                 <Button

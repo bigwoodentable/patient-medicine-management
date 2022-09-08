@@ -13,8 +13,13 @@ router.get("/:patientId", async (req, res) => {
   const patientId = req.params.patientId
   try {
     const reportBasics = await db.getReportsById(patientId)
+
+    const sortedReportBasics = reportBasics.sort(
+      (a, b) => Date.parse(a.dateAdded) - Date.parse(b.dateAdded)
+    )
+
     const reportsFunc = async (arr = []) => {
-      for (const report of reportBasics) {
+      for (const report of sortedReportBasics) {
         const prescription = await db.getPrescriptionsByReportId(
           report.reportId
         )
@@ -39,11 +44,10 @@ router.post("/add/:patientId", async (req, res) => {
   console.log("route - req.body", req.body)
   db.addReportById(reportBasics, patientId)
     .then((reportId) => {
-      console.log("addReportById - reportId", reportId)
       //postgres syntax
-      db.addPrescriptionsById(prescriptions, reportId[0]["report_id"])
+      // db.addPrescriptionsById(prescriptions, reportId[0]["report_id"])
       //sqlite syntax
-      // db.addPrescriptionsById(prescriptions, reportId)
+      db.addPrescriptionsById(prescriptions, reportId)
       updateQuantByName(prescriptions)
       return res.json("success")
     })

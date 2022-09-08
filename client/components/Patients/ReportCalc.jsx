@@ -6,7 +6,7 @@ function ReportCalc(props) {
 
   return costs === 0 ? null : (
     <>
-      <Typography>Total Charge: {charge}</Typography>
+      <Typography>Amount Charged (Revenue): {charge}</Typography>
       <Typography>Total Costs: {costs}</Typography>
       <Typography>Total Profit: {profits}</Typography>
     </>
