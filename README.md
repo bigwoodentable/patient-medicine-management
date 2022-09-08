@@ -1,3 +1,11 @@
+![image]({https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB}
+![image]({https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white}
+![image]({https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white}
+![image]({https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white}
+![image]({https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white}
+![image]({ 	https://img.shields.io/badge/Insomnia-5849be?style=for-the-badge&logo=Insomnia&logoColor=white}
+
+
 <h1 align="center">
   Patient and Medicine Management App
 </h1>
@@ -5,14 +13,6 @@
   A React app that manages patient records and medicine inventory with charts to show relevant data. View <a href="https://patient-stock-management.herokuapp.com/" target="_blank">here</a>.
 </p>
 
-  <!-- <a href="values-identity.html">
-      <div class="blogimg">
-          <img src="images/rodin.jpg" alt="blog image">
-      </div>
-      <div class ="blogTitle">
-          <p>VALUES - IDENTITY</p>
-      </div>
-  </a> -->
 
 ![demo](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
 
