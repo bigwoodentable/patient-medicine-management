@@ -12,13 +12,11 @@
 <p align="center">
   A React app that manages patient records and medicine inventory with charts to show relevant data. 
 </p>
-<a href="#" onclick='window.open("https://patient-stock-management.herokuapp.com/");return false;'>here</a>
-<p align="center">
-View app <a href="https://patient-stock-management.herokuapp.com/" target="_blank">here</a>.
+View app <a href="https://patient-stock-management.herokuapp.com/" target="_blank" rel="noreferrer noopener">here</a>.
 </p>
 <p align="center">
 View video demo <a href="https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/videos/demo-vid.mp4?raw=true
-" target="_blank">here</a>.
+" target="_blank" rel="noreferrer noopener">here</a>.
 </p>
 
 ![demo image](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
@@ -55,10 +53,10 @@ This app manages medicine stock and patient reports. Each time a patient visits,
 
 The dashboard includes:
 1. Charts that display patients who generate the highest revenues, patients with the most visits, and the medicines most frequently prescribed. 
-2. It also shows information about the medicines fetched from an <a href="https://rapidapi.com/rnelsomain/api/drug-info-and-price-history/" target="_blank"> API </a>. 
+2. It also shows information about the medicines fetched from an <a href="https://rapidapi.com/rnelsomain/api/drug-info-and-price-history/" target="_blank" rel="noreferrer noopener"> API </a>. 
 3. There’s also a section to remind users which stocks are low.
 
-As the original version has data in Chinese, the demo displays western medicines so english speaking viewers can test the <a href="https://patient-stock-management.herokuapp.com/" target="_blank">app</a> more easily. As a result, the form that generates a patient report asks: for each medicine, how many tablets per day would the user like to prescribe. This form's format coincides with my mom's practice where she prescribes a certain number of grams of herbs per day, but it may not be optimal for the way western medicines are prescribed. 
+As the original version has data in Chinese, the demo displays western medicines so english speaking viewers can test the <a href="https://patient-stock-management.herokuapp.com/" target="_blank" rel="noreferrer noopener">app</a> more easily. As a result, the form that generates a patient report asks: for each medicine, how many tablets per day would the user like to prescribe. This form's format coincides with my mom's practice where she prescribes a certain number of grams of herbs per day, but it may not be optimal for the way western medicines are prescribed. 
 
 ## Next Steps
 1. Implement Auth0
