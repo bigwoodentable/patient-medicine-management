@@ -10,9 +10,11 @@
   Patient and Medicine Management App
 </h1>
 <p align="center">
-  A React app that manages patient records and medicine inventory with charts to show relevant data. View <a href="https://patient-stock-management.herokuapp.com/" target="_blank">here</a>.
+  A React app that manages patient records and medicine inventory with charts to show relevant data. 
 </p>
-
+<p align="center">
+View <a href="https://patient-stock-management.herokuapp.com/" target="_blank">here</a>.
+</p>
 
 ![demo](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
 
