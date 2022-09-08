@@ -12,6 +12,7 @@
 <p align="center">
   A React app that manages patient records and medicine inventory with charts to show relevant data. 
 </p>
+<p align="center">
 View app <a href="https://patient-stock-management.herokuapp.com/" target="_blank" rel="noreferrer noopener">here</a>.
 </p>
 <p align="center">
