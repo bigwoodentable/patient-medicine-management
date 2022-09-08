@@ -14,7 +14,7 @@
       </div>
   </a> -->
 
-![demo](https://github.com/bigwoodentable/patient-medicine-management/blob/server/public/images/demo.png?raw=true)
+![demo](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
 
 https://raw.githubusercontent.com/bigwoodentable/patient-medicine-management/server/public/videos/Demo-Patient-Stock-Management-Explanation.mov
 ## Installation & Set Up
