@@ -17,7 +17,7 @@ View video demo <a href="https://github.com/bigwoodentable/patient-medicine-mana
 " target="_blank" rel="noreferrer noopener">here</a>.
 </p>
 <p align="center">
-View app <a href="https://patient-meds-management.herokuapp.com/" target="_blank" rel="noreferrer noopener">here</a>. <p><i> Note: It may take some time to load the app because I am using the free version of heroku to deploy it. Thanks. </i></p>
+View app <a href="https://patient-meds-management.herokuapp.com/" target="_blank" rel="noreferrer noopener">here</a>.<i> Note: It may take some time to load the app because I am using the free version of heroku to deploy it. Thanks. </i>
 </p>
 
 
