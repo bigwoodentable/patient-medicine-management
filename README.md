@@ -16,12 +16,6 @@
 View video demo <a href="https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/videos/demo-vid.mp4?raw=true
 " target="_blank" rel="noreferrer noopener">here</a>.
 </p>
-<p align="center">
-View app <a href="https://patient-meds-management.herokuapp.com/" target="_blank" rel="noreferrer noopener">here</a>. 
-</p>
-<p align="center">
-<i> Note: It may take some time to load the app because I am using the free version of heroku to deploy it. Thanks. </i>
-</p>
 
 ![demo image](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
 
@@ -60,7 +54,7 @@ The dashboard includes:
 2. Information about the medicines fetched from an <a href="https://rapidapi.com/rnelsomain/api/drug-info-and-price-history/" target="_blank" rel="noreferrer noopener"> API </a>. 
 3. Reminders about medicines that are low in stock.
 
-As the original version has data in Chinese, the demo displays western medicines so english speaking viewers can test the <a href="https://patient-meds-management.herokuapp.com/" target="_blank" rel="noreferrer noopener">app</a> more easily. The form that generates a patient report asks - for each medicine, how many tablets per day would the user like to prescribe to the patient. This form's format coincides with my mom's practice where she prescribes a certain number of grams of herbs per day to the patient, but it may not be optimal for the way western medicines are prescribed.
+As the original version has data in Chinese, the demo displays western medicines so english speaking viewers can test the app more easily. The form that generates a patient report asks - for each medicine, how many tablets per day would the user like to prescribe to the patient. This form's format coincides with my mom's practice where she prescribes a certain number of grams of herbs per day to the patient, but it may not be optimal for the way western medicines are prescribed.
 
 ## Next Steps
 1. Implement Auth0
