@@ -30,10 +30,6 @@ function addReportById(reportBasics, patientId, db = connection) {
     patient_id: patientId,
   }
 
-  //postgres syntax
-  // return db("reports").insert(newReport, ["report_id"])
-  //sqlite syntax
-
   return db("reports").insert(newReport)
 }
 
@@ -43,15 +39,10 @@ function deleteReportById(reportId, db = connection) {
 
 //input prescriptions + reportId, add inputs + date
 function addPrescriptionsById(prescriptions, reportId, db = connection) {
-  console.log("addPrescriptionsById - prescriptions", prescriptions)
-  console.log("addPrescriptionsById - reportId", reportId)
   prescriptions.forEach(async (prescription) => {
-    console.log("addPrescriptionsById - inloop prescription", prescription)
     return await db("prescriptions").insert({
       prescribed_quantity: prescription.prescribedQuantity,
       med_name: prescription.medName,
-      //postgres - potentially need to uncomment this
-      // report_id: reportId,
     })
   })
 

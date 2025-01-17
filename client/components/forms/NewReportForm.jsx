@@ -40,7 +40,6 @@ function NewReportForm() {
   }
 
   function handleSubmit(newReport) {
-    // console.log("form - add report", newReport)
     addReportById(
       newReport,
       totalCosts,

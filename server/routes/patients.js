@@ -50,7 +50,6 @@ router.post("/add", (req, res) => {
 router.get("/revenuePerPatient", (req, res) => {
   db.revenuePerPatientTotal()
     .then((rev) => {
-      // console.log(res)
       res.json(rev)
       return null
     })
