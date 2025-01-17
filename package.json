@@ -73,7 +73,7 @@
     "superagent": "^6.1.0",
     "use-state-if-mounted": "^1.0.7",
     "uuid": "^8.3.2",
-    "yup": "^0.32.11"
+    "yup": "^0.28.5"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
