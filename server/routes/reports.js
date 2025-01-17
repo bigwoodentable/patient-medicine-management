@@ -41,7 +41,6 @@ router.get("/:patientId", async (req, res) => {
 router.post("/add/:patientId", async (req, res) => {
   const patientId = req.params.patientId
   const { reportBasics, prescriptions } = req.body
-  console.log("route - req.body", req.body)
   db.addReportById(reportBasics, patientId)
     .then((reportId) => {
       //postgres syntax
