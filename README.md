@@ -29,7 +29,7 @@ View app <a href="https://patient-meds-management.herokuapp.com/" target="_blank
 1. Clone and install dependancies
 
 ```
-git clone https://github.com/bigwoodentable/patient-medicine-management.git
+git clone https://github.com/kangmichael/patient-medicine-management.git
 npm install
 ```
 
