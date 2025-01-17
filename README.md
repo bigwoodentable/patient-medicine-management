@@ -15,12 +15,6 @@
 View video demo <a href="https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/videos/demo-vid.mp4?raw=true
 " target="_blank" rel="noreferrer noopener">here</a>.
 </p>
-<p align="center">
-View app <a href="https://patient-meds-management.herokuapp.com/" target="_blank" rel="noreferrer noopener">here</a>. 
-</p>
-<p align="center">
-<i> Note: It may take some time to load the app because I am using the free version of heroku to deploy it. Thanks. </i>
-</p>
 
 ![demo image](https://github.com/bigwoodentable/patient-medicine-management/blob/main/server/public/images/demo.png?raw=true)
 
@@ -48,6 +42,7 @@ npm run dev
 
 4. Server runs on [http://localhost:3000](http://localhost:3000)
 
+
 ## Intro
 
 This project was created with two primary objectives. First, having recently completed my software development bootcamp, I wanted to apply the skills and knowledge I had acquired to a practical project, reinforcing and consolidating what I had learned. Second, I aimed to address a real-world problem through this project, honing my ability to identify user needs and translate them into product features. A detailed explanation of the real-world problem this project tackles is provided below. On a whole, this was my first attempt in building a project without help from others and it was a fruitful learning experience!
@@ -67,3 +62,4 @@ The dashboard includes:
 3. Reminders about medicines that are low in stock.
 
 As the original version has data in Chinese, the demo displays western medicines so english speaking viewers can test the app more easily. The form that generates a patient report asks - for each medicine, how many tablets per day would the user like to prescribe to the patient. This form's format coincides with my mom's practice where she prescribes a certain number of grams of herbs per day to the patient, but it may not be optimal for the way western medicines are prescribed.
+
